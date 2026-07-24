@@ -1,0 +1,15 @@
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: the burden of material\n"
+"Language: en\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+# item descriptions
+msgid "shiv_title"
+msgstr "Shiv"
+
+msgid "shiv_description"
+msgstr "•Stab you foes dealing *{damage}* damage."

@@ -1,0 +1,77 @@
+extends Node
+
+var item_data = {
+	shiv = {
+		scene = preload("res://equipment/shiv/shiv.tscn"),
+		shape = [
+			[true ],
+			[true ]
+		],
+		stats = {
+			damage = 4
+		}
+	},
+	boomerang = {
+		scene = preload("res://equipment/boomerang/boomerang.tscn"),
+		shape = [
+			[true , true ],
+			[false, true ],
+		]
+	},
+	axe = {
+		scene = preload("res://equipment/axe/axe.tscn"),
+		shape = [
+			[true , true ],
+			[true , false],
+			[true , false]
+		],
+		connections = [
+			{
+				active = preload("res://equipment/diamonds_connection_active.tscn"),
+				inactive = preload("res://equipment/diamonds_connection_inactive.tscn"),
+				shape = [
+					[true , true ],
+					[true , true ]
+				],
+				offset = Vector2i(1, 1)
+			}
+		],
+		passive_ability = {
+			item_stat_modifiers = func(stat, modifiers, grid, item, this): ## example ability boosting the damage of all connected items
+		if stat == "damage" and grid.get_connected_items(this, 0).has(item):
+			modifiers["base"] += 2
+		}
+	},
+}
+
+var encounter_data = {
+	"bandit" = {
+		enemies = [
+			{
+				character = preload("res://equipment/characters/swordsman.png"),
+				loadout = [
+					[true , true , true , true , true , true , true , true ],
+					[true , true , true , true , true , true , true , true ],
+					[true , true , true , true , true , true , true , true ],
+					[true , true , true , true , true , true , true , true ],
+					[true , true , true , true , true , true , true , true ],
+					[true , true , true , true , true , true , true , true ],
+					[true , true , true , true , true , true , true , true ],
+					[true , true , true , true , true , true , true , true ]
+				],
+				equipment = [{
+						type = "shiv",
+						position = Vector2(2, 1),
+						rotation = 0,
+						equipped = true
+					},
+					{
+						type = "axe",
+						position = Vector2(4, 1),
+						rotation = 0,
+						equipped = true
+					}]
+			}
+		]
+	}
+}
