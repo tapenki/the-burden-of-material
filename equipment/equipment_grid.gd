@@ -1,6 +1,7 @@
 extends Control
 
 @export var can_edit = true
+@export var character: Node
 
 var layout = [
 	[true , true , true , true , true , true , true , true ],
@@ -15,30 +16,61 @@ var layout = [
 var offset_x = 4
 var offset_y = 4
 
-var equipment = [{
-		type = "shiv",
-		position = Vector2(2, 1),
-		rotation = 0,
-		equipped = true
-	},
-	{
-		type = "axe",
-		position = Vector2(4, 1),
-		rotation = 0,
-		equipped = true
-	}]
+var equipment = []
+
+var stats = {
+	max_health = 50,
+	health = 50,
+	cooldown = 1.0,
+}
+
+var stat_changes: Dictionary
+
+var team: int
+var target_team: int
+var target_enemy: int
 
 var dragging: Node
 
+signal stat_modifiers(stat, modifiers, grid)
 signal item_stat_modifiers(stat, modifiers, grid, item)
+
+var signals = [
+	stat_modifiers, 
+	item_stat_modifiers
+]
+
+func get_stat(stat):
+	var modifiers = {"base" = 0, "add_mult" = 1, "mult_mult" = 1}
+	if stat_changes.has(stat):
+		modifiers = stat_changes[stat].duplicate()
+	modifiers["base"] += stats.get(stat, 0)
+	stat_modifiers.emit(stat, modifiers, self)
+	modifiers["final"] = modifiers["base"] * modifiers["add_mult"] * modifiers["mult_mult"]
+	return modifiers
+
+func add_stat(stat, value, operation = "base"):
+	if not stat_changes.has(stat):
+		stat_changes[stat] = {"base" = 0, "add_mult" = 1, "mult_mult" = 1}
+	stat_changes[stat][operation] += value
+
 func get_item_stat(item, stat):
 	var item_data = Registry.item_data[item["type"]]
-	var modifiers = {"base" = 0, "multiplier" = 1}
+	var modifiers = {"base" = 0, "add_mult" = 1, "mult_mult" = 1}
+	if item.has("stat_changes") and item["stat_changes"].has(stat):
+		modifiers = item["stat_changes"][stat].duplicate()
 	if item_data.has("stats"):
 		modifiers["base"] += item_data["stats"].get(stat, 0)
 	item_stat_modifiers.emit(stat, modifiers, self, item)
-	modifiers["final"] = modifiers["base"] * modifiers["multiplier"]
+	modifiers["final"] = modifiers["base"] * modifiers["add_mult"] * modifiers["mult_mult"]
 	return modifiers
+
+func add_item_stat(item, stat, operation, value):
+	if not item.has("stat_changes"):
+		item["stat_changes"] = {}
+	if not item["stat_changes"].has(stat):
+		item["stat_changes"][stat] = {"base" = 0, "add_mult" = 1, "mult_mult" = 1}
+	item["stat_changes"][stat][operation] += value
 
 func instantiate_item(item):
 	var item_data = Registry.item_data[item["type"]]
@@ -71,6 +103,9 @@ func load_item(item):
 	instantiate_item(item)
 
 func load_grid():
+	for signal_reference in signals:
+		for connection in signal_reference.get_connections():
+			signal_reference.disconnect(connection["callable"])
 	for child in get_children():
 		child.queue_free()
 	for y in layout.size():
@@ -122,7 +157,7 @@ func rotate_shape(grid_shape, grid_rotation):
 
 func get_item_at_position(at_x, at_y):
 	for item in equipment:
-		if not item["equipped"]:
+		if not item.get("equipped", true):
 			continue
 		var item_data = Registry.item_data[item["type"]]
 		var shape = rotate_shape(item_data["shape"], item["rotation"])
@@ -135,7 +170,7 @@ func get_item_at_position(at_x, at_y):
 func get_connected_items(item, connections_index):
 	var connected = []
 	var item_data = Registry.item_data[item["type"]]
-	if not item_data.has("connections") or not item["equipped"]:
+	if not item_data.has("connections") or not item.get("equipped", true):
 		return connected
 	var rotated_grid_shape = rotate_shape(item_data["shape"], item["rotation"])
 	#for connections in item_data["connections"]:
@@ -162,3 +197,55 @@ func get_connected_items(item, connections_index):
 				if connected_item and not connected.has(connected_item):
 					connected.append(connected_item)
 	return connected
+
+func get_enemy():
+	var battle = get_node("/root/Game").battle
+	return battle["teams"][target_team][target_enemy]
+
+func take_damage(damage):
+	add_stat("health", -damage["final"])
+	text_effect(str(damage["final"]), Color.RED)
+
+func deal_damage(target, damage):
+	target.take_damage(damage)
+
+func use_item():
+	var useable_items = []
+	for item in equipment:
+		var item_data = Registry.item_data[item["type"]]
+		if item_data.has("active_ability") and not item.get("used"):
+			useable_items.append(item)
+	if useable_items.size() > 0:
+		var item = useable_items.pick_random()
+		var item_data = Registry.item_data[item["type"]]
+		item["used"] = true
+		item_data["active_ability"].call(self, item)
+	else:
+		for item in equipment:
+			var item_data = Registry.item_data[item["type"]]
+			if item_data.has("active_ability") and item.get("used"):
+				item["used"] = false
+
+func text_effect(text, color = Color.BLACK):
+	var label_instance = preload("res://floating_text.tscn").instantiate()
+	label_instance.text = text
+	label_instance.modulate = color
+	character.add_child(label_instance)
+	label_instance.position = Vector2(randf_range(0, character.size.x * 0.5) + character.size.x * 0.25, randf_range(0, character.size.y * 0.5)) - label_instance.size * 0.5
+	var tween = create_tween()
+	tween.tween_property(label_instance, "position:y", -20, 0.2).as_relative()
+	await get_tree().create_timer(0.4).timeout
+	label_instance.queue_free()
+
+func _process(_delta: float) -> void:
+	var battle = get_node("/root/Game").battle
+	if not battle.get("active"):
+		return
+	character.get_node("ChargeBar").value = get_stat("charge")["final"]
+	character.get_node("ChargeBar").max_value = get_stat("cooldown")["final"]
+	
+	var hp = get_stat("health")["final"]
+	var max_hp = get_stat("max_health")["final"]
+	character.get_node("LifeBar").value = hp
+	character.get_node("LifeBar").max_value = max_hp
+	character.get_node("LifeBar/Label").text = str(hp) + "/" + str(max_hp)

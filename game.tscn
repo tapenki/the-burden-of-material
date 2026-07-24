@@ -1,13 +1,23 @@
 [gd_scene format=3 uid="uid://dvcabhmklyl8j"]
 
 [ext_resource type="Script" uid="uid://dpkircw6cmts1" path="res://equipment/equipment_grid.gd" id="1_e2o6t"]
+[ext_resource type="Script" uid="uid://42nhxyh63d6w" path="res://game.gd" id="1_feb5d"]
 [ext_resource type="Texture2D" uid="uid://mlpsadm2hvvn" path="res://equipment/characters/swordsman.png" id="2_e2o6t"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_13qdw"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_b1lj4"]
+bg_color = Color(1, 0, 0, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_feb5d"]
+bg_color = Color(0, 0, 1, 1)
 
 [node name="Game" type="Control" unique_id=1461724475]
 layout_mode = 3
 anchors_preset = 0
 offset_right = 900.0
 offset_bottom = 600.0
+script = ExtResource("1_feb5d")
 
 [node name="PlayerCharacter" type="TextureRect" parent="." unique_id=1062287325]
 layout_mode = 0
@@ -15,7 +25,87 @@ offset_left = 152.0
 offset_top = 400.0
 offset_right = 296.0
 offset_bottom = 544.0
+mouse_filter = 2
 texture = ExtResource("2_e2o6t")
+
+[node name="LifeBar" type="ProgressBar" parent="PlayerCharacter" unique_id=1490460950]
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 10.0
+offset_top = 2.0
+offset_right = -14.0
+offset_bottom = 10.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_styles/background = SubResource("StyleBoxFlat_13qdw")
+theme_override_styles/fill = SubResource("StyleBoxFlat_b1lj4")
+value = 50.0
+show_percentage = false
+
+[node name="Background" type="ColorRect" parent="PlayerCharacter/LifeBar" unique_id=1157610091]
+show_behind_parent = true
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -2.0
+offset_top = -2.0
+offset_right = 2.0
+offset_bottom = 2.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+color = Color(0.24705882, 0.24705882, 0.24705882, 1)
+
+[node name="Label" type="Label" parent="PlayerCharacter/LifeBar" unique_id=1969000658]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -47.0
+offset_top = -12.5
+offset_right = 45.0
+offset_bottom = 10.5
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset_ratio = Vector2(0.5, 0.5)
+text = "100/100"
+horizontal_alignment = 1
+
+[node name="ChargeBar" type="ProgressBar" parent="PlayerCharacter" unique_id=2038019070]
+layout_mode = 1
+anchors_preset = 9
+anchor_bottom = 1.0
+offset_left = -10.0
+offset_top = 10.0
+offset_right = -2.0
+offset_bottom = -14.0
+grow_vertical = 2
+theme_override_styles/background = SubResource("StyleBoxFlat_13qdw")
+theme_override_styles/fill = SubResource("StyleBoxFlat_feb5d")
+value = 50.0
+fill_mode = 3
+show_percentage = false
+
+[node name="Background" type="ColorRect" parent="PlayerCharacter/ChargeBar" unique_id=1450296717]
+show_behind_parent = true
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -2.0
+offset_top = -2.0
+offset_right = 2.0
+offset_bottom = 2.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+color = Color(0.24705882, 0.24705882, 0.24705882, 1)
 
 [node name="EnemyCharacter" type="TextureRect" parent="." unique_id=1072601134]
 layout_mode = 0
@@ -23,18 +113,102 @@ offset_left = 604.0
 offset_top = 400.0
 offset_right = 748.0
 offset_bottom = 544.0
+mouse_filter = 2
 texture = ExtResource("2_e2o6t")
 flip_h = true
 
-[node name="PlayerEquipment" type="Control" parent="." unique_id=1984047910]
+[node name="LifeBar" type="ProgressBar" parent="EnemyCharacter" unique_id=2087303507]
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 10.0
+offset_top = 2.0
+offset_right = -14.0
+offset_bottom = 10.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_styles/background = SubResource("StyleBoxFlat_13qdw")
+theme_override_styles/fill = SubResource("StyleBoxFlat_b1lj4")
+value = 50.0
+show_percentage = false
+
+[node name="Background" type="ColorRect" parent="EnemyCharacter/LifeBar" unique_id=622503001]
+show_behind_parent = true
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -2.0
+offset_top = -2.0
+offset_right = 2.0
+offset_bottom = 2.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+color = Color(0.24705882, 0.24705882, 0.24705882, 1)
+
+[node name="Label" type="Label" parent="EnemyCharacter/LifeBar" unique_id=208034842]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -47.0
+offset_top = -12.5
+offset_right = 45.0
+offset_bottom = 10.5
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset_ratio = Vector2(0.5, 0.5)
+text = "100/100"
+horizontal_alignment = 1
+
+[node name="ChargeBar" type="ProgressBar" parent="EnemyCharacter" unique_id=2054519512]
+layout_mode = 1
+anchors_preset = 11
+anchor_left = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 2.0
+offset_top = 10.0
+offset_right = 10.0
+offset_bottom = -14.0
+grow_horizontal = 0
+grow_vertical = 2
+theme_override_styles/background = SubResource("StyleBoxFlat_13qdw")
+theme_override_styles/fill = SubResource("StyleBoxFlat_feb5d")
+value = 50.0
+fill_mode = 3
+show_percentage = false
+
+[node name="Background" type="ColorRect" parent="EnemyCharacter/ChargeBar" unique_id=531925996]
+show_behind_parent = true
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -2.0
+offset_top = -2.0
+offset_right = 2.0
+offset_bottom = 2.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+color = Color(0.24705882, 0.24705882, 0.24705882, 1)
+
+[node name="PlayerEquipment" type="Control" parent="." unique_id=1984047910 node_paths=PackedStringArray("character")]
 anchors_preset = 0
 offset_left = 224.0
 offset_top = 224.0
 offset_right = 224.0
 offset_bottom = 224.0
 script = ExtResource("1_e2o6t")
+character = NodePath("../PlayerCharacter")
 
-[node name="EnemyEquipment" type="Control" parent="." unique_id=1832386834]
+[node name="EnemyEquipment" type="Control" parent="." unique_id=1832386834 node_paths=PackedStringArray("character")]
 anchors_preset = 0
 offset_left = 676.0
 offset_top = 224.0
@@ -42,6 +216,7 @@ offset_right = 676.0
 offset_bottom = 224.0
 script = ExtResource("1_e2o6t")
 can_edit = false
+character = NodePath("../EnemyCharacter")
 
 [node name="Camera2D" type="Camera2D" parent="." unique_id=1187277755]
 offset = Vector2(450, 300)

@@ -8,8 +8,12 @@ var item_data = {
 			[true ]
 		],
 		stats = {
-			damage = 4
-		}
+			damage = 25
+		},
+		active_ability = func(grid, this): ## example active ability
+	var enemy = grid.get_enemy()
+	var damage = grid.get_item_stat(this, "damage")
+	grid.deal_damage(enemy, damage)
 	},
 	boomerang = {
 		scene = preload("res://equipment/boomerang/boomerang.tscn"),
@@ -45,33 +49,43 @@ var item_data = {
 }
 
 var encounter_data = {
-	"bandit" = {
+	bandit = {
 		enemies = [
 			{
 				character = preload("res://equipment/characters/swordsman.png"),
-				loadout = [
-					[true , true , true , true , true , true , true , true ],
-					[true , true , true , true , true , true , true , true ],
-					[true , true , true , true , true , true , true , true ],
-					[true , true , true , true , true , true , true , true ],
-					[true , true , true , true , true , true , true , true ],
-					[true , true , true , true , true , true , true , true ],
-					[true , true , true , true , true , true , true , true ],
-					[true , true , true , true , true , true , true , true ]
+				layout = [
+					[false, false, false, false, false, false, false, false],
+					[false, false, false, false, false, false, false, false],
+					[false, false, true , true , true , true , false, false],
+					[false, false, true , true , true , true , false, false],
+					[false, false, true , true , true , true , false, false],
+					[false, false, true , true , true , true , false, false],
+					[false, false, false, false, false, false, false, false],
+					[false, false, false, false, false, false, false, false]
 				],
 				equipment = [{
 						type = "shiv",
-						position = Vector2(2, 1),
+						position = Vector2(2, 2),
 						rotation = 0,
-						equipped = true
 					},
 					{
 						type = "axe",
-						position = Vector2(4, 1),
+						position = Vector2(4, 2),
 						rotation = 0,
-						equipped = true
 					}]
 			}
 		]
 	}
+}
+
+var zone_data = {
+	field = {
+		encounters = [
+			["bandit"],
+			["bandit"],
+			["bandit"],
+			["bandit"],
+		],
+		bosses = ["bandit"]
+		}
 }

@@ -164,7 +164,6 @@ func _on_gui_input(event: InputEvent) -> void:
 	if event is InputEventMouseButton:
 		if event.button_index == 1:
 			if event.pressed:
-				modulate = Color.WHITE
 				grid.dragging = self
 				unequip()
 				position = grid.get_local_mouse_position() - (grid_size * 24 + drag_offset).rotated(rotation) 
@@ -174,7 +173,7 @@ func _on_gui_input(event: InputEvent) -> void:
 				grid.dragging = null
 				equip(grid.get_local_mouse_position() - (grid_size * 24 + drag_offset).rotated(rotation))
 				if mouse_inside:
-					if equipment_reference["equipped"]:
+					if equipment_reference.get("equipped", true):
 						highlight(position)
 					else:
 						unhighlight()
@@ -191,13 +190,19 @@ func _on_gui_input(event: InputEvent) -> void:
 var flash_progress = 0.0
 var flash_direction = 1
 func _process(delta: float) -> void:
-	if not equipment_reference["equipped"] and grid.dragging != self:
+	if not equipment_reference.get("equipped", true) and grid.dragging != self:
 		flash_progress = clampf(flash_progress + delta * flash_direction * 2.5, 0.0, 1.0)
 		if flash_progress == 1.0:
 			flash_direction = -1
 		elif flash_progress == 0.0:
 			flash_direction = 1
 		modulate = lerp(Color.WHITE, Color.DIM_GRAY, flash_progress)
+	else:
+		if equipment_reference.get("used"):
+			modulate = Color.DIM_GRAY
+			return
+		flash_progress = 0.0
+		modulate = Color.WHITE
 
 func describe():
 	var description_instance = preload("res://description.tscn").instantiate()
@@ -211,7 +216,6 @@ func describe():
 			format[key] = grid.get_item_stat(equipment_reference, key)["final"]
 	description_instance.text = tr(equipment_reference["type"] + "_title")
 	description_instance.get_node("Body").text = tr(equipment_reference["type"] + "_description").format(format)
-	#String
 	grid.add_sibling(description_instance)
 	descriptions.append(description_instance)
 
@@ -224,10 +228,13 @@ func _notification(what: int) -> void: ##TODO: may cause flickering with certain
 	if what == NOTIFICATION_MOUSE_ENTER:
 		mouse_inside = true
 		if not grid.dragging:
-			if equipment_reference["equipped"]:
+			if equipment_reference.get("equipped", true):
 				highlight(position)
 			describe()
 	elif what == NOTIFICATION_MOUSE_EXIT:
 		mouse_inside = false
 		unhighlight()
 		undescribe()
+
+func kill():
+	queue_free()

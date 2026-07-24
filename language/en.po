@@ -12,4 +12,4 @@ msgid "shiv_title"
 msgstr "Shiv"
 
 msgid "shiv_description"
-msgstr "•Stab you foes dealing *{damage}* damage."
+msgstr "•On Use: Stab an enemy dealing *{damage}* damage."
