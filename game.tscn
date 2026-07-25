@@ -2,21 +2,36 @@
 
 [ext_resource type="Script" uid="uid://dpkircw6cmts1" path="res://equipment/ui/equipment_grid.gd" id="1_e2o6t"]
 [ext_resource type="Script" uid="uid://42nhxyh63d6w" path="res://game.gd" id="1_feb5d"]
-[ext_resource type="Texture2D" uid="uid://mlpsadm2hvvn" path="res://characters/swordsman.png" id="2_e2o6t"]
+[ext_resource type="Texture2D" uid="uid://mlpsadm2hvvn" path="res://characters/knight.png" id="2_e2o6t"]
 [ext_resource type="Texture2D" uid="uid://e5m8r16gl243" path="res://characters/x.png" id="3_ryrav"]
 [ext_resource type="Script" uid="uid://hu7rqj3w343v" path="res://ui/battle_timer.gd" id="4_fc0e3"]
-[ext_resource type="Script" uid="uid://daykwgw7m45i1" path="res://ui/proceed_button.gd" id="5_7jktm"]
+[ext_resource type="Script" uid="uid://dl2rdwhi7884n" path="res://character_picker.gd" id="6_eow3j"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_13qdw"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_b1lj4"]
 bg_color = Color(1, 0, 0, 1)
 
+[sub_resource type="LabelSettings" id="LabelSettings_eow3j"]
+outline_size = 4
+outline_color = Color(0, 0, 0, 1)
+
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_feb5d"]
 bg_color = Color(0, 0, 1, 1)
 
+[sub_resource type="LabelSettings" id="LabelSettings_j5wjh"]
+outline_size = 4
+outline_color = Color(0, 0, 0, 1)
+
 [sub_resource type="LabelSettings" id="LabelSettings_feb5d"]
 font_size = 24
+
+[sub_resource type="LabelSettings" id="LabelSettings_7jktm"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_ryrav"]
+font_size = 32
+outline_size = 4
+outline_color = Color(0, 0, 0, 1)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_fc0e3"]
 bg_color = Color(1, 1, 1, 1)
@@ -34,6 +49,7 @@ offset_bottom = 600.0
 script = ExtResource("1_feb5d")
 
 [node name="EnemyCharacter" type="TextureRect" parent="." unique_id=1072601134]
+visible = false
 layout_mode = 0
 offset_left = 618.0
 offset_top = 400.0
@@ -91,6 +107,7 @@ grow_horizontal = 2
 grow_vertical = 2
 pivot_offset_ratio = Vector2(0.5, 0.5)
 text = "100/100"
+label_settings = SubResource("LabelSettings_eow3j")
 horizontal_alignment = 1
 
 [node name="ChargeBar" type="ProgressBar" parent="EnemyCharacter" unique_id=2054519512]
@@ -192,6 +209,7 @@ grow_horizontal = 2
 grow_vertical = 2
 pivot_offset_ratio = Vector2(0.5, 0.5)
 text = "100/100"
+label_settings = SubResource("LabelSettings_j5wjh")
 horizontal_alignment = 1
 
 [node name="ChargeBar" type="ProgressBar" parent="PlayerCharacter" unique_id=2038019070]
@@ -257,6 +275,7 @@ character = NodePath("../PlayerCharacter")
 offset = Vector2(450, 300)
 
 [node name="BattleTimer" type="Label" parent="." unique_id=1344888304]
+visible = false
 self_modulate = Color(0, 0, 0, 1)
 layout_mode = 1
 anchors_preset = 8
@@ -304,13 +323,81 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
 
-[node name="ProceedButton" type="Button" parent="." unique_id=633778067]
+[node name="DayCounter" type="Label" parent="." unique_id=1631565137]
 visible = false
-layout_mode = 0
-offset_left = 639.0
-offset_top = 400.0
-offset_right = 741.0
-offset_bottom = 442.0
+self_modulate = Color(0, 0, 0, 1)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -47.5
+offset_top = 277.0
+offset_right = 47.5
+offset_bottom = 300.0
+grow_horizontal = 2
+grow_vertical = 2
+label_settings = SubResource("LabelSettings_7jktm")
+horizontal_alignment = 1
+
+[node name="Background1" type="ColorRect" parent="DayCounter" unique_id=459595447]
+show_behind_parent = true
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -4.0
+offset_top = -4.0
+offset_right = 4.0
+offset_bottom = 4.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+color = Color(0.627451, 0.627451, 0.627451, 1)
+
+[node name="Background2" type="ColorRect" parent="DayCounter" unique_id=1869621836]
+show_behind_parent = true
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -2.0
+offset_top = -2.0
+offset_right = 2.0
+offset_bottom = 2.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="BattleEndLabel" type="Label" parent="." unique_id=907304980]
+visible = false
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -47.5
+offset_top = -252.0
+offset_right = 47.5
+offset_bottom = -218.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "You win!"
+label_settings = SubResource("LabelSettings_ryrav")
+horizontal_alignment = 1
+
+[node name="ProceedToRewards" type="Button" parent="BattleEndLabel" unique_id=114913602]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -51.0
+offset_top = 50.0
+offset_right = 51.0
+offset_bottom = 84.0
+grow_horizontal = 2
 mouse_default_cursor_shape = 2
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_colors/font_pressed_color = Color(1, 1, 1, 1)
@@ -320,9 +407,8 @@ theme_override_styles/normal = SubResource("StyleBoxFlat_fc0e3")
 theme_override_styles/pressed = SubResource("StyleBoxFlat_7jktm")
 theme_override_styles/hover = SubResource("StyleBoxFlat_ryrav")
 text = "Proceed"
-script = ExtResource("5_7jktm")
 
-[node name="Background1" type="ColorRect" parent="ProceedButton" unique_id=320607068]
+[node name="Background1" type="ColorRect" parent="BattleEndLabel/ProceedToRewards" unique_id=264740638]
 show_behind_parent = true
 layout_mode = 1
 anchors_preset = -1
@@ -338,7 +424,7 @@ mouse_filter = 1
 mouse_default_cursor_shape = 2
 color = Color(0.627451, 0.627451, 0.627451, 1)
 
-[node name="Background2" type="ColorRect" parent="ProceedButton" unique_id=1172589560]
+[node name="Background2" type="ColorRect" parent="BattleEndLabel/ProceedToRewards" unique_id=1112884989]
 show_behind_parent = true
 layout_mode = 1
 anchors_preset = -1
@@ -353,8 +439,139 @@ grow_vertical = 2
 mouse_filter = 1
 mouse_default_cursor_shape = 2
 
+[node name="ProceedToBattle" type="Button" parent="." unique_id=633778067]
+layout_mode = 0
+offset_left = 639.0
+offset_top = 400.0
+offset_right = 741.0
+offset_bottom = 442.0
+mouse_default_cursor_shape = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_colors/font_pressed_color = Color(1, 1, 1, 1)
+theme_override_colors/font_hover_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 24
+theme_override_styles/normal = SubResource("StyleBoxFlat_fc0e3")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_7jktm")
+theme_override_styles/hover = SubResource("StyleBoxFlat_ryrav")
+text = "Proceed"
+
+[node name="Background1" type="ColorRect" parent="ProceedToBattle" unique_id=320607068]
+show_behind_parent = true
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -4.0
+offset_top = -4.0
+offset_right = 4.0
+offset_bottom = 4.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 1
+mouse_default_cursor_shape = 2
+color = Color(0.627451, 0.627451, 0.627451, 1)
+
+[node name="Background2" type="ColorRect" parent="ProceedToBattle" unique_id=1172589560]
+show_behind_parent = true
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -2.0
+offset_top = -2.0
+offset_right = 2.0
+offset_bottom = 2.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 1
+mouse_default_cursor_shape = 2
+
+[node name="CharacterPicker" type="ColorRect" parent="." unique_id=1088183380]
+show_behind_parent = true
+layout_mode = 0
+offset_left = 500.0
+offset_top = 20.0
+offset_right = 884.0
+offset_bottom = 404.0
+mouse_filter = 2
+mouse_default_cursor_shape = 2
+
+[node name="Background1" type="ColorRect" parent="CharacterPicker" unique_id=1314142633]
+show_behind_parent = true
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -2.0
+offset_top = -2.0
+offset_right = 2.0
+offset_bottom = 2.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+mouse_default_cursor_shape = 2
+color = Color(0.627451, 0.627451, 0.627451, 1)
+
+[node name="Container" type="FlowContainer" parent="CharacterPicker" unique_id=553270576]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = 34.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme_override_constants/h_separation = 10
+theme_override_constants/v_separation = 10
+alignment = 1
+script = ExtResource("6_eow3j")
+
+[node name="Title" type="Label" parent="CharacterPicker" unique_id=1336406400]
+self_modulate = Color(0, 0, 0, 1)
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -47.5
+offset_right = 47.5
+offset_bottom = 23.0
+grow_horizontal = 2
+text = "WANTED CRIMINALS"
+label_settings = SubResource("LabelSettings_7jktm")
+horizontal_alignment = 1
+
+[node name="Background1" type="ColorRect" parent="CharacterPicker/Title" unique_id=1869292855]
+show_behind_parent = true
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -4.0
+offset_top = -4.0
+offset_right = 4.0
+offset_bottom = 4.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+color = Color(0.627451, 0.627451, 0.627451, 1)
+
+[node name="Background2" type="ColorRect" parent="CharacterPicker/Title" unique_id=1063702330]
+show_behind_parent = true
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -2.0
+offset_top = -2.0
+offset_right = 2.0
+offset_bottom = 2.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
 [connection signal="battle_ended" from="." to="BattleTimer" method="_on_game_battle_ended"]
-[connection signal="battle_ended" from="." to="ProceedButton" method="_on_game_battle_ended"]
+[connection signal="battle_ended" from="." to="ProceedToBattle" method="_on_game_battle_ended"]
 [connection signal="battle_initiated" from="." to="BattleTimer" method="_on_game_battle_initiated"]
-[connection signal="battle_initiated" from="." to="ProceedButton" method="_on_game_battle_initiated"]
-[connection signal="pressed" from="ProceedButton" to="ProceedButton" method="_on_pressed"]
+[connection signal="battle_initiated" from="." to="ProceedToBattle" method="_on_game_battle_initiated"]
+[connection signal="pressed" from="BattleEndLabel/ProceedToRewards" to="." method="proceed_to_rewards"]
+[connection signal="pressed" from="ProceedToBattle" to="." method="proceed_to_battle"]

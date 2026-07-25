@@ -3,10 +3,10 @@ extends Label
 var running = false
 
 var time = 0.0
-func _process(delta: float) -> void:
+func _physics_process(_delta: float) -> void:
 	if not running:
 		return
-	time += delta
+	time += 0.05
 	var miliseconds = int(time*60) % 60
 	var miliseconds_string = str(miliseconds)
 	if miliseconds < 10:
@@ -22,10 +22,10 @@ func _process(delta: float) -> void:
 	text = minutes_string + ":" + seconds_string + ":" + miliseconds_string
 
 func _on_game_battle_initiated() -> void:
-	visible = true
+	#visible = true
+	time = 0.0
 	running = true
 
 func _on_game_battle_ended() -> void:
-	visible = false
-	time = 0.0
+	#visible = false
 	running = false

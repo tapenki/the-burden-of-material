@@ -7,6 +7,16 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
+# ui
+
+msgid "you_win"
+msgstr "You Win!"
+msgid "you_lose"
+msgstr "You Lose!"
+
+msgid "day_counter"
+msgstr "Day {day}"
+
 # item descriptions
 msgid "shiv_title"
 msgstr "Shiv"
@@ -17,3 +27,8 @@ msgid "milk_title"
 msgstr "Milk"
 msgid "milk_description"
 msgstr "•Use (health is below 50%): Sip the milk, recovering *{recovery}* health."
+
+msgid "roots_title"
+msgstr "Roots"
+msgid "roots_description"
+msgstr "•Use: Absorb nutrients, gaining *{recovery}* bonus health."

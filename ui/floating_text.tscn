@@ -1,7 +1,8 @@
 [gd_scene format=3 uid="uid://g5yrc8ed8tdl"]
 
-[sub_resource type="LabelSettings" id="LabelSettings_wvgbu"]
-font_size = 24
+[sub_resource type="LabelSettings" id="LabelSettings_maacx"]
+outline_size = 4
+outline_color = Color(0, 0, 0, 1)
 
 [node name="FloatingText" type="Label" unique_id=1844892784]
-label_settings = SubResource("LabelSettings_wvgbu")
+label_settings = SubResource("LabelSettings_maacx")
