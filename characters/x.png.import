@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dfn2gbdp46eku"
-path="res://.godot/imported/diamonds_connection_active.png-403c92958c758ae999bab1c786b1604e.ctex"
+uid="uid://e5m8r16gl243"
+path="res://.godot/imported/x.png-20c8f992f702f4af2c836227c40e66aa.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://equipment/diamonds_connection_active.png"
-dest_files=["res://.godot/imported/diamonds_connection_active.png-403c92958c758ae999bab1c786b1604e.ctex"]
+source_file="res://characters/x.png"
+dest_files=["res://.godot/imported/x.png-20c8f992f702f4af2c836227c40e66aa.ctex"]
 
 [params]
 

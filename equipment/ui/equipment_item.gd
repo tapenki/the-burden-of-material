@@ -40,7 +40,7 @@ func get_grid_pos_and_shape(from_position):
 	return {position = from_position, shape = rotated_grid_shape}
 
 func highlight_slot(x, y):
-	var highlight_instance = load("res://equipment/grid_slot.tscn").instantiate()
+	var highlight_instance = preload("res://equipment/ui/grid_slot.tscn").instantiate()
 	highlight_instance.position = Vector2(48 * (x - grid.offset_x), 48 * (y - grid.offset_y))
 	highlight_instance.z_index += 1
 	highlights.append(highlight_instance)
@@ -204,8 +204,14 @@ func _process(delta: float) -> void:
 		flash_progress = 0.0
 		modulate = Color.WHITE
 
+func pop():
+	var sprite = get_node("Sprite")
+	sprite.scale = Vector2(1.2, 1.2)
+	var scale_tween = create_tween()
+	scale_tween.tween_property(sprite, "scale", Vector2(1, 1), 0.2)
+
 func describe():
-	var description_instance = preload("res://description.tscn").instantiate()
+	var description_instance = preload("res://ui/description.tscn").instantiate()
 	if global_position.x + grid_size.x * 24 > 450:
 		description_instance.position = Vector2(48, 12)
 	else:

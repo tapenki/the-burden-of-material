@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://mlpsadm2hvvn"
-path="res://.godot/imported/swordsman.png-4907cdf960cbfba49dc651e653c76c57.ctex"
+uid="uid://bf4rapra7416d"
+path="res://.godot/imported/milk.png-77db7c8b53976e3e17553fd461b71da9.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://equipment/characters/swordsman.png"
-dest_files=["res://.godot/imported/swordsman.png-4907cdf960cbfba49dc651e653c76c57.ctex"]
+source_file="res://equipment/milk/milk.png"
+dest_files=["res://.godot/imported/milk.png-77db7c8b53976e3e17553fd461b71da9.ctex"]
 
 [params]
 

@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://h24w4ln8sws6"]
 
-[ext_resource type="Texture2D" uid="uid://dq2kaf71t32tm" path="res://equipment/diamonds_connection_inactive.png" id="1_y70vb"]
+[ext_resource type="Texture2D" uid="uid://dq2kaf71t32tm" path="res://equipment/ui/diamonds_connection_inactive.png" id="1_y70vb"]
 
 [node name="Connection" type="TextureRect" unique_id=839607892]
 z_index = 1

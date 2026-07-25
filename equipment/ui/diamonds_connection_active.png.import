@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://b55qw7awss2ug"
-path="res://.godot/imported/grid_background.png-347d30ad1b63031ed288d81400b3bf1f.ctex"
+uid="uid://dfn2gbdp46eku"
+path="res://.godot/imported/diamonds_connection_active.png-1efc9a95b2dddb5ff4c3fc0c53e6f7d4.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://equipment/grid_background.png"
-dest_files=["res://.godot/imported/grid_background.png-347d30ad1b63031ed288d81400b3bf1f.ctex"]
+source_file="res://equipment/ui/diamonds_connection_active.png"
+dest_files=["res://.godot/imported/diamonds_connection_active.png-1efc9a95b2dddb5ff4c3fc0c53e6f7d4.ctex"]
 
 [params]
 

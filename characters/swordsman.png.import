@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cyp2swfswx015"
-path="res://.godot/imported/grid.png-21cce3ea0458c6a91bd75ee6668a9d7d.ctex"
+uid="uid://mlpsadm2hvvn"
+path="res://.godot/imported/swordsman.png-38bc48fcd9db089e89d4a98688b2e29c.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://equipment/grid.png"
-dest_files=["res://.godot/imported/grid.png-21cce3ea0458c6a91bd75ee6668a9d7d.ctex"]
+source_file="res://characters/swordsman.png"
+dest_files=["res://.godot/imported/swordsman.png-38bc48fcd9db089e89d4a98688b2e29c.ctex"]
 
 [params]
 

@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://clp8vw6l5chop"
-path="res://.godot/imported/boomerang.png-6b4dcc9a6ae66b94514dba6235272fd8.ctex"
+uid="uid://dq2kaf71t32tm"
+path="res://.godot/imported/diamonds_connection_inactive.png-2d306ce19ff828908e87d8eaa853c479.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://equipment/boomerang/boomerang.png"
-dest_files=["res://.godot/imported/boomerang.png-6b4dcc9a6ae66b94514dba6235272fd8.ctex"]
+source_file="res://equipment/ui/diamonds_connection_inactive.png"
+dest_files=["res://.godot/imported/diamonds_connection_inactive.png-2d306ce19ff828908e87d8eaa853c479.ctex"]
 
 [params]
 

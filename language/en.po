@@ -10,6 +10,10 @@ msgstr ""
 # item descriptions
 msgid "shiv_title"
 msgstr "Shiv"
-
 msgid "shiv_description"
-msgstr "•On Use: Stab an enemy dealing *{damage}* damage."
+msgstr "•Use: Stab an enemy, dealing *{damage}* damage."
+
+msgid "milk_title"
+msgstr "Milk"
+msgid "milk_description"
+msgstr "•Use (health is below 50%): Sip the milk, recovering *{recovery}* health."

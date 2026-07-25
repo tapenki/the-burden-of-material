@@ -16,7 +16,16 @@ var layout = [
 var offset_x = 4
 var offset_y = 4
 
-var equipment = []
+var equipment = [{
+		type = "shiv",
+		position = Vector2(2, 2),
+		rotation = 0,
+	},
+	{
+		type = "milk",
+		position = Vector2(4, 2),
+		rotation = 0,
+	}]
 
 var stats = {
 	max_health = 50,
@@ -85,12 +94,13 @@ func instantiate_item(item):
 	
 	item["item_scene"].rotation = item["rotation"] * PI * 0.5
 	item["item_scene"].position = Vector2(48 * (item["position"].x - offset_x), 48 * (item["position"].y - offset_y))
+	
 	if item["rotation"] == 1: ## jank???
-		item["item_scene"].position += Vector2(item["item_scene"].size.y, 0)
+		item["item_scene"].position += Vector2(item["item_scene"].grid_size.y * 48, 0)
 	if item["rotation"] == 2:
-		item["item_scene"].position += Vector2(item["item_scene"].size.x, item["item_scene"].size.y)
+		item["item_scene"].position += Vector2(item["item_scene"].grid_size.x * 48, item["item_scene"].grid_size.y * 48)
 	if item["rotation"] == 3:
-		item["item_scene"].position += Vector2(0, item["item_scene"].size.x)
+		item["item_scene"].position += Vector2(0, item["item_scene"].grid_size.x * 48)
 	
 	add_child(item["item_scene"])
 
@@ -113,7 +123,7 @@ func load_grid():
 		for x in row.size():
 			var value = row[x]
 			if value:
-				var grid = load("res://equipment/grid_slot.tscn").instantiate()
+				var grid = preload("res://equipment/ui/grid_slot.tscn").instantiate()
 				grid.position = Vector2(48 * (x - offset_x), 48 * (y - offset_y))
 				add_child(grid)
 	for item in equipment:
@@ -204,21 +214,33 @@ func get_enemy():
 
 func take_damage(damage):
 	add_stat("health", -damage["final"])
-	text_effect(str(damage["final"]), Color.RED)
+	text_effect("-" + str(damage["final"]), Color.RED)
 
 func deal_damage(target, damage):
 	target.take_damage(damage)
+
+func recover_health(recovery):
+	var hp = get_stat("health")["final"]
+	var max_hp = get_stat("max_health")["final"]
+	if hp + recovery["final"] >= max_hp:
+		add_stat("health", max_hp - hp)
+	else:
+		add_stat("health", recovery["final"])
+	text_effect("+" + str(recovery["final"]), Color.GREEN)
 
 func use_item():
 	var useable_items = []
 	for item in equipment:
 		var item_data = Registry.item_data[item["type"]]
+		if item_data.has("active_requirement") and not item_data["active_requirement"].call(self, item):
+			continue
 		if item_data.has("active_ability") and not item.get("used"):
 			useable_items.append(item)
 	if useable_items.size() > 0:
 		var item = useable_items.pick_random()
 		var item_data = Registry.item_data[item["type"]]
 		item["used"] = true
+		item["item_scene"].pop()
 		item_data["active_ability"].call(self, item)
 	else:
 		for item in equipment:
@@ -227,7 +249,7 @@ func use_item():
 				item["used"] = false
 
 func text_effect(text, color = Color.BLACK):
-	var label_instance = preload("res://floating_text.tscn").instantiate()
+	var label_instance = preload("res://ui/floating_text.tscn").instantiate()
 	label_instance.text = text
 	label_instance.modulate = color
 	character.add_child(label_instance)
@@ -238,14 +260,18 @@ func text_effect(text, color = Color.BLACK):
 	label_instance.queue_free()
 
 func _process(_delta: float) -> void:
-	var battle = get_node("/root/Game").battle
-	if not battle.get("active"):
-		return
-	character.get_node("ChargeBar").value = get_stat("charge")["final"]
-	character.get_node("ChargeBar").max_value = get_stat("cooldown")["final"]
+	#var battle = get_node("/root/Game").battle
+	#if not battle.get("active"):
+	#	return
+	var chargebar_max_value_tween = create_tween()
+	chargebar_max_value_tween.tween_property(character.get_node("ChargeBar"), "max_value", get_stat("cooldown")["final"], 0.05)
+	var chargebar_value_tween = create_tween()
+	chargebar_value_tween.tween_property(character.get_node("ChargeBar"), "value", get_stat("charge")["final"], 0.05)
 	
 	var hp = get_stat("health")["final"]
 	var max_hp = get_stat("max_health")["final"]
-	character.get_node("LifeBar").value = hp
-	character.get_node("LifeBar").max_value = max_hp
+	var lifebar_max_value_tween = create_tween()
+	lifebar_max_value_tween.tween_property(character.get_node("LifeBar"), "max_value", max_hp, 0.05)
+	var lifebar_value_tween = create_tween()
+	lifebar_value_tween.tween_property(character.get_node("LifeBar"), "value", hp, 0.05)
 	character.get_node("LifeBar/Label").text = str(hp) + "/" + str(max_hp)
