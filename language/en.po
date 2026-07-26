@@ -18,17 +18,34 @@ msgid "day_counter"
 msgstr "Day {day}"
 
 # item descriptions
-msgid "shiv_title"
+msgid "item_shiv_title"
 msgstr "Shiv"
-msgid "shiv_description"
+msgid "item_shiv_description"
 msgstr "•Use: Stab an enemy, dealing *{damage}* damage."
 
-msgid "milk_title"
-msgstr "Milk"
-msgid "milk_description"
-msgstr "•Use (health is below 50%): Sip the milk, recovering *{recovery}* health."
-
-msgid "roots_title"
+msgid "item_roots_title"
 msgstr "Roots"
-msgid "roots_description"
+msgid "item_roots_description"
 msgstr "•Use: Absorb nutrients, gaining *{recovery}* bonus health."
+
+msgid "item_flower_title"
+msgstr "Flower"
+msgid "item_flower_description"
+msgstr "•Connected items have +2 to recovery effects."
+
+# knight
+msgid "item_zweihander_title"
+msgstr "Zweihander"
+msgid "item_zweihander_description"
+msgstr "•Use: Slash an enemy, dealing *{damage}* damage."
+
+# chef
+msgid "item_frying_pan_title"
+msgstr "Frying Pan"
+msgid "item_frying_pan_description"
+msgstr "•Use: Bludgeon an enemy, dealing *{damage}* damage.[br]•Connected items have x2 the recovery effects."
+
+msgid "item_milk_title"
+msgstr "Milk"
+msgid "item_milk_description"
+msgstr "•Use (health is below 50%): Sip the milk, recovering *{recovery}* health."

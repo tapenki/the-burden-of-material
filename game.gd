@@ -11,6 +11,8 @@ var battle: Dictionary
 signal battle_initiated()
 signal battle_ended()
 
+signal tick(time)
+
 func init_battle(encounter):
 	var encounter_data = Registry.encounter_data[encounter]
 	battle = {teams = [[player_equipment], [enemy_equipment]], active = true}
@@ -86,6 +88,8 @@ func lose_battle():
 
 func proceed_to_battle():
 	var encounter = Registry.zone_data[zone]["encounters"][day % 5].pick_random()
+	get_node("DayCounter").visible = true
+	get_node("BattleTimer").visible = true
 	get_node("CharacterPicker").visible = false
 	get_node("ProceedToBattle").visible = false
 	day += 1
@@ -117,32 +121,21 @@ func proceed_to_rewards():
 			if not team.has(player_equipment):
 				battler.visible = false
 				battler.character.visible = false
+	get_node("BattleTimer").visible = false
 	get_node("BattleEndLabel").visible = false
 	get_node("ProceedToBattle").visible = true
 	battle = {}
-	fatigue_start_timer = 0.0
 	player_equipment.can_edit = true
 	
 
-func _ready() -> void:
+#func _ready() -> void:
 	#proceed_to_battle()
-	pass
 
-var fatigue_start_timer = 0.0
 func _physics_process(_delta: float) -> void:
 	if not battle.get("active"):
 		return
-	fatigue_start_timer += 0.05
-	for team in battle["teams"]:
-		for battler in team:
-			if fatigue_start_timer >= 20:
-				var fatigue_damage = int(pow(2, floor(fatigue_start_timer - 20)))
-				battler.take_damage({"base" = fatigue_damage, "add_mult" = 1, "mult_mult" = 1, "final" = fatigue_damage, "fatigue" = true})
-			var cooldown = battler.get_stat("cooldown")["final"]
-			if battler.get_stat("charge")["final"] >= cooldown:
-				battler.use_item()
-				battler.add_stat("charge", -cooldown)
-			battler.add_stat("charge", 0.05)
+	tick.emit(0.05)
+	
 	var enemy_dead = true
 	var player_dead = true
 	for team in battle["teams"]:
@@ -156,4 +149,3 @@ func _physics_process(_delta: float) -> void:
 		win_battle()
 	elif player_dead:
 		lose_battle()
-			

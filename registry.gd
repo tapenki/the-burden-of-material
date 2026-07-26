@@ -16,27 +16,7 @@ var zone_data = {
 		}
 }
 
-var character_data = {
-	knight = {
-		character = preload("res://characters/knight.png"),
-		button_scene = preload("res://ui/character_button.tscn"),
-		layout = [
-					[false, false, false, false, false, false, false, false],
-					[false, false, false, false, false, false, false, false],
-					[false, false, true , true , true , true , false, false],
-					[false, false, true , true , true , true , false, false],
-					[false, false, true , true , true , true , false, false],
-					[false, false, true , true , true , true , false, false],
-					[false, false, false, false, false, false, false, false],
-					[false, false, false, false, false, false, false, false]
-				],
-		equipment = [{
-			type = "shiv",
-			position = Vector2(2, 2),
-			rotation = 0,
-		}]
-	}
-}
+var character_data = {}
 
 func register_item(item_name, item_definition):
 	item_data[item_name] = item_definition
@@ -48,6 +28,9 @@ func register_encounter(encounter_name, encounter_definition, encounter_zones = 
 		for day in schedule:
 			zone_data[zone]["encounters"][day].append(encounter_name)
 
+func register_character(character_name, character_definition):
+	character_data[character_name] = character_definition
+
 func _init() -> void:
 	#region register items
 	register_item("shiv", {
@@ -57,7 +40,7 @@ func _init() -> void:
 			[true ]
 		],
 		stats = {
-			damage = 10
+			damage = 8
 		},
 		active_ability = func(grid, this): ## example active ability
 		var enemy = grid.get_enemy()
@@ -74,8 +57,8 @@ func _init() -> void:
 		],
 		connections = [
 			{
-				active = preload("res://equipment/ui/diamonds_connection_active.tscn"),
-				inactive = preload("res://equipment/ui/diamonds_connection_inactive.tscn"),
+				active = preload("res://ui/diamonds_connection_active.tscn"),
+				inactive = preload("res://ui/diamonds_connection_inactive.tscn"),
 				shape = [
 					[true , true ],
 					[true , true ]
@@ -90,22 +73,27 @@ func _init() -> void:
 		}
 	})
 	
-	register_item("milk", {
-		scene = preload("res://equipment/milk/milk.tscn"),
+	register_item("flower", {
+		scene = preload("res://equipment/flower/flower.tscn"),
 		shape = [
-			[true ],
-			[true ]
+			[true , true ],
+			[true , true ],
 		],
-		stats = {
-			recovery = 10
-		},
-		active_requirement = func(grid, _this):
-		var hp = grid.get_stat("health")["final"]
-		var max_hp = grid.get_stat("max_health")["final"]
-		return hp <= max_hp * 0.5,
-			active_ability = func(grid, this):
-		var recovery = grid.get_item_stat(this, "recovery")
-		grid.recover_health(recovery)
+		connections = [
+			{
+				active = preload("res://ui/hearts_connection_active.tscn"),
+				inactive = preload("res://ui/hearts_connection_inactive.tscn"),
+				shape = [
+					[true , true],
+				],
+				offset = Vector2i(0, 2)
+			}
+		],
+		passive_ability = {
+			item_stat_modifiers = func(stat, modifiers, grid, item, this):
+		if stat == "recovery" and grid.get_connected_items(this, 0).has(item):
+			modifiers["base"] += 2
+		}
 	})
 	
 	register_item("roots", {
@@ -114,7 +102,7 @@ func _init() -> void:
 			[true , true ],
 		],
 		stats = {
-			recovery = 4
+			recovery = 6
 		},
 		active_ability = func(grid, this):
 		var recovery = grid.get_item_stat(this, "recovery")
@@ -126,7 +114,7 @@ func _init() -> void:
 	register_encounter("bandit", {
 		enemies = [
 			{
-				character = preload("res://characters/bandit.png"),
+				character = preload("res://zones/field/bandit/bandit.png"),
 				layout = [
 					[false, false, false, false, false, false, false, false],
 					[false, false, false, false, false, false, false, false],
@@ -149,7 +137,7 @@ func _init() -> void:
 	register_encounter("flower", {
 		enemies = [
 			{
-				character = preload("res://characters/flower.png"),
+				character = preload("res://zones/field/flower/flower.png"),
 				layout = [
 					[false, false, false, false, false, false, false, false],
 					[false, false, false, false, false, false, false, false],
@@ -162,7 +150,11 @@ func _init() -> void:
 				],
 				equipment = [{
 						type = "roots",
-						position = Vector2(3, 4),
+						position = Vector2(3, 5),
+						rotation = 0,
+					}, {
+						type = "flower",
+						position = Vector2(3, 3),
 						rotation = 0,
 					}]
 			}

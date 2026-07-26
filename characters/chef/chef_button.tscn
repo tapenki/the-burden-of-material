@@ -1,0 +1,17 @@
+[gd_scene format=3 uid="uid://c10q1g37ok8e6"]
+
+[ext_resource type="PackedScene" uid="uid://gf31xls6mmex" path="res://characters/character_button.tscn" id="1_48bwr"]
+[ext_resource type="Texture2D" uid="uid://bfbe471fjyii8" path="res://characters/chef/chef.png" id="2_43vy2"]
+
+[node name="CharacterButton" unique_id=1430139252 instance=ExtResource("1_48bwr")]
+character_name = "chef"
+
+[node name="TextureRect" parent="Mask" parent_id_path=PackedInt32Array(544147442) index="0" unique_id=292215806]
+offset_left = -41.0
+offset_top = -10.0
+offset_right = 39.0
+offset_bottom = 70.0
+texture = ExtResource("2_43vy2")
+
+[node name="Title" parent="." index="3" unique_id=1790409422]
+text = "Chef"

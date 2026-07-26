@@ -1,0 +1,8 @@
+[gd_scene format=3 uid="uid://dcytchbqucibh"]
+
+[ext_resource type="Texture2D" uid="uid://dfn2gbdp46eku" path="res://ui/diamonds_connection_active.png" id="1_lk1yr"]
+
+[node name="Connection" type="TextureRect" unique_id=839607892]
+z_index = 1
+mouse_filter = 2
+texture = ExtResource("1_lk1yr")

@@ -1,0 +1,19 @@
+[gd_scene format=3 uid="uid://cfskl7lbxsf7"]
+
+[ext_resource type="Texture2D" uid="uid://cyp2swfswx015" path="res://ui/grid.png" id="1_nch6e"]
+
+[node name="GridSlot" type="TextureRect" unique_id=839607892]
+z_index = -2
+pivot_offset_ratio = Vector2(0.5, 0.5)
+mouse_filter = 2
+texture = ExtResource("1_nch6e")
+
+[node name="TextureRect" type="ColorRect" parent="." unique_id=1091775924]
+z_index = -1
+layout_mode = 0
+offset_left = -3.0
+offset_top = -3.0
+offset_right = 51.0
+offset_bottom = 51.0
+mouse_filter = 2
+color = Color(0.7490196, 0.7490196, 0.7490196, 1)

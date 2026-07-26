@@ -22,6 +22,7 @@ config/icon="res://icon.svg"
 [autoload]
 
 Registry="*uid://ibdx3jlprm8c"
+BaseCharacters="*uid://eqgfotq46gii"
 
 [display]
 
