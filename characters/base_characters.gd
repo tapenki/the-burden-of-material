@@ -16,7 +16,13 @@ func _init() -> void:
 		active_ability = func(grid, this): ## example active ability
 		var enemy = grid.get_enemy()
 		var damage = grid.get_item_stat(this, "damage")
+		damage["item_source"] = this
 		grid.deal_damage(enemy, damage)
+		var hp = enemy.get_stat("health")["final"]
+		var max_hp = enemy.get_stat("max_health")["final"]
+		if hp > 0 and hp < max_hp * 0.2:
+			enemy.set_stat("health", 0)
+			enemy.text_effect("message_execution", Color.RED)
 	})
 	
 	Registry.register_character("knight", {
@@ -83,6 +89,7 @@ func _init() -> void:
 		active_ability = func(grid, this): ## example active ability
 		var enemy = grid.get_enemy()
 		var damage = grid.get_item_stat(this, "damage")
+		damage["item_source"] = this
 		grid.deal_damage(enemy, damage),
 		passive_ability = {
 			item_stat_modifiers = func(stat, modifiers, grid, item, this):

@@ -41,27 +41,42 @@ var target_enemy: int
 
 var dragging: Node
 
-signal stat_modifiers(stat, modifiers, grid)
-signal item_stat_modifiers(stat, modifiers, grid, item)
+#signal stat_modifiers(stat, modifiers, grid)
+#signal item_stat_modifiers(stat, modifiers, grid, item)
 
-var signals = [
-	stat_modifiers, 
-	item_stat_modifiers
-]
+#signal damage_dealt(damage, target, grid)
+
+var pseudo_signals = { ## workaround to allow duplicate connections
+	stat_modifiers = [], 
+	item_stat_modifiers = [],
+	damage_dealt = []
+}
+
+func pseudo_emit(pseudo_signal, arguments):
+	for connection in pseudo_signals[pseudo_signal]:
+		connection.callv(arguments)
 
 func get_stat(stat):
 	var modifiers = {"base" = 0, "add_mult" = 1, "mult_mult" = 1}
 	if stat_changes.has(stat):
 		modifiers = stat_changes[stat].duplicate()
 	modifiers["base"] += stats.get(stat, 0)
-	stat_modifiers.emit(stat, modifiers, self)
+	pseudo_emit("stat_modifiers", [stat, modifiers, self])
 	modifiers["final"] = modifiers["base"] * modifiers["add_mult"] * modifiers["mult_mult"]
+	if modifiers["base"] is int:
+		modifiers["final"] = (int)(modifiers["final"])
 	return modifiers
 
 func add_stat(stat, value, operation = "base"):
 	if not stat_changes.has(stat):
 		stat_changes[stat] = {"base" = 0, "add_mult" = 1, "mult_mult" = 1}
 	stat_changes[stat][operation] += value
+
+func set_stat(stat, value):
+	if not stat_changes.has(stat):
+		stat_changes[stat] = {"base" = 0, "add_mult" = 1, "mult_mult" = 1}
+	var offset = get_stat(stat)["final"] - value
+	stat_changes[stat]["base"] -= offset
 
 func get_item_stat(item, stat):
 	var item_data = Registry.item_data[item["type"]]
@@ -70,16 +85,26 @@ func get_item_stat(item, stat):
 		modifiers = item["stat_changes"][stat].duplicate()
 	if item_data.has("stats"):
 		modifiers["base"] += item_data["stats"].get(stat, 0)
-	item_stat_modifiers.emit(stat, modifiers, self, item)
+	pseudo_emit("item_stat_modifiers", [stat, modifiers, self, item])
 	modifiers["final"] = modifiers["base"] * modifiers["add_mult"] * modifiers["mult_mult"]
+	if modifiers["base"] is int:
+		modifiers["final"] = (int)(modifiers["final"])
 	return modifiers
 
-func add_item_stat(item, stat, operation, value):
+func add_item_stat(item, stat, value, operation = "base"):
 	if not item.has("stat_changes"):
 		item["stat_changes"] = {}
 	if not item["stat_changes"].has(stat):
 		item["stat_changes"][stat] = {"base" = 0, "add_mult" = 1, "mult_mult" = 1}
 	item["stat_changes"][stat][operation] += value
+
+func set_item_stat(item, stat, value):
+	if not item.has("stat_changes"):
+		item["stat_changes"] = {}
+	if not item["stat_changes"].has(stat):
+		item["stat_changes"][stat] = {"base" = 0, "add_mult" = 1, "mult_mult" = 1}
+	var offset = get_item_stat(item, stat)["final"] - value
+	item["stat_changes"][stat]["base"] -= offset
 
 func instantiate_item(item):
 	var item_data = Registry.item_data[item["type"]]
@@ -107,15 +132,16 @@ func instantiate_item(item):
 func load_item(item):
 	var item_data = Registry.item_data[item["type"]]
 	if item_data.has("passive_ability"):
-		for key in item_data["passive_ability"].keys():
-			var ability = item_data["passive_ability"][key]
-			self[key].connect(ability.bind(item))
+		item["passive_ability"] = item_data["passive_ability"].duplicate()
+		for key in item["passive_ability"].keys():
+			var ability = item["passive_ability"][key]
+			pseudo_signals[key].append(ability.bind(item))
 	instantiate_item(item)
 
 func load_grid():
-	for signal_reference in signals:
-		for connection in signal_reference.get_connections():
-			signal_reference.disconnect(connection["callable"])
+	for key in pseudo_signals.keys():
+		var pseudo_signal = pseudo_signals[key]
+		pseudo_signal.clear()
 	for child in get_children():
 		child.queue_free()
 	for y in layout.size():
@@ -218,6 +244,7 @@ func take_damage(damage):
 
 func deal_damage(target, damage):
 	target.take_damage(damage)
+	pseudo_emit("damage_dealt", [damage, target, self])
 
 func recover_health(recovery):
 	var hp = get_stat("health")["final"]

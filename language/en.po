@@ -9,13 +9,23 @@ msgstr ""
 
 # ui
 
-msgid "you_win"
+msgid "ui_character_select"
+msgstr "WANTED CRIMINALS"
+
+msgid "ui_you_win"
 msgstr "You Win!"
-msgid "you_lose"
+msgid "ui_you_lose"
 msgstr "You Lose!"
 
-msgid "day_counter"
+msgid "ui_day_counter"
 msgstr "Day {day}"
+
+msgid "ui_stolen_goods"
+msgstr "Stolen Goods"
+msgid "ui_found_treasure"
+msgstr "Found Treasure"
+msgid "ui_get_nothing"
+msgstr "Get Nothing"
 
 # item descriptions
 msgid "item_shiv_title"
@@ -33,11 +43,24 @@ msgstr "Flower"
 msgid "item_flower_description"
 msgstr "•Connected items have +2 to recovery effects."
 
+msgid "item_pitchfork_title"
+msgstr "Pitchfork"
+msgid "item_pitchfork_description"
+msgstr "•Use: Stab an enemy, dealing *{damage}* damage 3 times."
+
+msgid "item_straw_hat_title"
+msgstr "Straw Hat"
+msgid "item_straw_hat_description"
+msgstr "•On connected item dealing damage: Recover *{recovery}* health."
+
 # knight
 msgid "item_zweihander_title"
 msgstr "Zweihander"
 msgid "item_zweihander_description"
-msgstr "•Use: Slash an enemy, dealing *{damage}* damage."
+msgstr "•Use: Slash an enemy, dealing *{damage}* damage. Then, if the enemy health is below 20%, execute your foe."
+
+msgid "message_execution"
+msgstr "EXECUTION"
 
 # chef
 msgid "item_frying_pan_title"
