@@ -148,6 +148,41 @@ func _init() -> void:
 			grid.recover_health(recovery)
 		}
 	})
+	
+	register_item("beef", {
+		scene = preload("res://equipment/beef/beef.tscn"),
+		shape = [
+			[true , true ],
+			[true , true ],
+		],
+		passive_ability = {
+			stat_modifiers = func(stat, modifiers, _grid, _this):
+		if stat == "health" or stat == "max_health":
+			modifiers["base"] += 30
+		}
+	})
+	
+	register_item("cow_slam", {
+		scene = preload("res://equipment/cow_slam/cow_slam.tscn"),
+		shape = [
+			[true , true ],
+			[true , true ],
+		],
+		stats = {
+			damage = 2
+		},
+		active_ability = func(grid, this): ## example active ability
+		var enemy = grid.get_enemy()
+		var damage = grid.get_item_stat(this, "damage")
+		damage["item_source"] = this
+		grid.deal_damage(enemy, damage),
+		passive_ability = {
+			item_stat_modifiers = func(stat, modifiers, grid, item, this):
+		if stat == "damage" and item == this:
+			var hp = grid.get_stat("health")
+			modifiers["base"] += int(hp["final"] / 8)
+		}
+	})
 	#endregion
 	#region register encounters
 	register_encounter("bandit", {
@@ -224,6 +259,33 @@ func _init() -> void:
 						position = Vector2(3, 2),
 						rotation = 0,
 					},]
+			}
+		]
+	}, ["field"])
+	
+	register_encounter("cow", {
+		enemies = [
+			{
+				character = preload("res://zones/field/cow/cow.png"),
+				layout = [
+					[false, false, false, false, false, false, false, false],
+					[false, false, false, false, false, false, false, false],
+					[false, false, true , true , true , true , false, false],
+					[false, false, true , true , true , true , false, false],
+					[false, false, true , true , true , true , false, false],
+					[false, false, true , true , true , true , false, false],
+					[false, false, false, false, false, false, false, false],
+					[false, false, false, false, false, false, false, false]
+				],
+				equipment = [{
+						type = "cow_slam",
+						position = Vector2(2, 2),
+						rotation = 0,
+					}, {
+						type = "beef",
+						position = Vector2(4, 4),
+						rotation = 0,
+					}]
 			}
 		]
 	}, ["field"])

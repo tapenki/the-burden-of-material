@@ -11,7 +11,7 @@ func _init() -> void:
 			[true ]
 		],
 		stats = {
-			damage = 12
+			damage = 10
 		},
 		active_ability = func(grid, this): ## example active ability
 		var enemy = grid.get_enemy()
@@ -23,6 +23,28 @@ func _init() -> void:
 		if hp > 0 and hp < max_hp * 0.2:
 			enemy.set_stat("health", 0)
 			enemy.text_effect("message_execution", Color.RED)
+	})
+	
+	Registry.register_item("whetstone", {
+		scene = preload("res://characters/knight/whetstone/whetstone.tscn"),
+		shape = [
+			[true ],
+		],
+		connections = [
+			{
+				active = preload("res://ui/diamonds_connection_active.tscn"),
+				inactive = preload("res://ui/diamonds_connection_inactive.tscn"),
+				shape = [
+					[true , true , true ],
+				],
+				offset = Vector2i(-1, -1)
+			}
+		],
+		passive_ability = {
+			item_stat_modifiers = func(stat, modifiers, grid, item, this): ## example ability boosting the damage of all connected items
+		if stat == "damage" and grid.get_connected_items(this, 0).has(item):
+			modifiers["base"] += 2
+		}
 	})
 	
 	Registry.register_character("knight", {
@@ -41,6 +63,10 @@ func _init() -> void:
 		equipment = [{
 			type = "zweihander",
 			position = Vector2(3, 2),
+			rotation = 0,
+		},{
+			type = "whetstone",
+			position = Vector2(4, 4),
 			rotation = 0,
 		}]
 	})

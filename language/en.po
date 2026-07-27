@@ -53,11 +53,26 @@ msgstr "Straw Hat"
 msgid "item_straw_hat_description"
 msgstr "•On connected item dealing damage: Recover *{recovery}* health."
 
+msgid "item_cow_slam_title"
+msgstr "Technique: Cow Slam!"
+msgid "item_cow_slam_description"
+msgstr "•Use: Cow Slam! an enemy, dealing *{damage}* damage.[br]•Has +1 damage for each 8 health you have."
+
+msgid "item_beef_title"
+msgstr "Beef"
+msgid "item_beef_description"
+msgstr "•You have +30 health."
+
 # knight
 msgid "item_zweihander_title"
 msgstr "Zweihander"
 msgid "item_zweihander_description"
 msgstr "•Use: Slash an enemy, dealing *{damage}* damage. Then, if the enemy health is below 20%, execute your foe."
+
+msgid "item_whetstone_title"
+msgstr "Whetstone"
+msgid "item_whetstone_description"
+msgstr "•Connected items have +2 to damage."
 
 msgid "message_execution"
 msgstr "EXECUTION"

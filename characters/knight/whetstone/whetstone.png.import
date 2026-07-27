@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://b0snspep8tolh"
-path="res://.godot/imported/flower.png-b7f753f31015187a9e34da0bb2e669ae.ctex"
+uid="uid://dar63m7yfkje3"
+path="res://.godot/imported/whetstone.png-4cc40e2846e90a1eae2b3d55a4806c2e.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://equipment/flower/flower.png"
-dest_files=["res://.godot/imported/flower.png-b7f753f31015187a9e34da0bb2e669ae.ctex"]
+source_file="res://characters/knight/whetstone/whetstone.png"
+dest_files=["res://.godot/imported/whetstone.png-4cc40e2846e90a1eae2b3d55a4806c2e.ctex"]
 
 [params]
 

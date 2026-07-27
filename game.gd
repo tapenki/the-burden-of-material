@@ -112,12 +112,13 @@ func proceed_to_rewards():
 	if not battle.has("won"):
 		return
 	if battle["won"]:
-		var prize_item = enemy_equipment.equipment.pick_random().duplicate()
-		if prize_item.has("stat_changes"):
-			prize_item["stat_changes"] = {}
-		prize_item["used"] = false
-		prize_item["equipped"] = false
+		var chosen_item = enemy_equipment.equipment.pick_random()
+		var prize_item = {}
+		prize_item["type"] = chosen_item["type"]
+		prize_item["position"] = chosen_item["position"]
 		prize_item["position"].x += 10
+		prize_item["rotation"] = chosen_item["rotation"]
+		prize_item["equipped"] = false
 		player_equipment.equipment.append(prize_item)
 		if day % 4 == 0:
 			get_node("RewardBackground/Title").text = "ui_found_treasure"

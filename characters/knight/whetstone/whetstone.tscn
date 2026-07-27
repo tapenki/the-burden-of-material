@@ -1,18 +1,18 @@
-[gd_scene format=3 uid="uid://kmnoeabsluac"]
+[gd_scene format=3 uid="uid://da88enjb8ob0c"]
 
-[ext_resource type="Script" uid="uid://hcvljlmyr8es" path="res://ui/equipment_item.gd" id="1_dlhs2"]
-[ext_resource type="Texture2D" uid="uid://b0snspep8tolh" path="res://equipment/flower/flower.png" id="2_qrr65"]
+[ext_resource type="Script" uid="uid://hcvljlmyr8es" path="res://ui/equipment_item.gd" id="1_l3atk"]
+[ext_resource type="Texture2D" uid="uid://dar63m7yfkje3" path="res://characters/knight/whetstone/whetstone.png" id="2_vof1e"]
 
-[node name="Flower" type="Control" unique_id=1620977827]
+[node name="Whetstone" type="Control" unique_id=1620977827]
 layout_mode = 3
 anchors_preset = 0
-script = ExtResource("1_dlhs2")
+script = ExtResource("1_l3atk")
 
 [node name="Sprite" type="TextureRect" parent="." unique_id=1247240217]
 layout_mode = 0
 pivot_offset_ratio = Vector2(0.5, 0.5)
 mouse_filter = 2
-texture = ExtResource("2_qrr65")
+texture = ExtResource("2_vof1e")
 
 [node name="SelectionArea" type="Control" parent="." unique_id=761036972]
 anchors_preset = 0
@@ -20,8 +20,8 @@ mouse_filter = 1
 
 [node name="Shape1" type="Control" parent="SelectionArea" unique_id=1430213690]
 anchors_preset = 0
-offset_right = 96.0
-offset_bottom = 96.0
+offset_right = 48.0
+offset_bottom = 48.0
 mouse_filter = 1
 mouse_default_cursor_shape = 2
 

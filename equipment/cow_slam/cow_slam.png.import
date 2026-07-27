@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://b0snspep8tolh"
-path="res://.godot/imported/flower.png-b7f753f31015187a9e34da0bb2e669ae.ctex"
+uid="uid://c5fpo61qw7qrx"
+path="res://.godot/imported/cow_slam.png-47f347e9be94d00810561bd0b7687de8.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://equipment/flower/flower.png"
-dest_files=["res://.godot/imported/flower.png-b7f753f31015187a9e34da0bb2e669ae.ctex"]
+source_file="res://equipment/cow_slam/cow_slam.png"
+dest_files=["res://.godot/imported/cow_slam.png-47f347e9be94d00810561bd0b7687de8.ctex"]
 
 [params]
 

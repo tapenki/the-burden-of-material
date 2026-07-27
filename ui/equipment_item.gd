@@ -147,11 +147,13 @@ func equip(from_position):
 		position += Vector2(0, grid_size.x * 48)
 	
 	equipment_reference["equipped"] = true
+	grid.connect_item(equipment_reference)
 	grid.move_child(self, 0)
 	return true
 
 func unequip():
 	equipment_reference["equipped"] = false
+	grid.disconnect_item(equipment_reference)
 	move_to_front()
 
 func _on_gui_input(event: InputEvent) -> void:
@@ -243,4 +245,5 @@ func _notification(what: int) -> void: ##TODO: may cause flickering with certain
 		undescribe()
 
 func kill():
+	grid.disconnect_item(equipment_reference)
 	queue_free()

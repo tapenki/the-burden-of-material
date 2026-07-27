@@ -1,18 +1,18 @@
-[gd_scene format=3 uid="uid://kmnoeabsluac"]
+[gd_scene format=3 uid="uid://dtblqtdyv23ku"]
 
-[ext_resource type="Script" uid="uid://hcvljlmyr8es" path="res://ui/equipment_item.gd" id="1_dlhs2"]
-[ext_resource type="Texture2D" uid="uid://b0snspep8tolh" path="res://equipment/flower/flower.png" id="2_qrr65"]
+[ext_resource type="Script" uid="uid://hcvljlmyr8es" path="res://ui/equipment_item.gd" id="1_x1xn7"]
+[ext_resource type="Texture2D" uid="uid://c5fpo61qw7qrx" path="res://equipment/cow_slam/cow_slam.png" id="2_pv8bo"]
 
-[node name="Flower" type="Control" unique_id=1620977827]
+[node name="CowSlam" type="Control" unique_id=1620977827]
 layout_mode = 3
 anchors_preset = 0
-script = ExtResource("1_dlhs2")
+script = ExtResource("1_x1xn7")
 
 [node name="Sprite" type="TextureRect" parent="." unique_id=1247240217]
 layout_mode = 0
 pivot_offset_ratio = Vector2(0.5, 0.5)
 mouse_filter = 2
-texture = ExtResource("2_qrr65")
+texture = ExtResource("2_pv8bo")
 
 [node name="SelectionArea" type="Control" parent="." unique_id=761036972]
 anchors_preset = 0
