@@ -13,6 +13,7 @@ var layout = [
 	[true , true , true , true , true , true , true , true ],
 	[true , true , true , true , true , true , true , true ]
 ]
+var layout_tier = 0
 var offset_x = 4
 var offset_y = 4
 
@@ -46,10 +47,16 @@ signal item_stat_modifiers(arguments)
 
 signal damage_dealt(arguments)
 
+signal game_tick(arguments)
+
+signal battle_start(arguments)
+
 var signals = [
 	stat_modifiers,
 	item_stat_modifiers,
-	damage_dealt
+	damage_dealt,
+	game_tick,
+	battle_start,
 ]
 
 func get_stat(stat):
@@ -179,6 +186,7 @@ func load_grid():
 
 func _ready() -> void:
 	get_node("/root/Game").tick.connect(_on_game_tick)
+	get_node("/root/Game").battle_initiated.connect(_on_battle_initiated)
 
 func rotate_shape(grid_shape, grid_rotation):
 	var rotated_grid_shape = []
@@ -284,13 +292,17 @@ func recover_health(recovery):
 		add_stat("health", recovery["final"])
 	text_effect("+" + str(recovery["final"]), Color.GREEN)
 
+func recover_shield(recovery):
+	add_stat("shield", recovery["final"])
+	text_effect("+" + str(recovery["final"]), Color.ORANGE)
+
 func use_item():
 	var useable_items = []
 	for item in equipment:
 		var item_data = Registry.item_data[item["type"]]
 		if item_data.has("active_requirement") and not item_data["active_requirement"].call(self, item):
 			continue
-		if item_data.has("active_ability") and not item.get("used"):
+		if item_data.has("active_ability") and not item.get("used") and not item.get("destroyed") and item.get("equipped", true):
 			useable_items.append(item)
 	if useable_items.size() > 0:
 		var item = useable_items.pick_random()
@@ -349,3 +361,8 @@ func _on_game_tick(tick) -> void:
 		var fatigue_damage = int(pow(2, floor(fatigue - 20)))
 		take_damage({"base" = fatigue_damage, "add_mult" = 1, "mult_mult" = 1, "final" = fatigue_damage, "fatigue" = true})
 	
+	game_tick.emit([tick, self])
+	
+
+func _on_battle_initiated():
+	battle_start.emit([self])

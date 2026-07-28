@@ -41,15 +41,15 @@ func _init() -> void:
 			damage = 8
 		},
 		active_requirement = func(grid, _this):
-		var enemy = grid.get_enemy()
-		var hp = enemy.get_stat("health")["final"]
-		var max_hp = enemy.get_stat("max_health")["final"]
-		return hp <= max_hp * 0.5,
-		active_ability = func(grid, this): ## example active ability
-		var enemy = grid.get_enemy()
-		var damage = grid.get_item_stat(this, "damage")
-		damage["item_source"] = this
-		grid.deal_damage(enemy, damage),
+			var enemy = grid.get_enemy()
+			var hp = enemy.get_stat("health")["final"]
+			var max_hp = enemy.get_stat("max_health")["final"]
+			return hp <= max_hp * 0.5,
+		active_ability = func(grid, this):
+			var enemy = grid.get_enemy()
+			var damage = grid.get_item_stat(this, "damage")
+			damage["item_source"] = this
+			grid.deal_damage(enemy, damage),
 		tags = ["treasure_loot"]
 	})
 	
@@ -62,12 +62,12 @@ func _init() -> void:
 		stats = {
 			damage = 8
 		},
-		active_ability = func(grid, this): ## example active ability
-		var enemy = grid.get_enemy()
-		var damage = grid.get_item_stat(this, "damage")
-		damage["item_source"] = this
-		grid.deal_damage(enemy, damage),
-		tags = ["treasure_loot"]
+		active_ability = func(grid, this):
+			var enemy = grid.get_enemy()
+			var damage = grid.get_item_stat(this, "damage")
+			damage["item_source"] = this
+			grid.deal_damage(enemy, damage),
+			tags = ["treasure_loot"]
 	})
 	
 	register_item("axe", {
@@ -90,9 +90,8 @@ func _init() -> void:
 		],
 		passive_ability = {
 			item_stat_modifiers = func(stat, modifiers, grid, item, this): ## example ability boosting the damage of all connected items
-		if stat == "damage" and grid.get_connected_items(this, 0).has(item):
-			modifiers["base"] += 2
-		}
+				if stat == "damage" and grid.get_connected_items(this, 0).has(item):
+					modifiers["base"] += 2}
 	})
 	
 	register_item("flower", {
@@ -113,9 +112,8 @@ func _init() -> void:
 		],
 		passive_ability = {
 			item_stat_modifiers = func(stat, modifiers, grid, item, this):
-		if stat == "recovery" and grid.get_connected_items(this, 0).has(item):
-			modifiers["base"] += 2
-		}
+				if stat == "recovery" and grid.get_connected_items(this, 0).has(item):
+					modifiers["base"] += 2}
 	})
 	
 	register_item("roots", {
@@ -127,9 +125,9 @@ func _init() -> void:
 			recovery = 6
 		},
 		active_ability = func(grid, this):
-		var recovery = grid.get_item_stat(this, "recovery")
-		grid.add_stat("max_health", recovery["final"])
-		grid.recover_health(recovery)
+			var recovery = grid.get_item_stat(this, "recovery")
+			grid.add_stat("max_health", recovery["final"])
+			grid.recover_health(recovery)
 	})
 	
 	register_item("pitchfork", {
@@ -144,11 +142,11 @@ func _init() -> void:
 			damage = 3
 		},
 		active_ability = func(grid, this): ## example active ability
-		var enemy = grid.get_enemy()
-		for i in 3:
-			var damage = grid.get_item_stat(this, "damage")
-			damage["item_source"] = this
-			grid.deal_damage(enemy, damage)
+			var enemy = grid.get_enemy()
+			for i in 3:
+				var damage = grid.get_item_stat(this, "damage")
+				damage["item_source"] = this
+				grid.deal_damage(enemy, damage)
 	})
 	
 	register_item("straw_hat", {
@@ -172,10 +170,9 @@ func _init() -> void:
 		},
 		passive_ability = {
 			damage_dealt = func(damage, _target, grid, this):
-		if damage.has("item_source") and grid.get_connected_items(this, 0).has(damage["item_source"]):
-			var recovery = grid.get_item_stat(this, "recovery")
-			grid.recover_health(recovery)
-		}
+				if damage.has("item_source") and grid.get_connected_items(this, 0).has(damage["item_source"]):
+					var recovery = grid.get_item_stat(this, "recovery")
+					grid.recover_health(recovery)}
 	})
 	
 	register_item("beef", {
@@ -184,11 +181,14 @@ func _init() -> void:
 			[true , true ],
 			[true , true ],
 		],
+		stats = {
+			recovery = 30
+		},
 		passive_ability = {
-			stat_modifiers = func(stat, modifiers, _grid, _this):
-		if stat == "health" or stat == "max_health":
-			modifiers["base"] += 30
-		}
+			battle_start = func(grid, this):
+				var recovery = grid.get_item_stat(this, "recovery")
+				grid.add_stat("max_health", recovery["final"])
+				grid.recover_health(recovery)}
 	})
 	
 	register_item("cow_slam", {
@@ -201,16 +201,15 @@ func _init() -> void:
 			damage = 2
 		},
 		active_ability = func(grid, this): ## example active ability
-		var enemy = grid.get_enemy()
-		var damage = grid.get_item_stat(this, "damage")
-		damage["item_source"] = this
-		grid.deal_damage(enemy, damage),
+			var enemy = grid.get_enemy()
+			var damage = grid.get_item_stat(this, "damage")
+			damage["item_source"] = this
+			grid.deal_damage(enemy, damage),
 		passive_ability = {
 			item_stat_modifiers = func(stat, modifiers, grid, item, this):
-		if stat == "damage" and item == this:
-			var hp = grid.get_stat("health")
-			modifiers["base"] += int(hp["final"] / 8)
-		}
+				if stat == "damage" and item == this:
+					var hp = grid.get_stat("health")
+					modifiers["base"] += int(hp["final"] / 8)}
 	})
 	
 	register_item("wood", {
@@ -218,11 +217,13 @@ func _init() -> void:
 		shape = [
 			[true , true , true ],
 		],
+		stats = {
+			shield = 30
+		},
 		passive_ability = {
-			stat_modifiers = func(stat, modifiers, _grid, _this):
-		if stat == "shield":
-			modifiers["base"] += 30
-		}
+			battle_start = func(grid, this):
+				var shield = grid.get_item_stat(this, "shield")
+				grid.recover_shield(shield)}
 	})
 	#endregion
 	#region register encounters

@@ -1,5 +1,18 @@
 extends Node
 
+var basic_layouts = [
+	[
+		[false, false, false, false, false, false, false, false],
+		[false, false, false, false, false, false, false, false],
+		[false, false, true , true , true , true , false, false],
+		[false, false, true , true , true , true , false, false],
+		[false, false, true , true , true , true , false, false],
+		[false, false, true , true , true , true , false, false],
+		[false, false, false, false, false, false, false, false],
+		[false, false, false, false, false, false, false, false]
+	],
+]
+
 func _init() -> void:
 	## knight
 	Registry.register_item("zweihander", {
@@ -14,15 +27,16 @@ func _init() -> void:
 			damage = 10
 		},
 		active_ability = func(grid, this): ## example active ability
-		var enemy = grid.get_enemy()
-		var damage = grid.get_item_stat(this, "damage")
-		damage["item_source"] = this
-		grid.deal_damage(enemy, damage)
-		var hp = enemy.get_stat("health")["final"]
-		var max_hp = enemy.get_stat("max_health")["final"]
-		if hp > 0 and hp < max_hp * 0.2:
-			enemy.set_stat("health", 0)
-			enemy.text_effect("message_execution", Color.RED)
+			var enemy = grid.get_enemy()
+			var damage = grid.get_item_stat(this, "damage")
+			damage["item_source"] = this
+			grid.deal_damage(enemy, damage)
+			var hp = enemy.get_stat("health")["final"]
+			var max_hp = enemy.get_stat("max_health")["final"]
+			if hp > 0 and hp < max_hp * 0.2:
+				enemy.set_stat("health", 0)
+				enemy.text_effect("message_execution", Color.RED),
+			tags = ["heirloom"]
 	})
 	
 	Registry.register_item("whetstone", {
@@ -42,25 +56,15 @@ func _init() -> void:
 		],
 		passive_ability = {
 			item_stat_modifiers = func(stat, modifiers, grid, item, this): ## example ability boosting the damage of all connected items
-		if stat == "damage" and grid.get_connected_items(this, 0).has(item):
-			modifiers["base"] += 2
-		},
+				if stat == "damage" and grid.get_connected_items(this, 0).has(item):
+					modifiers["base"] += 2},
 		tags = ["treasure_loot"]
 	})
 	
 	Registry.register_character("knight", {
 		character = preload("res://characters/knight/knight.png"),
 		button_scene = preload("res://characters/knight/knight_button.tscn"),
-		layout = [
-					[false, false, false, false, false, false, false, false],
-					[false, false, false, false, false, false, false, false],
-					[false, false, true , true , true , true , false, false],
-					[false, false, true , true , true , true , false, false],
-					[false, false, true , true , true , true , false, false],
-					[false, false, true , true , true , true , false, false],
-					[false, false, false, false, false, false, false, false],
-					[false, false, false, false, false, false, false, false]
-				],
+		layouts = basic_layouts,
 		equipment = [{
 			type = "zweihander",
 			position = Vector2(3, 2),
@@ -83,13 +87,13 @@ func _init() -> void:
 			recovery = 8
 		},
 		active_requirement = func(grid, _this):
-		var hp = grid.get_stat("health")["final"]
-		var max_hp = grid.get_stat("max_health")["final"]
-		return hp <= max_hp * 0.5,
-			active_ability = func(grid, this):
-		var recovery = grid.get_item_stat(this, "recovery")
-		grid.recover_health(recovery),
-		tags = ["treasure_loot"]
+			var hp = grid.get_stat("health")["final"]
+			var max_hp = grid.get_stat("max_health")["final"]
+			return hp <= max_hp * 0.5,
+		active_ability = func(grid, this):
+			var recovery = grid.get_item_stat(this, "recovery")
+			grid.recover_health(recovery),
+			tags = ["treasure_loot"]
 	})
 	
 	Registry.register_item("frying_pan", {
@@ -115,30 +119,21 @@ func _init() -> void:
 			damage = 8
 		},
 		active_ability = func(grid, this): ## example active ability
-		var enemy = grid.get_enemy()
-		var damage = grid.get_item_stat(this, "damage")
-		damage["item_source"] = this
-		grid.deal_damage(enemy, damage),
+			var enemy = grid.get_enemy()
+			var damage = grid.get_item_stat(this, "damage")
+			damage["item_source"] = this
+			grid.deal_damage(enemy, damage),
 		passive_ability = {
 			item_stat_modifiers = func(stat, modifiers, grid, item, this):
-		if stat == "recovery" and grid.get_connected_items(this, 0).has(item):
-			modifiers["mult_mult"] *= 2
-		}
+				if stat == "recovery" and grid.get_connected_items(this, 0).has(item):
+					modifiers["add_mult"] += 1},
+		tags = ["heirloom"]
 	})
 	
 	Registry.register_character("chef", {
 		character = preload("res://characters/chef/chef.png"),
 		button_scene = preload("res://characters/chef/chef_button.tscn"),
-		layout = [
-					[false, false, false, false, false, false, false, false],
-					[false, false, false, false, false, false, false, false],
-					[false, false, true , true , true , true , false, false],
-					[false, false, true , true , true , true , false, false],
-					[false, false, true , true , true , true , false, false],
-					[false, false, true , true , true , true , false, false],
-					[false, false, false, false, false, false, false, false],
-					[false, false, false, false, false, false, false, false]
-				],
+		layouts = basic_layouts,
 		equipment = [{
 			type = "frying_pan",
 			position = Vector2(3, 3),
@@ -147,5 +142,84 @@ func _init() -> void:
 			type = "milk",
 			position = Vector2(3, 2),
 			rotation = 3,
+		}]
+	})
+	
+	## bomber
+	
+	Registry.register_item("matches", {
+		scene = preload("res://characters/bomber/matches/matches.tscn"),
+		shape = [
+			[true ],
+		],
+		stats = {
+			damage = 6
+		},
+		active_ability = func(grid, this):
+			var enemy = grid.get_enemy()
+			var damage = grid.get_item_stat(this, "damage")
+			damage["item_source"] = this
+			grid.deal_damage(enemy, damage),
+			tags = ["treasure_loot"],
+		connections = [
+			{
+				active = preload("res://ui/diamonds_connection_active.tscn"),
+				inactive = preload("res://ui/diamonds_connection_inactive.tscn"),
+				shape = [
+					[true ],
+				],
+				offset = Vector2i(0, -1)
+			}
+		],
+		passive_ability = {
+			item_stat_modifiers = func(stat, modifiers, grid, item, this):
+				if stat == "damage" and grid.get_connected_items(this, 0).has(item):
+					modifiers["add_mult"] += 0.25},
+	})
+	
+	Registry.register_item("bomb", {
+		scene = preload("res://characters/bomber/bomb/bomb.tscn"),
+		shape = [
+			[true , true ],
+			[true , true ],
+		],
+		stats = {
+			damage = 20
+		},
+		passive_ability = {
+			game_tick = func(tick, grid, this):
+				grid.add_item_stat(this, "fuse", tick, "base")
+				if grid.get_item_stat(this, "fuse")["final"] >= 5:
+					var enemy = grid.get_enemy()
+					var damage = grid.get_item_stat(this, "damage")
+					damage["item_source"] = this
+					grid.deal_damage(enemy, damage)
+					var destroy_valid_items = []
+					for item in enemy.equipment:
+						if not item.get("destroyed"):
+							destroy_valid_items.append(item)
+					if destroy_valid_items.size() > 0:
+						var item_to_destroy = destroy_valid_items.pick_random()
+						enemy.disconnect_item(item_to_destroy)
+						item_to_destroy["destroyed"] = true
+						item_to_destroy["item_scene"].kill()
+					grid.disconnect_item(this)
+					this["destroyed"] = true
+					this["item_scene"].kill()},
+		tags = ["heirloom"]
+	})
+	
+	Registry.register_character("bomber", {
+		character = preload("res://characters/bomber/bomber.png"),
+		button_scene = preload("res://characters/bomber/bomber_button.tscn"),
+		layouts = basic_layouts,
+		equipment = [{
+			type = "bomb",
+			position = Vector2(3, 3),
+			rotation = 0,
+		}, {
+			type = "matches",
+			position = Vector2(3, 5),
+			rotation = 0,
 		}]
 	})

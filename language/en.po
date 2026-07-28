@@ -66,12 +66,12 @@ msgstr "•Use: Cow Slam! an enemy, dealing *{damage}* damage.[br]•Has +1 dama
 msgid "item_beef_title"
 msgstr "Beef"
 msgid "item_beef_description"
-msgstr "•You have +30 health."
+msgstr "•Battle start: Eat beef, gaining *{recovery}* bonus health."
 
 msgid "item_wood_title"
 msgstr "Wood"
 msgid "item_wood_description"
-msgstr "•You have +30 shield."
+msgstr "•Battle start: Build a wall, gaining *{recovery}* shield."
 
 # knight
 msgid "item_zweihander_title"
@@ -91,9 +91,20 @@ msgstr "EXECUTION"
 msgid "item_frying_pan_title"
 msgstr "Frying Pan"
 msgid "item_frying_pan_description"
-msgstr "•Use: Bludgeon an enemy, dealing *{damage}* damage.[br]•Connected items have x2 the recovery effects."
+msgstr "•Use: Bludgeon an enemy, dealing *{damage}* damage.[br]•Connected items have +100% recovery."
 
 msgid "item_milk_title"
 msgstr "Milk"
 msgid "item_milk_description"
 msgstr "•Use (health is below 50%): Sip the milk, recovering *{recovery}* health."
+
+# bomber
+msgid "item_bomb_title"
+msgstr "Bomb"
+msgid "item_bomb_description"
+msgstr "•After 5 seconds: Explode an enemy, dealing *{damage}* damage and destroying a random enemy item."
+
+msgid "item_matches_title"
+msgstr "Matches"
+msgid "item_matches_description"
+msgstr "•Use: Burn an enemy, dealing *{damage}* damage.[br]•Connected items have +25% damage."

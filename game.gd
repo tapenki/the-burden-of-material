@@ -169,6 +169,7 @@ func proceed_to_rewards():
 				if item.has("stat_changes"):
 					item["stat_changes"] = {}
 				item["used"] = false
+				item["destroyed"] = false
 			battler.load_grid()
 			#if team.has(player_equipment):
 			#	battler.character.get_node("LifeBar").visible = false

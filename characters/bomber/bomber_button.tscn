@@ -1,0 +1,17 @@
+[gd_scene format=3 uid="uid://dvbmgiegmplto"]
+
+[ext_resource type="PackedScene" uid="uid://gf31xls6mmex" path="res://characters/character_button.tscn" id="1_g2g4g"]
+[ext_resource type="Texture2D" uid="uid://dpd1kgfba2w3h" path="res://characters/bomber/bomber.png" id="2_bq572"]
+
+[node name="CharacterButton" unique_id=1430139252 instance=ExtResource("1_g2g4g")]
+character_name = "bomber"
+
+[node name="TextureRect" parent="Mask" parent_id_path=PackedInt32Array(544147442) index="0" unique_id=292215806]
+offset_left = -32.0
+offset_top = -9.0
+offset_right = 48.0
+offset_bottom = 71.0
+texture = ExtResource("2_bq572")
+
+[node name="Title" parent="." index="3" unique_id=1790409422]
+text = "Bomber"
