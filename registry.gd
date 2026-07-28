@@ -12,8 +12,15 @@ var zone_data = {
 
 var character_data = {}
 
+var item_tag_lists = {}
+
 func register_item(item_name, item_definition):
 	item_data[item_name] = item_definition
+	if item_definition.has("tags"):
+		for tag in item_definition["tags"]:
+			if not item_tag_lists.has(tag):
+				item_tag_lists[tag] = []
+			item_tag_lists[tag].append(item_name)
 
 func register_encounter(encounter_name, encounter_definition, encounter_zones = []):
 	encounter_data[encounter_name] = encounter_definition
@@ -25,6 +32,27 @@ func register_character(character_name, character_definition):
 
 func _init() -> void:
 	#region register items
+	register_item("salt", {
+		scene = preload("res://equipment/salt/salt.tscn"),
+		shape = [
+			[true ],
+		],
+		stats = {
+			damage = 8
+		},
+		active_requirement = func(grid, _this):
+		var enemy = grid.get_enemy()
+		var hp = enemy.get_stat("health")["final"]
+		var max_hp = enemy.get_stat("max_health")["final"]
+		return hp <= max_hp * 0.5,
+		active_ability = func(grid, this): ## example active ability
+		var enemy = grid.get_enemy()
+		var damage = grid.get_item_stat(this, "damage")
+		damage["item_source"] = this
+		grid.deal_damage(enemy, damage),
+		tags = ["treasure_loot"]
+	})
+	
 	register_item("shiv", {
 		scene = preload("res://equipment/shiv/shiv.tscn"),
 		shape = [
@@ -38,7 +66,8 @@ func _init() -> void:
 		var enemy = grid.get_enemy()
 		var damage = grid.get_item_stat(this, "damage")
 		damage["item_source"] = this
-		grid.deal_damage(enemy, damage)
+		grid.deal_damage(enemy, damage),
+		tags = ["treasure_loot"]
 	})
 	
 	register_item("axe", {

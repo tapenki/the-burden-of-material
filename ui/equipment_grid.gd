@@ -52,25 +52,11 @@ var signals = [
 	damage_dealt
 ]
 
-var pseudo_signals = { ## workaround to allow duplicate connections
-	stat_modifiers = [], 
-	item_stat_modifiers = [],
-	damage_dealt = []
-}
-
-func pseudo_emit(pseudo_signal, arguments):
-	for connection in pseudo_signals[pseudo_signal]:
-		connection.callv(arguments)
-
-func pseudo_connect(pseudo_signal, callable):
-	pseudo_signals[pseudo_signal].append(callable)
-
 func get_stat(stat):
 	var modifiers = {"base" = 0, "add_mult" = 1, "mult_mult" = 1}
 	if stat_changes.has(stat):
 		modifiers = stat_changes[stat].duplicate()
 	modifiers["base"] += stats.get(stat, 0)
-	pseudo_emit("stat_modifiers", [stat, modifiers, self])
 	stat_modifiers.emit([stat, modifiers, self])
 	modifiers["final"] = modifiers["base"] * modifiers["add_mult"] * modifiers["mult_mult"]
 	if modifiers["base"] is int:
@@ -95,7 +81,6 @@ func get_item_stat(item, stat):
 		modifiers = item["stat_changes"][stat].duplicate()
 	if item_data.has("stats"):
 		modifiers["base"] += item_data["stats"].get(stat, 0)
-	pseudo_emit("item_stat_modifiers", [stat, modifiers, self, item])
 	item_stat_modifiers.emit([stat, modifiers, self, item])
 	modifiers["final"] = modifiers["base"] * modifiers["add_mult"] * modifiers["mult_mult"]
 	if modifiers["base"] is int:
@@ -147,9 +132,8 @@ func connect_item(item):
 			item["passive_ability"] = item_data["passive_ability"].duplicate()
 			for key in item["passive_ability"].keys():
 				var ability = item["passive_ability"][key]
-				var wrapper = func(arguments):
+				var wrapper = func(arguments): ## workaround to allow duplicate connections
 					ability.bind(item).callv(arguments)
-					pass
 				self[key].connect(wrapper)
 				if not item.get("connected_callables"):
 					item["connected_callables"] = {}
@@ -279,7 +263,6 @@ func take_damage(damage):
 
 func deal_damage(target, damage):
 	target.take_damage(damage)
-	pseudo_emit("damage_dealt", [damage, target, self])
 	damage_dealt.emit([damage, target, self])
 
 func recover_health(recovery):

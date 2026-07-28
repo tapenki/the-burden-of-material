@@ -44,7 +44,8 @@ func _init() -> void:
 			item_stat_modifiers = func(stat, modifiers, grid, item, this): ## example ability boosting the damage of all connected items
 		if stat == "damage" and grid.get_connected_items(this, 0).has(item):
 			modifiers["base"] += 2
-		}
+		},
+		tags = ["treasure_loot"]
 	})
 	
 	Registry.register_character("knight", {
@@ -87,7 +88,8 @@ func _init() -> void:
 		return hp <= max_hp * 0.5,
 			active_ability = func(grid, this):
 		var recovery = grid.get_item_stat(this, "recovery")
-		grid.recover_health(recovery)
+		grid.recover_health(recovery),
+		tags = ["treasure_loot"]
 	})
 	
 	Registry.register_item("frying_pan", {

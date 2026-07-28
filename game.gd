@@ -108,6 +108,19 @@ func proceed_to_battle():
 	get_node("DayCounter").text = tr("ui_day_counter").format({day = day})
 	init_battle(encounter)
 
+func generate_reward_from_pool(pool):
+	if not Registry.item_tag_lists.has(pool):
+		return
+	var chosen_item = Registry.item_tag_lists[pool].pick_random()
+	var prize_item = {}
+	prize_item["type"] = chosen_item
+	prize_item["rotation"] = 0
+	var item_data = Registry.item_data[chosen_item]
+	var offset = Vector2(item_data["shape"][0].size(), item_data["shape"].size()) * 0.5
+	prize_item["position"] = Vector2(randf_range(2, 5) + 10.5, randf_range(2, 5) + 0.5) - offset
+	prize_item["equipped"] = false
+	player_equipment.equipment.append(prize_item)
+
 func proceed_to_rewards():
 	if not battle.has("won"):
 		return
@@ -121,6 +134,8 @@ func proceed_to_rewards():
 		prize_item["equipped"] = false
 		player_equipment.equipment.append(prize_item)
 		if day % 4 == 0:
+			for i in 3:
+				generate_reward_from_pool("treasure_loot")
 			get_node("RewardBackground/Title").text = "ui_found_treasure"
 		else:
 			get_node("RewardBackground/Title").text = "ui_stolen_goods"
@@ -129,9 +144,13 @@ func proceed_to_rewards():
 			get_tree().reload_current_scene()
 			return
 		if day % 4 == 0:
+			for i in 3:
+				generate_reward_from_pool("treasure_loot")
 			get_node("RewardBackground/Title").text = "ui_found_treasure"
 		else:
-			get_node("RewardBackground/Title").text = "ui_get_nothing"
+			for i in 3:
+				generate_reward_from_pool("treasure_loot")
+			get_node("RewardBackground/Title").text = "ui_gift_from_grandma"
 	for team in battle["teams"]:
 		for battler in team:
 			battler.character.get_node("DeathOverlay").visible = false
