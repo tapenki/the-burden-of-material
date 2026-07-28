@@ -74,6 +74,15 @@ func win_battle():
 	battle["active"] = false
 	battle_ended.emit()
 
+func update_lives():
+	var i = 0
+	for life_texture in player_equipment.character.get_node("Lives").get_children():
+		if i < lives:
+			life_texture.visible = true
+		else:
+			life_texture.visible = false
+		i += 1
+
 func lose_battle():
 	player_equipment.character.get_node("DeathOverlay").visible = true
 	get_node("BattleEndLabel").visible = true
@@ -81,6 +90,7 @@ func lose_battle():
 	battle["won"] = false
 	battle["active"] = false
 	lives -= 1
+	update_lives()
 	battle_ended.emit()
 
 func proceed_to_battle():

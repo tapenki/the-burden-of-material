@@ -123,6 +123,9 @@ func instantiate_item(item):
 	if item["rotation"] == 3:
 		item["item_scene"].position += Vector2(0, item["item_scene"].grid_size.x * 48)
 	
+	if not item.get("equipped", true):
+		item["item_scene"].z_index = 3
+	
 	add_child(item["item_scene"])
 
 func connect_item(item):
@@ -258,7 +261,14 @@ func get_enemy():
 	return battle["teams"][target_team][target_enemy]
 
 func take_damage(damage):
-	add_stat("health", -damage["final"])
+	var shield = get_stat("shield")
+	if shield["final"] >= damage["final"]:
+		add_stat("shield", -damage["final"])
+	else:
+		var health_damage = damage["final"] - shield["final"]
+		add_stat("shield", -shield["final"])
+		add_stat("health", -health_damage)
+	
 	text_effect("-" + str(damage["final"]), Color.RED)
 
 func deal_damage(target, damage):
@@ -321,6 +331,10 @@ func _process(_delta: float) -> void:
 	var lifebar_value_tween = create_tween()
 	lifebar_value_tween.tween_property(character.get_node("LifeBar"), "value", hp, 0.05)
 	character.get_node("LifeBar/Label").text = str(hp) + "/" + str(max_hp)
+	var shield = get_stat("shield")["final"]
+	if shield > 0:
+		character.get_node("LifeBar/Label").text += "+" + str(shield)
+	
 
 func _on_game_tick(tick) -> void:
 	var cooldown = get_stat("cooldown")["final"]

@@ -212,6 +212,18 @@ func _init() -> void:
 			modifiers["base"] += int(hp["final"] / 8)
 		}
 	})
+	
+	register_item("wood", {
+		scene = preload("res://equipment/wood/wood.tscn"),
+		shape = [
+			[true , true , true ],
+		],
+		passive_ability = {
+			stat_modifiers = func(stat, modifiers, _grid, _this):
+		if stat == "shield":
+			modifiers["base"] += 30
+		}
+	})
 	#endregion
 	#region register encounters
 	register_encounter("bandit", {
@@ -231,6 +243,10 @@ func _init() -> void:
 				equipment = [{
 						type = "shiv",
 						position = Vector2(2, 2),
+						rotation = 0,
+					}, {
+						type = "wood",
+						position = Vector2(3, 2),
 						rotation = 0,
 					}]
 			}

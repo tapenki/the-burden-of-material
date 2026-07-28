@@ -1,0 +1,28 @@
+[gd_scene format=3 uid="uid://be8g2eq0kjw1b"]
+
+[ext_resource type="Script" uid="uid://hcvljlmyr8es" path="res://ui/equipment_item.gd" id="1_lrlrx"]
+[ext_resource type="Texture2D" uid="uid://c3nl05nuo7hmj" path="res://equipment/wood/wood.png" id="2_dumor"]
+
+[node name="Wood" type="Control" unique_id=1620977827]
+layout_mode = 3
+anchors_preset = 0
+script = ExtResource("1_lrlrx")
+
+[node name="Sprite" type="TextureRect" parent="." unique_id=1247240217]
+layout_mode = 0
+pivot_offset_ratio = Vector2(0.5, 0.5)
+mouse_filter = 2
+texture = ExtResource("2_dumor")
+
+[node name="SelectionArea" type="Control" parent="." unique_id=761036972]
+anchors_preset = 0
+mouse_filter = 1
+
+[node name="Shape1" type="Control" parent="SelectionArea" unique_id=1430213690]
+anchors_preset = 0
+offset_right = 144.0
+offset_bottom = 48.0
+mouse_filter = 1
+mouse_default_cursor_shape = 2
+
+[connection signal="gui_input" from="." to="." method="_on_gui_input"]

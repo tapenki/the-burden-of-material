@@ -3,6 +3,5 @@
 [ext_resource type="Texture2D" uid="uid://dv2ciwahnpxgk" path="res://ui/hearts_connection_inactive.png" id="1_flre7"]
 
 [node name="Connection" type="TextureRect" unique_id=839607892]
-z_index = 1
 mouse_filter = 2
 texture = ExtResource("1_flre7")

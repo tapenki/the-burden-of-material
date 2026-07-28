@@ -68,6 +68,11 @@ msgstr "Beef"
 msgid "item_beef_description"
 msgstr "•You have +30 health."
 
+msgid "item_wood_title"
+msgstr "Wood"
+msgid "item_wood_description"
+msgstr "•You have +30 shield."
+
 # knight
 msgid "item_zweihander_title"
 msgstr "Zweihander"

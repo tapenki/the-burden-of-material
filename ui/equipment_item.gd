@@ -148,12 +148,14 @@ func equip(from_position):
 	
 	equipment_reference["equipped"] = true
 	grid.connect_item(equipment_reference)
+	z_index = 0
 	grid.move_child(self, 0)
 	return true
 
 func unequip():
 	equipment_reference["equipped"] = false
 	grid.disconnect_item(equipment_reference)
+	z_index = 3
 	move_to_front()
 
 func _on_gui_input(event: InputEvent) -> void:
