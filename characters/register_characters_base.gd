@@ -57,7 +57,7 @@ func _init() -> void:
 		passive_ability = {
 			item_stat_modifiers = func(stat, modifiers, grid, item, this): ## example ability boosting the damage of all connected items
 				if stat == "damage" and grid.get_connected_items(this, 0).has(item):
-					modifiers["base"] += 2},
+					modifiers["base"] += 1},
 		tags = ["treasure_loot"]
 	})
 	
@@ -188,8 +188,8 @@ func _init() -> void:
 		},
 		passive_ability = {
 			game_tick = func(tick, grid, this):
-				grid.add_item_stat(this, "fuse", tick, "base")
-				if grid.get_item_stat(this, "fuse")["final"] >= 5:
+				grid.add_item_stat(this, "charge", tick, "base")
+				if grid.get_item_stat(this, "charge")["final"] >= 5:
 					var enemy = grid.get_enemy()
 					var damage = grid.get_item_stat(this, "damage")
 					damage["item_source"] = this

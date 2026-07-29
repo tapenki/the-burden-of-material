@@ -1,18 +1,20 @@
 extends Node
 
 var item_data = {}
+var item_tag_lists = {}
+
+var zone_data = {}
+var zone_tiers = {}
 
 var encounter_data = {}
 
-var zone_data = {
-	field = {
-		encounters = []
-		}
-}
-
 var character_data = {}
 
-var item_tag_lists = {}
+func register_zone(zone_name, zone_tier):
+	zone_data[zone_name] = {encounters = []}
+	if not zone_tiers.has(zone_tier):
+		zone_tiers[zone_tier] = []
+	zone_tiers[zone_tier].append(zone_name)
 
 func register_item(item_name, item_definition):
 	item_data[item_name] = item_definition
@@ -212,7 +214,7 @@ func _init() -> void:
 		stats = {
 			damage = 2
 		},
-		active_ability = func(grid, this): ## example active ability
+		active_ability = func(grid, this):
 			var enemy = grid.get_enemy()
 			var damage = grid.get_item_stat(this, "damage")
 			damage["item_source"] = this
@@ -237,114 +239,15 @@ func _init() -> void:
 				var shield = grid.get_item_stat(this, "shield")
 				grid.recover_shield(shield)}
 	})
-	#endregion
-	#region register encounters
-	register_encounter("bandit", {
-		enemies = [
-			{
-				character = preload("res://zones/field/bandit/bandit.png"),
-				layout = [
-					[false, false, false, false, false, false, false, false],
-					[false, false, false, false, false, false, false, false],
-					[false, false, true , true , true , true , false, false],
-					[false, false, true , true , true , true , false, false],
-					[false, false, true , true , true , true , false, false],
-					[false, false, true , true , true , true , false, false],
-					[false, false, false, false, false, false, false, false],
-					[false, false, false, false, false, false, false, false]
-				],
-				equipment = [{
-						type = "shiv",
-						position = Vector2(2, 3),
-						rotation = 0,
-					}, {
-						type = "bandana",
-						position = Vector2(3, 3),
-						rotation = 0,
-					}]
-			}
-		]
-	}, ["field"])
 	
-	register_encounter("flower", {
-		enemies = [
-			{
-				character = preload("res://zones/field/flower/flower.png"),
-				layout = [
-					[false, false, false, false, false, false, false, false],
-					[false, false, false, false, false, false, false, false],
-					[false, false, true , true , true , true , false, false],
-					[false, false, true , true , true , true , false, false],
-					[false, false, true , true , true , true , false, false],
-					[false, false, true , true , true , true , false, false],
-					[false, false, false, false, false, false, false, false],
-					[false, false, false, false, false, false, false, false]
-				],
-				equipment = [{
-						type = "roots",
-						position = Vector2(3, 5),
-						rotation = 0,
-					}, {
-						type = "flower",
-						position = Vector2(3, 3),
-						rotation = 0,
-					}]
-			}
-		]
-	}, ["field"])
-	
-	register_encounter("scarecrow", {
-		enemies = [
-			{
-				character = preload("res://zones/field/scarecrow/scarecrow.png"),
-				layout = [
-					[false, false, false, false, false, false, false, false],
-					[false, false, false, false, false, false, false, false],
-					[false, false, true , true , true , true , false, false],
-					[false, false, true , true , true , true , false, false],
-					[false, false, true , true , true , true , false, false],
-					[false, false, true , true , true , true , false, false],
-					[false, false, false, false, false, false, false, false],
-					[false, false, false, false, false, false, false, false]
-				],
-				equipment = [{
-						type = "pitchfork",
-						position = Vector2(2, 4),
-						rotation = 1,
-					},
-					{
-						type = "straw_hat",
-						position = Vector2(3, 2),
-						rotation = 0,
-					},]
-			}
-		]
-	}, ["field"])
-	
-	register_encounter("cow", {
-		enemies = [
-			{
-				character = preload("res://zones/field/cow/cow.png"),
-				layout = [
-					[false, false, false, false, false, false, false, false],
-					[false, false, false, false, false, false, false, false],
-					[false, false, true , true , true , true , false, false],
-					[false, false, true , true , true , true , false, false],
-					[false, false, true , true , true , true , false, false],
-					[false, false, true , true , true , true , false, false],
-					[false, false, false, false, false, false, false, false],
-					[false, false, false, false, false, false, false, false]
-				],
-				equipment = [{
-						type = "cow_slam",
-						position = Vector2(2, 2),
-						rotation = 0,
-					}, {
-						type = "beef",
-						position = Vector2(4, 4),
-						rotation = 0,
-					}]
-			}
-		]
-	}, ["field"])
+	register_item("wise_words", {
+		scene = preload("res://equipment/wise_words/wise_words.tscn"),
+		shape = [
+			[true , true ],
+			[true , true ],
+		],
+		active_ability = func(grid, _this):
+			var enemy = grid.get_enemy()
+			enemy.progress_fatigue(0.5)
+	})
 	#endregion

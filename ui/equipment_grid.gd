@@ -347,7 +347,14 @@ func _process(_delta: float) -> void:
 	var shield = get_stat("shield")["final"]
 	if shield > 0:
 		character.get_node("LifeBar/Label").text += "+" + str(shield)
-	
+
+func progress_fatigue(time):
+	add_stat("fatigue", time)
+	var fatigue = get_stat("fatigue")["final"]
+	while fatigue >= 20 + get_stat("fatigue_threshold")["final"]:
+		var fatigue_damage = int(pow(2, floor(get_stat("fatigue_threshold")["final"])))
+		add_stat("fatigue_threshold", 0.5)
+		take_damage({"base" = fatigue_damage, "add_mult" = 1, "mult_mult" = 1, "final" = fatigue_damage, "fatigue" = true})
 
 func _on_game_tick(tick) -> void:
 	var cooldown = get_stat("cooldown")["final"]
@@ -356,11 +363,7 @@ func _on_game_tick(tick) -> void:
 		add_stat("charge", -cooldown)
 	add_stat("charge", tick)
 	
-	add_stat("fatigue", tick)
-	var fatigue = get_stat("fatigue")["final"]
-	if fatigue >= 20:
-		var fatigue_damage = int(pow(2, floor(fatigue - 20)))
-		take_damage({"base" = fatigue_damage, "add_mult" = 1, "mult_mult" = 1, "final" = fatigue_damage, "fatigue" = true})
+	progress_fatigue(tick)
 	
 	game_tick.emit([tick, self])
 	

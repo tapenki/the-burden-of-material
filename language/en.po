@@ -79,7 +79,12 @@ msgstr "•Battle start: Eat beef, gaining *{recovery}* bonus health."
 msgid "item_wood_title"
 msgstr "Wood"
 msgid "item_wood_description"
-msgstr "•Battle start: Build a wall, gaining *{recovery}* shield."
+msgstr "•Battle start: Build a wall, gaining *{shield}* shield."
+
+msgid "item_wise_words_title"
+msgstr "Technique: Wise Words"
+msgid "item_wise_words_description"
+msgstr "•Use: Speak wisely, progressing enemy fatigue by 0.5 seconds."
 
 # knight
 msgid "item_zweihander_title"
@@ -90,7 +95,7 @@ msgstr "•Use: Slash an enemy, dealing *{damage}* damage. Then, if the enemy he
 msgid "item_whetstone_title"
 msgstr "Whetstone"
 msgid "item_whetstone_description"
-msgstr "•Connected items have +2 damage."
+msgstr "•Connected items have +1 damage."
 
 msgid "message_execution"
 msgstr "EXECUTION"

@@ -3,7 +3,8 @@ extends Control
 @onready var player_equipment = get_node("PlayerEquipment")
 @onready var enemy_equipment = get_node("EnemyEquipment")
 
-var zone = "field"
+var zone: String
+var zone_tier = 0#-1
 var day = 0
 var seen_encounters: Array
 
@@ -95,6 +96,10 @@ func lose_battle():
 
 func proceed_to_battle():
 	var valid_encounters = []
+	if day % 4 == 0:
+		if Registry.zone_tiers.has(zone_tier + 1):
+			zone_tier += 1
+		zone = Registry.zone_tiers[zone_tier].pick_random()
 	for check_encounter in Registry.zone_data[zone]["encounters"]:
 		if not seen_encounters.has(check_encounter):
 			valid_encounters.append(check_encounter)
@@ -128,7 +133,7 @@ func generate_reward_from_pool(pool):
 	prize_item["rotation"] = 0
 	var item_data = Registry.item_data[chosen_item]
 	var offset = Vector2(item_data["shape"][0].size(), item_data["shape"].size()) * 0.5
-	prize_item["position"] = Vector2(randf_range(2, 5) + 10.5, randf_range(2, 5) + 0.5) - offset
+	prize_item["position"] = Vector2(randf_range(1, 6) + 10.5, randf_range(1, 6) + 0.5) - offset
 	prize_item["equipped"] = false
 	player_equipment.equipment.append(prize_item)
 
