@@ -111,6 +111,7 @@ func proceed_to_battle():
 	enemy_equipment.character.visible = true
 	get_node("DayCounter").visible = true
 	#get_node("BattleTimer").visible = true
+	get_node("SpeedButton").visible = true
 	get_node("RewardBackground").visible = false
 	get_node("CharacterPicker").visible = false
 	get_node("ProceedToBattle").visible = false
@@ -135,14 +136,24 @@ func proceed_to_rewards():
 	if not battle.has("won"):
 		return
 	if battle["won"]:
-		var chosen_item = enemy_equipment.equipment.pick_random()
-		var prize_item = {}
-		prize_item["type"] = chosen_item["type"]
-		prize_item["position"] = chosen_item["position"]
-		prize_item["position"].x += 10
-		prize_item["rotation"] = chosen_item["rotation"]
-		prize_item["equipped"] = false
-		player_equipment.equipment.append(prize_item)
+		var valid_loot = []
+		
+		for item in enemy_equipment.equipment:
+			valid_loot.append(item)
+		
+		for i in player_equipment.get_stat("loot_quantity")["final"]:
+			if valid_loot.size() <= 0:
+				break
+			var chosen_item = valid_loot.pick_random()
+			var prize_item = {}
+			prize_item["type"] = chosen_item["type"]
+			prize_item["position"] = chosen_item["position"]
+			prize_item["position"].x += 10
+			prize_item["rotation"] = chosen_item["rotation"]
+			prize_item["equipped"] = false
+			player_equipment.equipment.append(prize_item)
+			valid_loot.erase(chosen_item)
+		
 		if day % 4 == 0:
 			for i in 3:
 				generate_reward_from_pool("treasure_loot")
@@ -180,6 +191,7 @@ func proceed_to_rewards():
 	get_node("RewardBackground").visible = true
 	get_node("ProceedToBattle").visible = true
 	#get_node("BattleTimer").visible = false
+	get_node("SpeedButton").visible = false
 	get_node("BattleEndLabel").visible = false
 	battle = {}
 	player_equipment.can_edit = true

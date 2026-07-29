@@ -32,6 +32,7 @@ var stats = {
 	max_health = 50,
 	health = 50,
 	cooldown = 1.0,
+	loot_quantity = 1
 }
 
 var stat_changes: Dictionary
@@ -324,7 +325,7 @@ func text_effect(text, color = Color.BLACK):
 	label_instance.position = Vector2(randf_range(0, character.size.x * 0.5) + character.size.x * 0.25, randf_range(0, character.size.y * 0.5)) - label_instance.size * 0.5
 	var tween = create_tween()
 	tween.tween_property(label_instance, "position:y", -20, 0.2).as_relative()
-	await get_tree().create_timer(0.4).timeout
+	await get_tree().create_timer(0.5).timeout
 	label_instance.queue_free()
 
 func _process(_delta: float) -> void:

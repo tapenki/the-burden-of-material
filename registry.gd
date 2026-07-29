@@ -70,6 +70,18 @@ func _init() -> void:
 			tags = ["treasure_loot"]
 	})
 	
+	register_item("bandana", {
+		scene = preload("res://equipment/bandana/bandana.tscn"),
+		shape = [
+			[true , true ],
+			[true , false],
+		],
+		passive_ability = {
+			stat_modifiers = func(stat, modifiers, _grid, _this):
+				if stat == "loot_quantity":
+					modifiers["base"] += 1}
+	})
+	
 	register_item("axe", {
 		scene = preload("res://equipment/axe/axe.tscn"),
 		shape = [
@@ -243,11 +255,11 @@ func _init() -> void:
 				],
 				equipment = [{
 						type = "shiv",
-						position = Vector2(2, 2),
+						position = Vector2(2, 3),
 						rotation = 0,
 					}, {
-						type = "wood",
-						position = Vector2(3, 2),
+						type = "bandana",
+						position = Vector2(3, 3),
 						rotation = 0,
 					}]
 			}

@@ -20,6 +20,9 @@ msgstr "You Lose!"
 msgid "ui_day_counter"
 msgstr "Day {day}"
 
+msgid "ui_speed_button"
+msgstr "Speed: {speed}x"
+
 msgid "ui_stolen_goods"
 msgstr "Stolen Goods"
 msgid "ui_found_treasure"
@@ -37,6 +40,11 @@ msgid "item_shiv_title"
 msgstr "Shiv"
 msgid "item_shiv_description"
 msgstr "•Use: Stab an enemy, dealing *{damage}* damage."
+
+msgid "item_bandana_title"
+msgstr "Bandana"
+msgid "item_bandana_description"
+msgstr "•Steal +1 item when defeating an enemy."
 
 msgid "item_roots_title"
 msgstr "Roots"
@@ -102,7 +110,7 @@ msgstr "•Use (health is below 50%): Sip the milk, recovering *{recovery}* heal
 msgid "item_bomb_title"
 msgstr "Bomb"
 msgid "item_bomb_description"
-msgstr "•After 5 seconds: Explode an enemy, dealing *{damage}* damage and destroying a random enemy item."
+msgstr "•After 5 seconds: Explode an enemy, dealing *{damage}* damage and stunning them for 2 seconds."
 
 msgid "item_matches_title"
 msgstr "Matches"

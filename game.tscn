@@ -5,6 +5,7 @@
 [ext_resource type="Texture2D" uid="uid://mlpsadm2hvvn" path="res://characters/knight/knight.png" id="2_e2o6t"]
 [ext_resource type="Texture2D" uid="uid://e5m8r16gl243" path="res://ui/x.png" id="3_ryrav"]
 [ext_resource type="Script" uid="uid://hu7rqj3w343v" path="res://ui/battle_timer.gd" id="4_fc0e3"]
+[ext_resource type="Script" uid="uid://bfi01ndy8eovu" path="res://speed_button.gd" id="4_j5wjh"]
 [ext_resource type="Script" uid="uid://dl2rdwhi7884n" path="res://character_picker.gd" id="6_eow3j"]
 [ext_resource type="Texture2D" uid="uid://cmoijxno6h350" path="res://ui/life.png" id="6_j5wjh"]
 
@@ -255,17 +256,16 @@ mouse_filter = 2
 visible = false
 self_modulate = Color(0, 0, 0, 1)
 layout_mode = 1
-anchors_preset = 8
+anchors_preset = 7
 anchor_left = 0.5
-anchor_top = 0.5
+anchor_top = 1.0
 anchor_right = 0.5
-anchor_bottom = 0.5
+anchor_bottom = 1.0
 offset_left = -47.5
-offset_top = 277.0
+offset_top = -23.0
 offset_right = 47.5
-offset_bottom = 300.0
 grow_horizontal = 2
-grow_vertical = 2
+grow_vertical = 0
 label_settings = SubResource("LabelSettings_7jktm")
 horizontal_alignment = 1
 
@@ -444,6 +444,62 @@ grow_vertical = 2
 mouse_filter = 1
 mouse_default_cursor_shape = 2
 
+[node name="SpeedButton" type="Button" parent="." unique_id=408384824]
+visible = false
+z_index = 1
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -37.0
+offset_top = -48.0
+offset_right = 37.0
+offset_bottom = -25.0
+grow_horizontal = 2
+grow_vertical = 0
+mouse_default_cursor_shape = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_colors/font_pressed_color = Color(1, 1, 1, 1)
+theme_override_colors/font_hover_color = Color(0, 0, 0, 1)
+theme_override_styles/normal = SubResource("StyleBoxFlat_fc0e3")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_7jktm")
+theme_override_styles/hover = SubResource("StyleBoxFlat_ryrav")
+text = "Speed: 1x"
+script = ExtResource("4_j5wjh")
+
+[node name="Background1" type="ColorRect" parent="SpeedButton" unique_id=1817233559]
+show_behind_parent = true
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -4.0
+offset_top = -4.0
+offset_right = 4.0
+offset_bottom = 4.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 1
+mouse_default_cursor_shape = 2
+color = Color(0.627451, 0.627451, 0.627451, 1)
+
+[node name="Background2" type="ColorRect" parent="SpeedButton" unique_id=1145286363]
+show_behind_parent = true
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -2.0
+offset_top = -2.0
+offset_right = 2.0
+offset_bottom = 2.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 1
+mouse_default_cursor_shape = 2
+
 [node name="EnemyCharacter" type="TextureRect" parent="." unique_id=1072601134]
 visible = false
 layout_mode = 0
@@ -521,7 +577,7 @@ grow_vertical = 2
 mouse_filter = 2
 theme_override_styles/background = SubResource("StyleBoxFlat_13qdw")
 theme_override_styles/fill = SubResource("StyleBoxFlat_feb5d")
-value = 50.0
+allow_lesser = true
 fill_mode = 3
 show_percentage = false
 
@@ -620,7 +676,7 @@ grow_vertical = 2
 mouse_filter = 2
 theme_override_styles/background = SubResource("StyleBoxFlat_13qdw")
 theme_override_styles/fill = SubResource("StyleBoxFlat_feb5d")
-value = 50.0
+allow_lesser = true
 fill_mode = 3
 show_percentage = false
 
@@ -702,3 +758,4 @@ offset = Vector2(450, 300)
 [connection signal="battle_initiated" from="." to="ProceedToBattle" method="_on_game_battle_initiated"]
 [connection signal="pressed" from="BattleEndLabel/ProceedToRewards" to="." method="proceed_to_rewards"]
 [connection signal="pressed" from="ProceedToBattle" to="." method="proceed_to_battle"]
+[connection signal="pressed" from="SpeedButton" to="SpeedButton" method="_on_pressed"]

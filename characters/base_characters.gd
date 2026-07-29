@@ -194,15 +194,16 @@ func _init() -> void:
 					var damage = grid.get_item_stat(this, "damage")
 					damage["item_source"] = this
 					grid.deal_damage(enemy, damage)
-					var destroy_valid_items = []
-					for item in enemy.equipment:
-						if not item.get("destroyed"):
-							destroy_valid_items.append(item)
-					if destroy_valid_items.size() > 0:
-						var item_to_destroy = destroy_valid_items.pick_random()
-						enemy.disconnect_item(item_to_destroy)
-						item_to_destroy["destroyed"] = true
-						item_to_destroy["item_scene"].kill()
+					#var destroy_valid_items = []
+					#for item in enemy.equipment:
+						#if not item.get("destroyed"):
+							#destroy_valid_items.append(item)
+					#if destroy_valid_items.size() > 0:
+						#var item_to_destroy = destroy_valid_items.pick_random()
+						#enemy.disconnect_item(item_to_destroy)
+						#item_to_destroy["destroyed"] = true
+						#item_to_destroy["item_scene"].kill()
+					enemy.add_stat("charge", -2)
 					grid.disconnect_item(this)
 					this["destroyed"] = true
 					this["item_scene"].kill()},
