@@ -152,15 +152,6 @@ func _init() -> void:
 		shape = [
 			[true ],
 		],
-		stats = {
-			damage = 6
-		},
-		active_ability = func(grid, this):
-			var enemy = grid.get_enemy()
-			var damage = grid.get_item_stat(this, "damage")
-			damage["item_source"] = this
-			grid.deal_damage(enemy, damage),
-			tags = ["treasure_loot"],
 		connections = [
 			{
 				active = preload("res://ui/diamonds_connection_active.tscn"),
@@ -175,6 +166,15 @@ func _init() -> void:
 			item_stat_modifiers = func(stat, modifiers, grid, item, this):
 				if stat == "damage" and grid.get_connected_items(this, 0).has(item):
 					modifiers["add_mult"] += 0.25},
+		stats = {
+			damage = 6
+		},
+		active_ability = func(grid, this):
+			var enemy = grid.get_enemy()
+			var damage = grid.get_item_stat(this, "damage")
+			damage["item_source"] = this
+			grid.deal_damage(enemy, damage),
+		tags = ["treasure_loot"],
 	})
 	
 	Registry.register_item("bomb", {
@@ -221,6 +221,67 @@ func _init() -> void:
 		}, {
 			type = "matches",
 			position = Vector2(3, 5),
+			rotation = 0,
+		}]
+	})
+	
+	## bum
+	
+	Registry.register_item("fisticuffs", {
+		scene = preload("res://characters/bum/fisticuffs/fisticuffs.tscn"),
+		shape = [
+			[true ,true ],
+		],
+		stats = {
+			damage = 6
+		},
+		active_ability = func(grid, this):
+			var hp = grid.get_stat("health")["final"]
+			var max_hp = grid.get_stat("max_health")["final"]
+			var enemy = grid.get_enemy()
+			var damage
+			if hp <= max_hp * 0.5:
+				damage = grid.get_item_stat(this, "damage")
+				damage["item_source"] = this
+				grid.deal_damage(enemy, damage)
+			damage = grid.get_item_stat(this, "damage")
+			damage["item_source"] = this
+			grid.deal_damage(enemy, damage),
+	})
+	
+	Registry.register_item("beer", {
+		scene = preload("res://characters/bum/beer/beer.tscn"),
+		shape = [
+			[true ],
+			[true ]
+		],
+		stats = {
+			damage = 1
+		},
+		active_requirement = func(grid, _this):
+			var hp = grid.get_stat("health")["final"]
+			var max_hp = grid.get_stat("max_health")["final"]
+			return hp >= max_hp * 0.5,
+		active_ability = func(grid, this):
+			var damage = grid.get_item_stat(this, "damage")
+			damage["item_source"] = this
+			grid.deal_damage(grid, damage)
+			for item in grid.equipment:
+				grid.add_item_stat(item, "damage", 3),
+		tags = ["heirloom"]
+	})
+	
+	Registry.register_character("bum", {
+		character = preload("res://characters/bum/bum.png"),
+		button_scene = preload("res://characters/bum/bum_button.tscn"),
+		layouts = basic_layouts,
+		equipment = [{
+			type = "beer",
+			position = Vector2(2, 3),
+			rotation = 0,
+		}, {
+			type = "fisticuffs",
+			position = Vector2(3, 4),
 			rotation = 0,
 		}]
 	})

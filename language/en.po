@@ -86,6 +86,11 @@ msgstr "Technique: Wise Words"
 msgid "item_wise_words_description"
 msgstr "•Use: Speak wisely, progressing enemy fatigue by 0.5 seconds."
 
+msgid "item_axe_title"
+msgstr "Axe"
+msgid "item_axe_description"
+msgstr "•Use: Chop an enemy, dealing *{damage}* damage. Hits twice against shielded enemies"
+
 # knight
 msgid "item_zweihander_title"
 msgstr "Zweihander"
@@ -121,3 +126,14 @@ msgid "item_matches_title"
 msgstr "Matches"
 msgid "item_matches_description"
 msgstr "•Use: Burn an enemy, dealing *{damage}* damage.[br]•Connected items have +25% damage."
+
+# bum
+msgid "item_fisticuffs_title"
+msgstr "Fisticuffs"
+msgid "item_fisticuffs_description"
+msgstr "•Use: Punch an enemy, dealing *{damage}* damage. Hits twice when below 50% health"
+
+msgid "item_beer_title"
+msgstr "Beer"
+msgid "item_beer_description"
+msgstr "•Use (health is above 50%): Ingest alcohol, taking *{damage}* damage and increasing the damage of all your items by 3."

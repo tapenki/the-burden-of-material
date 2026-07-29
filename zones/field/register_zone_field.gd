@@ -22,10 +22,6 @@ func _init() -> void:
 						position = Vector2(2, 3),
 						rotation = 0,
 					}, {
-						type = "shiv",
-						position = Vector2(5, 3),
-						rotation = 0,
-					}, {
 						type = "bandana",
 						position = Vector2(3, 3),
 						rotation = 0,

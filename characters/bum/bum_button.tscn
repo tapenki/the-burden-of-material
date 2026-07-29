@@ -1,0 +1,15 @@
+[gd_scene format=3 uid="uid://supew4wf66jq"]
+
+[ext_resource type="PackedScene" uid="uid://gf31xls6mmex" path="res://characters/character_button.tscn" id="1_ulbce"]
+[ext_resource type="Texture2D" uid="uid://1vkpcc7x1bob" path="res://characters/bum/bum.png" id="2_yam6g"]
+
+[node name="CharacterButton" unique_id=1430139252 instance=ExtResource("1_ulbce")]
+character_name = "bum"
+
+[node name="TextureRect" parent="Mask" parent_id_path=PackedInt32Array(544147442) index="0" unique_id=292215806]
+offset_top = -11.0
+offset_bottom = 69.0
+texture = ExtResource("2_yam6g")
+
+[node name="Title" parent="." index="3" unique_id=1790409422]
+text = "Bum"

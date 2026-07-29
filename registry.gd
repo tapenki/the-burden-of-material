@@ -69,7 +69,7 @@ func _init() -> void:
 			var damage = grid.get_item_stat(this, "damage")
 			damage["item_source"] = this
 			grid.deal_damage(enemy, damage),
-			tags = ["treasure_loot"]
+		tags = ["treasure_loot"]
 	})
 	
 	register_item("bandana", {
@@ -91,21 +91,20 @@ func _init() -> void:
 			[true , false],
 			[true , false]
 		],
-		connections = [
-			{
-				active = preload("res://ui/diamonds_connection_active.tscn"),
-				inactive = preload("res://ui/diamonds_connection_inactive.tscn"),
-				shape = [
-					[true , true ],
-					[true , true ]
-				],
-				offset = Vector2i(1, 1)
-			}
-		],
-		passive_ability = {
-			item_stat_modifiers = func(stat, modifiers, grid, item, this): ## example ability boosting the damage of all connected items
-				if stat == "damage" and grid.get_connected_items(this, 0).has(item):
-					modifiers["base"] += 2}
+		stats = {
+			damage = 8
+		},
+		active_ability = func(grid, this):
+			var enemy = grid.get_enemy()
+			var damage
+			if enemy.get_stat("shield")["final"] > 0:
+				damage = grid.get_item_stat(this, "damage")
+				damage["item_source"] = this
+				grid.deal_damage(enemy, damage)
+			damage = grid.get_item_stat(this, "damage")
+			damage["item_source"] = this
+			grid.deal_damage(enemy, damage),
+		tags = ["treasure_loot"]
 	})
 	
 	register_item("flower", {
@@ -155,7 +154,7 @@ func _init() -> void:
 		stats = {
 			damage = 3
 		},
-		active_ability = func(grid, this): ## example active ability
+		active_ability = func(grid, this):
 			var enemy = grid.get_enemy()
 			for i in 3:
 				var damage = grid.get_item_stat(this, "damage")
