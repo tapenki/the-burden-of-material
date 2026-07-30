@@ -37,3 +37,38 @@ func _init() -> void:
 			}
 		]
 	}, ["woods"])
+	
+	Registry.register_encounter("bees", {
+		enemies = [
+			{
+				character = preload("res://zones/woods/bees/bees.png"),
+				layout = [
+					[false, false, false, false, false, false, false, false],
+					[false, false, false, true , true , false, false, false],
+					[false, false, true , true , true , true , false, false],
+					[false, true , true , true , true , true , true , false],
+					[false, true , true , true , true , true , true , false],
+					[false, false, true , true , true , true , false, false],
+					[false, false, false, false, false, false, false, false],
+					[false, false, false, false, false, false, false, false]
+				],
+				equipment = [{
+						type = "stinger",
+						position = Vector2(2, 3),
+						rotation = 0,
+					}, {
+						type = "beehive",
+						position = Vector2(3, 4),
+						rotation = 0,
+					}, {
+						type = "honeycomb",
+						position = Vector2(3, 3),
+						rotation = 0,
+					}, {
+						type = "flower",
+						position = Vector2(3, 1),
+						rotation = 0,
+					}]
+			}
+		]
+	}, ["woods"])

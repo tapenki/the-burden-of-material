@@ -41,6 +41,7 @@ signal stat_modifiers(arguments)
 signal item_stat_modifiers(arguments)
 
 signal damage_dealt(arguments)
+signal damage_taken(arguments)
 
 signal game_tick(arguments)
 
@@ -52,6 +53,7 @@ var signals = [
 	stat_modifiers,
 	item_stat_modifiers,
 	damage_dealt,
+	damage_taken,
 	game_tick,
 	fatigue_start,
 	battle_start,
@@ -311,6 +313,7 @@ func take_damage(damage):
 		add_stat("health", -health_damage)
 	
 	text_effect("-" + str(damage["final"]), Color.RED)
+	damage_taken.emit([damage, self])
 
 func deal_damage(target, damage):
 	target.take_damage(damage)

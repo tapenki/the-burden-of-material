@@ -68,7 +68,7 @@ msgstr "•Use: Stab an enemy, dealing *{damage}* damage 3 times."
 msgid "item_straw_hat_title"
 msgstr "Straw Hat"
 msgid "item_straw_hat_description"
-msgstr "•On connected item dealing damage: Draw power from the hat, recovering *{recovery}* health."
+msgstr "•Connected item deals damage: Draw power from the hat, recovering *{recovery}* health."
 
 msgid "item_cow_slam_title"
 msgstr "Technique: Cow Slam!"
@@ -100,12 +100,27 @@ msgstr "Pillow"
 msgid "item_pillow_description"
 msgstr "•Fatigue start: Sleep on pillow, recovering *{recovery}* health."
 
+msgid "item_beehive_title"
+msgstr "Beehive"
+msgid "item_beehive_description"
+msgstr "•Damage Taken: Bees retaliate, applying *{status}* poison."
+
+msgid "item_honeycomb_title"
+msgstr "Honeycomb"
+msgid "item_honeycomb_description"
+msgstr "•Every 2 seconds: Absorb honey, gaining *{recovery}* bonus health."
+
+msgid "item_stinger_title"
+msgstr "Stinger"
+msgid "item_stinger_description"
+msgstr "•Use: Sting an enemy, dealing *{damage}* damage and applying *{status}* poison."
+
 # statuses
 
 msgid "status_poison_title"
 msgstr "Poison"
 msgid "status_poison_description"
-msgstr "•Every second: Take 1 damage for each stack of poison."
+msgstr "•Every 2 seconds: Take 1 damage for each stack of poison."
 
 msgid "status_burn_title"
 msgstr "Burn"
@@ -161,4 +176,4 @@ msgstr "•Use: Punch an enemy, dealing *{damage}* damage. Hits twice when below
 msgid "item_beer_title"
 msgstr "Beer"
 msgid "item_beer_description"
-msgstr "•Use: Ingest alcohol, applying *{status}* poison and increasing the damage of all your items by 5."
+msgstr "•Battle start: Imbibe alcohol, applying *{status}* poison and increasing the damage of all your items by 5."

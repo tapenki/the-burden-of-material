@@ -276,13 +276,14 @@ func _init() -> void:
 			[true ]
 		],
 		stats = {
-			status = 1
+			status = 3
 		},
-		active_ability = func(grid, this):
-			var status_applied = grid.get_item_stat(this, "status")["final"]
-			grid.add_status("poison", status_applied)
-			for item in grid.equipment:
-				grid.add_item_stat(item, "damage", 5),
+		passive_ability = {
+			battle_start = func(grid, this):
+				var status_applied = grid.get_item_stat(this, "status")["final"]
+				grid.add_status("poison", status_applied)
+				for item in grid.equipment:
+					grid.add_item_stat(item, "damage", 5)},
 		tags = ["heirloom"]
 	})
 	

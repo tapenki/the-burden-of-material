@@ -44,8 +44,8 @@ func _init() -> void:
 				if not this.has("charge"):
 					this["charge"] = 0
 				this["charge"] += tick
-				if this["charge"] >= 1.0:
-					this["charge"] -= 1.0
+				if this["charge"] >= 2.0:
+					this["charge"] -= 2.0
 					var damage = {"final" = this["stacks"]}
 					grid.deal_damage(grid, damage)}
 	})
@@ -294,5 +294,60 @@ func _init() -> void:
 				var recovery = grid.get_item_stat(this, "recovery")
 				grid.recover_health(recovery)},
 		tags = ["treasure_loot"]
+	})
+	
+	register_item("beehive", {
+		scene = preload("res://equipment/beehive/beehive.tscn"),
+		shape = [
+			[true , true ],
+			[true , true ],
+		],
+		stats = {
+			status = 1
+		},
+		passive_ability = {
+			damage_taken = func(_damage, grid, this):
+				var enemy = grid.get_enemy()
+				var status_applied = grid.get_item_stat(this, "status")["final"]
+				enemy.add_status("poison", status_applied)},
+	})
+	
+	register_item("stinger", {
+		scene = preload("res://equipment/stinger/stinger.tscn"),
+		shape = [
+			[true ],
+			[true ]
+		],
+		stats = {
+			damage = 4,
+			status = 1
+		},
+		active_ability = func(grid, this):
+			var enemy = grid.get_enemy()
+			var damage = grid.get_item_stat(this, "damage")
+			damage["item_source"] = this
+			grid.deal_damage(enemy, damage)
+			var status_applied = grid.get_item_stat(this, "status")["final"]
+			enemy.add_status("poison", status_applied),
+	})
+	
+	register_item("honeycomb", {
+		scene = preload("res://equipment/honeycomb/honeycomb.tscn"),
+		shape = [
+			[true , true ],
+		],
+		stats = {
+			recovery = 3
+		},
+		passive_ability = {
+			game_tick = func(tick, grid, this):
+				if not this.has("charge"):
+					this["charge"] = 0
+				this["charge"] += tick
+				if this["charge"] >= 2.0:
+					this["charge"] -= 2.0
+					var recovery = grid.get_item_stat(this, "recovery")
+					grid.add_stat("max_health", recovery["final"])
+					grid.recover_health(recovery)}
 	})
 	#endregion
