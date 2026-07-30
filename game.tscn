@@ -604,6 +604,21 @@ offset_bottom = 40.0
 mouse_filter = 2
 texture = ExtResource("3_ryrav")
 
+[node name="Statuses" type="VBoxContainer" parent="EnemyCharacter" unique_id=1151205052]
+layout_mode = 1
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -288.0
+offset_top = -72.0
+offset_right = -144.0
+offset_bottom = 72.0
+grow_horizontal = 0
+grow_vertical = 2
+theme_override_constants/separation = 0
+
 [node name="PlayerCharacter" type="TextureRect" parent="." unique_id=1062287325]
 layout_mode = 0
 offset_left = 138.0
@@ -731,7 +746,19 @@ texture = ExtResource("6_j5wjh")
 layout_mode = 2
 texture = ExtResource("6_j5wjh")
 
-[node name="EnemyEquipment" type="Control" parent="." unique_id=1832386834 node_paths=PackedStringArray("character")]
+[node name="Statuses" type="VBoxContainer" parent="PlayerCharacter" unique_id=1870942096]
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_left = 144.0
+offset_top = -72.0
+offset_right = 288.0
+offset_bottom = 72.0
+grow_vertical = 2
+theme_override_constants/separation = 0
+
+[node name="EnemyEquipment" type="Control" parent="." unique_id=1832386834 node_paths=PackedStringArray("character_sprite")]
 visible = false
 anchors_preset = 0
 offset_left = 690.0
@@ -740,16 +767,16 @@ offset_right = 690.0
 offset_bottom = 210.0
 script = ExtResource("1_e2o6t")
 can_edit = false
-character = NodePath("../EnemyCharacter")
+character_sprite = NodePath("../EnemyCharacter")
 
-[node name="PlayerEquipment" type="Control" parent="." unique_id=1984047910 node_paths=PackedStringArray("character")]
+[node name="PlayerEquipment" type="Control" parent="." unique_id=1984047910 node_paths=PackedStringArray("character_sprite")]
 anchors_preset = 0
 offset_left = 210.0
 offset_top = 210.0
 offset_right = 210.0
 offset_bottom = 210.0
 script = ExtResource("1_e2o6t")
-character = NodePath("../PlayerCharacter")
+character_sprite = NodePath("../PlayerCharacter")
 
 [node name="Camera2D" type="Camera2D" parent="." unique_id=1187277755]
 offset = Vector2(450, 300)

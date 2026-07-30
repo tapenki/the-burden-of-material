@@ -3,6 +3,8 @@ extends Node
 var item_data = {}
 var item_tag_lists = {}
 
+var status_data = {}
+
 var zone_data = {}
 var zone_tiers = {}
 
@@ -24,6 +26,9 @@ func register_item(item_name, item_definition):
 				item_tag_lists[tag] = []
 			item_tag_lists[tag].append(item_name)
 
+func register_status(status_name, status_definition):
+	status_data[status_name] = status_definition
+
 func register_encounter(encounter_name, encounter_definition, encounter_zones = []):
 	encounter_data[encounter_name] = encounter_definition
 	for zone in encounter_zones:
@@ -33,6 +38,31 @@ func register_character(character_name, character_definition):
 	character_data[character_name] = character_definition
 
 func _init() -> void:
+	register_status("poison", {
+		passive_ability = {
+			game_tick = func(tick, grid, this):
+				if not this.has("charge"):
+					this["charge"] = 0
+				this["charge"] += tick
+				if this["charge"] >= 1.0:
+					this["charge"] -= 1.0
+					var damage = {"final" = this["stacks"]}
+					grid.deal_damage(grid, damage)}
+	})
+	
+	register_status("burn", {
+		passive_ability = {
+			game_tick = func(tick, grid, this):
+				if not this.has("charge"):
+					this["charge"] = 0
+				this["charge"] += tick
+				if this["charge"] >= 0.5:
+					this["charge"] -= 0.5
+					var damage = {"final" = this["stacks"]}
+					grid.deal_damage(grid, damage)
+					grid.add_status("burn", -int(ceil(this["stacks"]*0.1)))}
+	})
+	
 	#region register items
 	register_item("salt", {
 		scene = preload("res://equipment/salt/salt.tscn"),
@@ -152,7 +182,7 @@ func _init() -> void:
 			[true ],
 		],
 		stats = {
-			damage = 3
+			damage = 2
 		},
 		active_ability = func(grid, this):
 			var enemy = grid.get_enemy()
@@ -195,7 +225,7 @@ func _init() -> void:
 			[true , true ],
 		],
 		stats = {
-			recovery = 30
+			recovery = 20
 		},
 		passive_ability = {
 			battle_start = func(grid, this):
@@ -248,5 +278,21 @@ func _init() -> void:
 		active_ability = func(grid, _this):
 			var enemy = grid.get_enemy()
 			enemy.progress_fatigue(0.5)
+	})
+	
+	register_item("pillow", {
+		scene = preload("res://equipment/pillow/pillow.tscn"),
+		shape = [
+			[true , true ],
+			[true , true ],
+		],
+		stats = {
+			recovery = 50
+		},
+		passive_ability = {
+			fatigue_start = func(grid, this):
+				var recovery = grid.get_item_stat(this, "recovery")
+				grid.recover_health(recovery)},
+		tags = ["treasure_loot"]
 	})
 	#endregion

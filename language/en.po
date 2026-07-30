@@ -30,7 +30,11 @@ msgstr "Found Treasure"
 msgid "ui_gift_from_grandma"
 msgstr "Gift From Grandma"
 
+msgid "message_fatigue"
+msgstr "FATIGUE"
+
 # item descriptions
+
 msgid "item_salt_title"
 msgstr "Salt"
 msgid "item_salt_description"
@@ -64,7 +68,7 @@ msgstr "•Use: Stab an enemy, dealing *{damage}* damage 3 times."
 msgid "item_straw_hat_title"
 msgstr "Straw Hat"
 msgid "item_straw_hat_description"
-msgstr "•On connected item dealing damage: Recover *{recovery}* health."
+msgstr "•On connected item dealing damage: Draw power from the hat, recovering *{recovery}* health."
 
 msgid "item_cow_slam_title"
 msgstr "Technique: Cow Slam!"
@@ -89,9 +93,27 @@ msgstr "•Use: Speak wisely, progressing enemy fatigue by 0.5 seconds."
 msgid "item_axe_title"
 msgstr "Axe"
 msgid "item_axe_description"
-msgstr "•Use: Chop an enemy, dealing *{damage}* damage. Hits twice against shielded enemies"
+msgstr "•Use: Chop an enemy, dealing *{damage}* damage. Hits twice against shielded enemies."
+
+msgid "item_pillow_title"
+msgstr "Pillow"
+msgid "item_pillow_description"
+msgstr "•Fatigue start: Sleep on pillow, recovering *{recovery}* health."
+
+# statuses
+
+msgid "status_poison_title"
+msgstr "Poison"
+msgid "status_poison_description"
+msgstr "•Every second: Take 1 damage for each stack of poison."
+
+msgid "status_burn_title"
+msgstr "Burn"
+msgid "status_burn_description"
+msgstr "•Every half a second: Take 1 damage for each stack of burn then lose 10% of your burn."
 
 # knight
+
 msgid "item_zweihander_title"
 msgstr "Zweihander"
 msgid "item_zweihander_description"
@@ -106,6 +128,7 @@ msgid "message_execution"
 msgstr "EXECUTION"
 
 # chef
+
 msgid "item_frying_pan_title"
 msgstr "Frying Pan"
 msgid "item_frying_pan_description"
@@ -117,6 +140,7 @@ msgid "item_milk_description"
 msgstr "•Use (health is below 50%): Sip the milk, recovering *{recovery}* health."
 
 # bomber
+
 msgid "item_bomb_title"
 msgstr "Bomb"
 msgid "item_bomb_description"
@@ -125,15 +149,16 @@ msgstr "•After 5 seconds: Explode an enemy, dealing *{damage}* damage and stun
 msgid "item_matches_title"
 msgstr "Matches"
 msgid "item_matches_description"
-msgstr "•Use: Burn an enemy, dealing *{damage}* damage.[br]•Connected items have +25% damage."
+msgstr "•Use: Set an enemy on fire, applying *{status}* burn.[br]•Connected items have +25% damage."
 
 # bum
+
 msgid "item_fisticuffs_title"
 msgstr "Fisticuffs"
 msgid "item_fisticuffs_description"
-msgstr "•Use: Punch an enemy, dealing *{damage}* damage. Hits twice when below 50% health"
+msgstr "•Use: Punch an enemy, dealing *{damage}* damage. Hits twice when below 50% health."
 
 msgid "item_beer_title"
 msgstr "Beer"
 msgid "item_beer_description"
-msgstr "•Use (health is above 50%): Ingest alcohol, taking *{damage}* damage and increasing the damage of all your items by 3."
+msgstr "•Use: Ingest alcohol, applying *{status}* poison and increasing the damage of all your items by 5."

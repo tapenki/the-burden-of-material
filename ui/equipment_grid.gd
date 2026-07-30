@@ -1,7 +1,9 @@
 extends Control
 
 @export var can_edit = true
-@export var character: Node
+@export var character_sprite: Node
+
+var character: String
 
 var layout = [
 	[true , true , true , true , true , true , true , true ],
@@ -17,16 +19,8 @@ var layout_tier = 0
 var offset_x = 4
 var offset_y = 4
 
-var equipment = [{
-		type = "shiv",
-		position = Vector2(2, 2),
-		rotation = 0,
-	},
-	{
-		type = "milk",
-		position = Vector2(4, 2),
-		rotation = 0,
-	}]
+var equipment: Array
+var statuses: Dictionary
 
 var stats = {
 	max_health = 50,
@@ -50,6 +44,8 @@ signal damage_dealt(arguments)
 
 signal game_tick(arguments)
 
+signal fatigue_start(arguments)
+
 signal battle_start(arguments)
 
 var signals = [
@@ -57,6 +53,7 @@ var signals = [
 	item_stat_modifiers,
 	damage_dealt,
 	game_tick,
+	fatigue_start,
 	battle_start,
 ]
 
@@ -156,12 +153,47 @@ func disconnect_item(item):
 			var callable = item["connected_callables"][key]
 			if self[key].is_connected(callable):
 				self[key].disconnect(callable)
-	item["connected_callables"] = null
+	item.erase("connected_callables")
 
 func load_item(item):
 	if item.get("equipped", true):
 		connect_item(item)
 	instantiate_item(item)
+
+func remove_status(status):
+	if statuses[status].get("connected_callables"):
+		for key in statuses[status]["connected_callables"].keys():
+			var callable = statuses[status]["connected_callables"][key]
+			if self[key].is_connected(callable):
+				self[key].disconnect(callable)
+	statuses[status]["status_scene"].queue_free()
+	statuses.erase(status)
+
+func add_status(status, stacks):
+	if statuses.has(status):
+		statuses[status]["stacks"] += stacks
+		if statuses[status]["stacks"] <= 0:
+			remove_status(status)
+			return
+	else:
+		var status_instance = preload("res://ui/status_label.tscn").instantiate()
+		if character_sprite.flip_h:
+			status_instance.horizontal_alignment = HorizontalAlignment.HORIZONTAL_ALIGNMENT_RIGHT
+		character_sprite.get_node("Statuses").add_child(status_instance)
+		statuses[status] = {"stacks" = stacks, "status_scene" = status_instance}
+		if not statuses[status].get("connected_callables"):
+			var status_data = Registry.status_data[status]
+			if status_data.has("passive_ability"):
+				statuses[status]["passive_ability"] = status_data["passive_ability"].duplicate()
+				for key in statuses[status]["passive_ability"].keys():
+					var ability = statuses[status]["passive_ability"][key]
+					var wrapper = func(arguments): ## workaround to allow duplicate connections
+						ability.bind(statuses[status]).callv(arguments)
+					self[key].connect(wrapper)
+					if not statuses[status].get("connected_callables"):
+						statuses[status]["connected_callables"] = {}
+						statuses[status]["connected_callables"][key] = wrapper
+	statuses[status]["status_scene"].text = tr("status_"+status+"_title") + " ({stacks})".format({stacks = statuses[status]["stacks"]})
 
 func unload_grid():
 	for check_signal in signals:
@@ -321,8 +353,8 @@ func text_effect(text, color = Color.BLACK):
 	var label_instance = preload("res://ui/floating_text.tscn").instantiate()
 	label_instance.text = text
 	label_instance.modulate = color
-	character.add_child(label_instance)
-	label_instance.position = Vector2(randf_range(0, character.size.x * 0.5) + character.size.x * 0.25, randf_range(0, character.size.y * 0.5)) - label_instance.size * 0.5
+	character_sprite.add_child(label_instance)
+	label_instance.position = Vector2(randf_range(0, character_sprite.size.x * 0.5) + character_sprite.size.x * 0.25, randf_range(0, character_sprite.size.y * 0.5)) - label_instance.size * 0.5
 	var tween = create_tween()
 	tween.tween_property(label_instance, "position:y", -20, 0.2).as_relative()
 	await get_tree().create_timer(0.5).timeout
@@ -333,28 +365,33 @@ func _process(_delta: float) -> void:
 	#if not battle.get("active"):
 	#	return
 	var chargebar_max_value_tween = create_tween()
-	chargebar_max_value_tween.tween_property(character.get_node("ChargeBar"), "max_value", get_stat("cooldown")["final"], 0.05)
+	chargebar_max_value_tween.tween_property(character_sprite.get_node("ChargeBar"), "max_value", get_stat("cooldown")["final"], 0.05)
 	var chargebar_value_tween = create_tween()
-	chargebar_value_tween.tween_property(character.get_node("ChargeBar"), "value", get_stat("charge")["final"], 0.05)
+	chargebar_value_tween.tween_property(character_sprite.get_node("ChargeBar"), "value", get_stat("charge")["final"], 0.05)
 	
 	var hp = get_stat("health")["final"]
 	var max_hp = get_stat("max_health")["final"]
 	var lifebar_max_value_tween = create_tween()
-	lifebar_max_value_tween.tween_property(character.get_node("LifeBar"), "max_value", max_hp, 0.05)
+	lifebar_max_value_tween.tween_property(character_sprite.get_node("LifeBar"), "max_value", max_hp, 0.05)
 	var lifebar_value_tween = create_tween()
-	lifebar_value_tween.tween_property(character.get_node("LifeBar"), "value", hp, 0.05)
-	character.get_node("LifeBar/Label").text = str(hp) + "/" + str(max_hp)
+	lifebar_value_tween.tween_property(character_sprite.get_node("LifeBar"), "value", hp, 0.05)
+	character_sprite.get_node("LifeBar/Label").text = str(hp) + "/" + str(max_hp)
 	var shield = get_stat("shield")["final"]
 	if shield > 0:
-		character.get_node("LifeBar/Label").text += "+" + str(shield)
+		character_sprite.get_node("LifeBar/Label").text += "+" + str(shield)
 
 func progress_fatigue(time):
 	add_stat("fatigue", time)
 	var fatigue = get_stat("fatigue")["final"]
-	while fatigue >= 20 + get_stat("fatigue_threshold")["final"]:
-		var fatigue_damage = int(pow(2, floor(get_stat("fatigue_threshold")["final"])))
-		add_stat("fatigue_threshold", 0.5)
-		take_damage({"base" = fatigue_damage, "add_mult" = 1, "mult_mult" = 1, "final" = fatigue_damage, "fatigue" = true})
+	var threshold = get_stat("fatigue_threshold")["final"]
+	if fatigue < 20 + threshold:
+		return
+	if threshold == 0:
+		fatigue_start.emit([self])
+		text_effect("message_fatigue", Color.PURPLE)
+	var fatigue_damage = int(pow(2, floor(threshold)))
+	add_stat("fatigue_threshold", 0.5)
+	take_damage({"base" = fatigue_damage, "add_mult" = 1, "mult_mult" = 1, "final" = fatigue_damage, "fatigue" = true})
 
 func _on_game_tick(tick) -> void:
 	var cooldown = get_stat("cooldown")["final"]

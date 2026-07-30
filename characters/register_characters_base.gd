@@ -11,6 +11,26 @@ var basic_layouts = [
 		[false, false, false, false, false, false, false, false],
 		[false, false, false, false, false, false, false, false]
 	],
+	[
+		[false, false, false, false, false, false, false, false],
+		[false, false, false, false, false, false, false, false],
+		[false, true , true , true , true , true , true , false],
+		[false, true , true , true , true , true , true , false],
+		[false, true , true , true , true , true , true , false],
+		[false, true , true , true , true , true , true , false],
+		[false, false, false, false, false, false, false, false],
+		[false, false, false, false, false, false, false, false]
+	],
+	[
+		[false, false, false, false, false, false, false, false],
+		[false, true , true , true , true , true , true , false],
+		[false, true , true , true , true , true , true , false],
+		[false, true , true , true , true , true , true , false],
+		[false, true , true , true , true , true , true , false],
+		[false, true , true , true , true , true , true , false],
+		[false, true , true , true , true , true , true , false],
+		[false, false, false, false, false, false, false, false]
+	],
 ]
 
 func _init() -> void:
@@ -167,13 +187,12 @@ func _init() -> void:
 				if stat == "damage" and grid.get_connected_items(this, 0).has(item):
 					modifiers["add_mult"] += 0.25},
 		stats = {
-			damage = 6
+			status = 3
 		},
 		active_ability = func(grid, this):
 			var enemy = grid.get_enemy()
-			var damage = grid.get_item_stat(this, "damage")
-			damage["item_source"] = this
-			grid.deal_damage(enemy, damage),
+			var status_applied = grid.get_item_stat(this, "status")["final"]
+			enemy.add_status("burn", status_applied),
 		tags = ["treasure_loot"],
 	})
 	
@@ -247,6 +266,7 @@ func _init() -> void:
 			damage = grid.get_item_stat(this, "damage")
 			damage["item_source"] = this
 			grid.deal_damage(enemy, damage),
+		tags = ["treasure_loot"]
 	})
 	
 	Registry.register_item("beer", {
@@ -256,18 +276,13 @@ func _init() -> void:
 			[true ]
 		],
 		stats = {
-			damage = 1
+			status = 1
 		},
-		active_requirement = func(grid, _this):
-			var hp = grid.get_stat("health")["final"]
-			var max_hp = grid.get_stat("max_health")["final"]
-			return hp >= max_hp * 0.5,
 		active_ability = func(grid, this):
-			var damage = grid.get_item_stat(this, "damage")
-			damage["item_source"] = this
-			grid.deal_damage(grid, damage)
+			var status_applied = grid.get_item_stat(this, "status")["final"]
+			grid.add_status("poison", status_applied)
 			for item in grid.equipment:
-				grid.add_item_stat(item, "damage", 3),
+				grid.add_item_stat(item, "damage", 5),
 		tags = ["heirloom"]
 	})
 	

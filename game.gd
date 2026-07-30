@@ -29,7 +29,7 @@ func init_battle(encounter):
 	var cooldown = player_equipment.get_stat("cooldown")["final"]
 	player_equipment.add_stat("charge", cooldown*0.5)
 	
-	enemy_equipment.character.texture = encounter_data["enemies"][0]["character"]
+	enemy_equipment.character_sprite.texture = encounter_data["enemies"][0]["character"]
 	enemy_equipment.layout = encounter_data["enemies"][0]["layout"].duplicate(true)
 	enemy_equipment.equipment = encounter_data["enemies"][0]["equipment"].duplicate(true)
 	enemy_equipment.team = 1
@@ -60,15 +60,15 @@ func end_battle():
 			battler.load_grid()
 			#if team.has(player_equipment):
 				#pass
-				#battler.character.get_node("LifeBar").visible = false
-				#battler.character.get_node("ChargeBar").visible = false
+				#battler.character_sprite.get_node("LifeBar").visible = false
+				#battler.character_sprite.get_node("ChargeBar").visible = false
 			#else:
 				#battler.visible = false
-				#battler.character.visible = false
+				#battler.character_sprite.visible = false
 	battle_ended.emit()
 
 func win_battle():
-	enemy_equipment.character.get_node("DeathOverlay").visible = true
+	enemy_equipment.character_sprite.get_node("DeathOverlay").visible = true
 	get_node("BattleEndLabel").visible = true
 	get_node("BattleEndLabel").text = "ui_you_win"
 	battle["won"] = true
@@ -77,7 +77,7 @@ func win_battle():
 
 func update_lives():
 	var i = 0
-	for life_texture in player_equipment.character.get_node("Lives").get_children():
+	for life_texture in player_equipment.character_sprite.get_node("Lives").get_children():
 		if i < lives:
 			life_texture.visible = true
 		else:
@@ -85,7 +85,7 @@ func update_lives():
 		i += 1
 
 func lose_battle():
-	player_equipment.character.get_node("DeathOverlay").visible = true
+	player_equipment.character_sprite.get_node("DeathOverlay").visible = true
 	get_node("BattleEndLabel").visible = true
 	get_node("BattleEndLabel").text = "ui_you_lose"
 	battle["won"] = false
@@ -109,11 +109,11 @@ func proceed_to_battle():
 		seen_encounters.append(encounter)
 	else:
 		encounter = Registry.zone_data[zone]["encounters"].pick_random()
-	player_equipment.character.get_node("LifeBar").visible = true
-	player_equipment.character.get_node("ChargeBar").visible = true
+	player_equipment.character_sprite.get_node("LifeBar").visible = true
+	player_equipment.character_sprite.get_node("ChargeBar").visible = true
 	player_equipment.can_edit = false
 	enemy_equipment.visible = true
-	enemy_equipment.character.visible = true
+	enemy_equipment.character_sprite.visible = true
 	get_node("DayCounter").visible = true
 	#get_node("BattleTimer").visible = true
 	get_node("SpeedButton").visible = true
@@ -162,6 +162,10 @@ func proceed_to_rewards():
 		if day % 4 == 0:
 			for i in 3:
 				generate_reward_from_pool("treasure_loot")
+			var character_data = Registry.character_data[player_equipment.character]
+			if character_data["layouts"].size() > player_equipment.layout_tier + 1:
+				player_equipment.layout_tier += 1
+				player_equipment.layout = character_data["layouts"][player_equipment.layout_tier].duplicate(true)
 			get_node("RewardBackground/Title").text = "ui_found_treasure"
 		else:
 			get_node("RewardBackground/Title").text = "ui_stolen_goods"
@@ -172,6 +176,10 @@ func proceed_to_rewards():
 		if day % 4 == 0:
 			for i in 3:
 				generate_reward_from_pool("treasure_loot")
+			var character_data = Registry.character_data[player_equipment.character]
+			if character_data["layouts"].get(player_equipment.layout_tier + 1):
+				player_equipment.layout_tier += 1
+				player_equipment.layout = character_data["layouts"][player_equipment.layout_tier].duplicate(true)
 			get_node("RewardBackground/Title").text = "ui_found_treasure"
 		else:
 			for i in 3:
@@ -179,20 +187,22 @@ func proceed_to_rewards():
 			get_node("RewardBackground/Title").text = "ui_gift_from_grandma"
 	for team in battle["teams"]:
 		for battler in team:
-			battler.character.get_node("DeathOverlay").visible = false
+			battler.character_sprite.get_node("DeathOverlay").visible = false
 			battler.stat_changes.clear()
 			for item in battler.equipment:
 				if item.has("stat_changes"):
 					item["stat_changes"] = {}
 				item["used"] = false
 				item["destroyed"] = false
+			for status in battler.statuses.keys():
+				battler.remove_status(status)
 			battler.load_grid()
 			#if team.has(player_equipment):
-			#	battler.character.get_node("LifeBar").visible = false
-			#	battler.character.get_node("ChargeBar").visible = false
+			#	battler.character_sprite.get_node("LifeBar").visible = false
+			#	battler.character_sprite.get_node("ChargeBar").visible = false
 			if not team.has(player_equipment):
 				battler.visible = false
-				battler.character.visible = false
+				battler.character_sprite.visible = false
 	get_node("RewardBackground").visible = true
 	get_node("ProceedToBattle").visible = true
 	#get_node("BattleTimer").visible = false

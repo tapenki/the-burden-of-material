@@ -1,0 +1,10 @@
+[gd_scene format=3 uid="uid://dg7pkpr1bi12i"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_xrivr"]
+outline_size = 4
+outline_color = Color(0, 0, 0, 1)
+
+[node name="Label" type="Label" unique_id=622260335]
+text = "Burn (10)"
+label_settings = SubResource("LabelSettings_xrivr")
+vertical_alignment = 1
