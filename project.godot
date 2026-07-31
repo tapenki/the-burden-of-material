@@ -23,8 +23,7 @@ config/icon="res://icon.svg"
 
 Registry="*uid://ibdx3jlprm8c"
 RegisterCharactersBase="uid://eqgfotq46gii"
-RegisterZoneField="uid://hut7jfq77a7w"
-RegisterZoneWoods="uid://lm6yqxmv4etd"
+RegisterEncountersBase="uid://hut7jfq77a7w"
 
 [display]
 

@@ -3,10 +3,7 @@ extends Control
 @onready var player_equipment = get_node("PlayerEquipment")
 @onready var enemy_equipment = get_node("EnemyEquipment")
 
-var zone: String
-var zone_tier = 0#-1
 var day = 0
-var seen_encounters: Array
 
 var lives = 3
 
@@ -95,20 +92,11 @@ func lose_battle():
 	battle_ended.emit()
 
 func proceed_to_battle():
-	var valid_encounters = []
-	if day % 4 == 0:
-		if Registry.zone_tiers.has(zone_tier + 1):
-			zone_tier += 1
-		zone = Registry.zone_tiers[zone_tier].pick_random()
-	for check_encounter in Registry.zone_data[zone]["encounters"]:
-		if not seen_encounters.has(check_encounter):
-			valid_encounters.append(check_encounter)
-	var encounter
-	if valid_encounters.size() > 0:
-		encounter = valid_encounters.pick_random()
-		seen_encounters.append(encounter)
-	else:
-		encounter = Registry.zone_data[zone]["encounters"].pick_random()
+	if Registry.encounter_schedule.has(day + 1):
+		day += 1
+	
+	var encounter = Registry.encounter_schedule[day].pick_random()
+	
 	player_equipment.character_sprite.get_node("LifeBar").visible = true
 	player_equipment.character_sprite.get_node("ChargeBar").visible = true
 	player_equipment.can_edit = false
@@ -120,7 +108,7 @@ func proceed_to_battle():
 	get_node("RewardBackground").visible = false
 	get_node("CharacterPicker").visible = false
 	get_node("ProceedToBattle").visible = false
-	day += 1
+	
 	get_node("DayCounter").text = tr("ui_day_counter").format({day = day})
 	init_battle(encounter)
 
@@ -173,17 +161,10 @@ func proceed_to_rewards():
 			get_tree().reload_current_scene()
 			return
 		else:
-			items_from_pool(rewards, "treasure_loot", 3)
+			items_from_pool(rewards, "treasure_loot", 1)
 			get_node("RewardBackground/Title").text = "ui_gift_from_grandma"
 	
-	if day % 4 == 0:
-		get_node("RewardBackground/Title").text = "ui_found_treasure"
-		items_from_pool(rewards, "treasure_loot", 3)
-		var character_data = Registry.character_data[player_equipment.character]
-		if character_data["layouts"].get(player_equipment.layout_tier + 1):
-			player_equipment.layout_tier += 1
-			player_equipment.layout = character_data["layouts"][player_equipment.layout_tier].duplicate(true)
-	
+	items_from_pool(rewards, "treasure_loot", 2)
 	generate_reward(rewards)
 	
 	for team in battle["teams"]:

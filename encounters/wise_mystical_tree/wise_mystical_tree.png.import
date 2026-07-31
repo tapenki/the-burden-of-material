@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cv8rwqovd6m67"
-path="res://.godot/imported/bear.png-dda4d75bb092c9b1be649dd2ec322202.ctex"
+uid="uid://chfdbvlsjs3p0"
+path="res://.godot/imported/wise_mystical_tree.png-4d4f3e75a160ada3c6cdf9673899fe01.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://zones/woods/bear/bear.png"
-dest_files=["res://.godot/imported/bear.png-dda4d75bb092c9b1be649dd2ec322202.ctex"]
+source_file="res://encounters/wise_mystical_tree/wise_mystical_tree.png"
+dest_files=["res://.godot/imported/wise_mystical_tree.png-4d4f3e75a160ada3c6cdf9673899fe01.ctex"]
 
 [params]
 

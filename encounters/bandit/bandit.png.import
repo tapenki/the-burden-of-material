@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://chfdbvlsjs3p0"
-path="res://.godot/imported/wise_mystical_tree.png-79416b1904d722c2778451888ce66cc4.ctex"
+uid="uid://dom2iurkbxbcn"
+path="res://.godot/imported/bandit.png-19854ce0de5d5e383ab43a3d02244f1c.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://zones/woods/wise_mystical_tree/wise_mystical_tree.png"
-dest_files=["res://.godot/imported/wise_mystical_tree.png-79416b1904d722c2778451888ce66cc4.ctex"]
+source_file="res://encounters/bandit/bandit.png"
+dest_files=["res://.godot/imported/bandit.png-19854ce0de5d5e383ab43a3d02244f1c.ctex"]
 
 [params]
 

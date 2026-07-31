@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dom2iurkbxbcn"
-path="res://.godot/imported/bandit.png-6254c112588668cf88e4b99c45e5b8c6.ctex"
+uid="uid://d1imec77wg7bn"
+path="res://.godot/imported/flower.png-c8b97844978a3160cf04b78fc2852d7b.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://zones/field/bandit/bandit.png"
-dest_files=["res://.godot/imported/bandit.png-6254c112588668cf88e4b99c45e5b8c6.ctex"]
+source_file="res://encounters/flower/flower.png"
+dest_files=["res://.godot/imported/flower.png-c8b97844978a3160cf04b78fc2852d7b.ctex"]
 
 [params]
 

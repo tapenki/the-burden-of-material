@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://j1tvj3c8b7cq"
-path="res://.godot/imported/woodsman.png-16e6608d8171411fae33d0cc4b43e27f.ctex"
+uid="uid://chstwrotoefeh"
+path="res://.godot/imported/cow.png-faa3d292b140d891a82d8b7d0143a170.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://zones/woods/woodsman/woodsman.png"
-dest_files=["res://.godot/imported/woodsman.png-16e6608d8171411fae33d0cc4b43e27f.ctex"]
+source_file="res://encounters/cow/cow.png"
+dest_files=["res://.godot/imported/cow.png-faa3d292b140d891a82d8b7d0143a170.ctex"]
 
 [params]
 

@@ -5,18 +5,10 @@ var item_tag_lists = {}
 
 var status_data = {}
 
-var zone_data = {}
-var zone_tiers = {}
-
 var encounter_data = {}
+var encounter_schedule = {}
 
 var character_data = {}
-
-func register_zone(zone_name, zone_tier):
-	zone_data[zone_name] = {encounters = []}
-	if not zone_tiers.has(zone_tier):
-		zone_tiers[zone_tier] = []
-	zone_tiers[zone_tier].append(zone_name)
 
 func register_item(item_name, item_definition):
 	item_data[item_name] = item_definition
@@ -29,10 +21,12 @@ func register_item(item_name, item_definition):
 func register_status(status_name, status_definition):
 	status_data[status_name] = status_definition
 
-func register_encounter(encounter_name, encounter_definition, encounter_zones = []):
+func register_encounter(encounter_name, encounter_definition, days = []):
 	encounter_data[encounter_name] = encounter_definition
-	for zone in encounter_zones:
-		zone_data[zone]["encounters"].append(encounter_name)
+	for day in days:
+		if not encounter_schedule.has(day):
+			encounter_schedule[day] = []
+		encounter_schedule[day].append(encounter_name)
 
 func register_character(character_name, character_definition):
 	character_data[character_name] = character_definition
@@ -237,7 +231,7 @@ func _init() -> void:
 			}
 		],
 		stats = {
-			recovery = 1
+			recovery = 2
 		},
 		passive_ability = {
 			damage_dealt = func(damage, _target, grid, this):
@@ -404,7 +398,7 @@ func _init() -> void:
 			[true ],
 		],
 		stats = {
-			recovery = 12,
+			recovery = 16,
 			uses = 1
 		},
 		active_requirement = func(grid, this):

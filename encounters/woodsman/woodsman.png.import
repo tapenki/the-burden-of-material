@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dog4ea5x8ypdq"
-path="res://.godot/imported/bees.png-472a9182ff1cc93f4ce3a522d5a15f45.ctex"
+uid="uid://j1tvj3c8b7cq"
+path="res://.godot/imported/woodsman.png-130743f489c64bc5214f73bf7fc1598d.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://zones/woods/bees/bees.png"
-dest_files=["res://.godot/imported/bees.png-472a9182ff1cc93f4ce3a522d5a15f45.ctex"]
+source_file="res://encounters/woodsman/woodsman.png"
+dest_files=["res://.godot/imported/woodsman.png-130743f489c64bc5214f73bf7fc1598d.ctex"]
 
 [params]
 

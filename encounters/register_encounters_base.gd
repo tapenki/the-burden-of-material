@@ -1,0 +1,247 @@
+extends Node
+
+func _init() -> void:
+	Registry.register_encounter("bandit", {
+		enemies = [
+			{
+				character = preload("res://encounters/bandit/bandit.png"),
+				layout = [
+					[false, false, false, false, false, false, false, false],
+					[false, false, false, false, false, false, false, false],
+					[false, false, true , true , true , true , false, false],
+					[false, false, true , true , true , true , false, false],
+					[false, false, true , true , true , true , false, false],
+					[false, false, true , true , true , true , false, false],
+					[false, false, false, false, false, false, false, false],
+					[false, false, false, false, false, false, false, false]
+				],
+				equipment = [{
+						type = "shiv",
+						position = Vector2(2, 3),
+						rotation = 0,
+					}, {
+						type = "bandana",
+						position = Vector2(3, 3),
+						rotation = 0,
+					}]
+			}
+		]
+	}, [1])
+	
+	Registry.register_encounter("flower", {
+		enemies = [
+			{
+				character = preload("res://encounters/flower/flower.png"),
+				layout = [
+					[false, false, false, false, false, false, false, false],
+					[false, false, false, false, false, false, false, false],
+					[false, false, true , true , true , true , false, false],
+					[false, false, true , true , true , true , false, false],
+					[false, false, true , true , true , true , false, false],
+					[false, false, true , true , true , true , false, false],
+					[false, false, false, false, false, false, false, false],
+					[false, false, false, false, false, false, false, false]
+				],
+				equipment = [{
+						type = "roots",
+						position = Vector2(3, 5),
+						rotation = 0,
+					}, {
+						type = "flower",
+						position = Vector2(3, 3),
+						rotation = 0,
+					}]
+			}
+		]
+	}, [1])
+	
+	Registry.register_encounter("scarecrow", {
+		enemies = [
+			{
+				character = preload("res://encounters/scarecrow/scarecrow.png"),
+				layout = [
+					[false, false, false, false, false, false, false, false],
+					[false, false, false, false, false, false, false, false],
+					[false, false, true , true , true , true , false, false],
+					[false, false, true , true , true , true , false, false],
+					[false, false, true , true , true , true , false, false],
+					[false, false, true , true , true , true , false, false],
+					[false, false, false, false, false, false, false, false],
+					[false, false, false, false, false, false, false, false]
+				],
+				equipment = [{
+						type = "pitchfork",
+						position = Vector2(2, 4),
+						rotation = 1,
+					},
+					{
+						type = "straw_hat",
+						position = Vector2(3, 2),
+						rotation = 0,
+					},]
+			}
+		]
+	}, [2])
+	
+	Registry.register_encounter("cow", {
+		enemies = [
+			{
+				character = preload("res://encounters/cow/cow.png"),
+				layout = [
+					[false, false, false, false, false, false, false, false],
+					[false, false, false, false, false, false, false, false],
+					[false, false, true , true , true , true , false, false],
+					[false, false, true , true , true , true , false, false],
+					[false, false, true , true , true , true , false, false],
+					[false, false, true , true , true , true , false, false],
+					[false, false, false, false, false, false, false, false],
+					[false, false, false, false, false, false, false, false]
+				],
+				equipment = [{
+						type = "cow_slam",
+						position = Vector2(2, 2),
+						rotation = 0,
+					}, {
+						type = "beef",
+						position = Vector2(4, 4),
+						rotation = 0,
+					}]
+			}
+		]
+	}, [2])
+	
+	Registry.register_encounter("bees", {
+		enemies = [
+			{
+				character = preload("res://encounters/bees/bees.png"),
+				layout = [
+					[false, false, false, false, false, false, false, false],
+					[false, false, false, true , true , false, false, false],
+					[false, false, true , true , true , true , false, false],
+					[false, true , true , true , true , true , true , false],
+					[false, true , true , true , true , true , true , false],
+					[false, false, true , true , true , true , false, false],
+					[false, false, false, true , true , false, false, false],
+					[false, false, false, false, false, false, false, false]
+				],
+				equipment = [{
+						type = "stinger",
+						position = Vector2(2, 3),
+						rotation = 0,
+					}, {
+						type = "beehive",
+						position = Vector2(3, 4),
+						rotation = 0,
+					}, {
+						type = "honeycomb",
+						position = Vector2(3, 3),
+						rotation = 0,
+					}, {
+						type = "flower",
+						position = Vector2(3, 1),
+						rotation = 0,
+					}]
+			}
+		]
+	}, [3])
+	
+	Registry.register_encounter("bear", {
+		enemies = [
+			{
+				character = preload("res://encounters/bear/bear.png"),
+				layout = [
+					[false, false, false, false, false, false, false, false],
+					[false, false, false, false, false, false, false, false],
+					[false, true , true , true , true , true , true , false],
+					[false, true , true , true , true , true , true , false],
+					[false, true , true , true , true , true , true , false],
+					[false, true , true , true , true , true , true , false],
+					[false, false, false, false, false, false, false, false],
+					[false, false, false, false, false, false, false, false]
+				],
+				equipment = [{
+						type = "pillow",
+						position = Vector2(1, 3),
+						rotation = 0,
+					}, {
+						type = "fish",
+						position = Vector2(4, 4),
+						rotation = 0,
+					}, {
+						type = "berries",
+						position = Vector2(4, 3),
+						rotation = 0,
+					}, {
+						type = "honeycomb",
+						position = Vector2(5, 3),
+						rotation = 0,
+					}]
+			}
+		]
+	}, [3])
+	
+	Registry.register_encounter("wise_mystical_tree", {
+		enemies = [
+			{
+				character = preload("res://encounters/wise_mystical_tree/wise_mystical_tree.png"),
+				layout = [
+					[false, false, false, false, false, false, false, false],
+					[false, false, false, true , true , false, false, false],
+					[false, false, true , true , true , true , false, false],
+					[false, true , true , true , true , true , true , false],
+					[false, true , true , true , true , true , true , false],
+					[false, false, true , true , true , true , false, false],
+					[false, false, false, true , true , false, false, false],
+					[false, false, false, false, false, false, false, false]
+				],
+				equipment = [{
+						type = "wood",
+						position = Vector2(2, 3),
+						rotation = 1,
+					}, {
+						type = "wood",
+						position = Vector2(5, 3),
+						rotation = 1,
+					}, {
+						type = "wise_words",
+						position = Vector2(3, 3),
+						rotation = 0,
+					}, {
+						type = "roots",
+						position = Vector2(3, 5),
+						rotation = 0,
+					}]
+			}
+		]
+	}, [4])
+	
+	Registry.register_encounter("woodsman", {
+		enemies = [
+			{
+				character = preload("res://encounters/woodsman/woodsman.png"),
+				layout = [
+					[false, false, false, false, false, false, false, false],
+					[false, false, false, false, false, false, false, false],
+					[false, true , true , true , true , true , true , false],
+					[false, true , true , true , true , true , true , false],
+					[false, true , true , true , true , true , true , false],
+					[false, true , true , true , true , true , true , false],
+					[false, false, false, false, false, false, false, false],
+					[false, false, false, false, false, false, false, false]
+				],
+				equipment = [{
+						type = "axe",
+						position = Vector2(1, 3),
+						rotation = 0,
+					}, {
+						type = "wood",
+						position = Vector2(2, 5),
+						rotation = 0,
+					}, {
+						type = "hunting_rifle",
+						position = Vector2(3, 2),
+						rotation = 0,
+					}]
+			}
+		]
+	}, [4])
