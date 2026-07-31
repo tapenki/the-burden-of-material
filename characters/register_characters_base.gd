@@ -50,13 +50,13 @@ func _init() -> void:
 			var enemy = grid.get_enemy()
 			var damage = grid.get_item_stat(this, "damage")
 			damage["item_source"] = this
-			grid.deal_damage(enemy, damage)
-			var hp = enemy.get_stat("health")["final"]
-			var max_hp = enemy.get_stat("max_health")["final"]
-			if hp > 0 and hp < max_hp * 0.2:
-				enemy.set_stat("health", 0)
-				enemy.text_effect("message_execution", Color.RED),
-			tags = ["heirloom"]
+			if grid.attack(enemy, damage):
+				var hp = enemy.get_stat("health")["final"]
+				var max_hp = enemy.get_stat("max_health")["final"]
+				if hp > 0 and hp < max_hp * 0.2:
+					enemy.set_stat("health", 0)
+					enemy.text_effect("message_execution", Color.RED),
+		tags = ["heirloom"]
 	})
 	
 	Registry.register_item("whetstone", {
@@ -142,7 +142,7 @@ func _init() -> void:
 			var enemy = grid.get_enemy()
 			var damage = grid.get_item_stat(this, "damage")
 			damage["item_source"] = this
-			grid.deal_damage(enemy, damage),
+			grid.attack(enemy, damage),
 		passive_ability = {
 			item_stat_modifiers = func(stat, modifiers, grid, item, this):
 				if stat == "recovery" and grid.get_connected_items(this, 0).has(item):
@@ -212,17 +212,17 @@ func _init() -> void:
 					var enemy = grid.get_enemy()
 					var damage = grid.get_item_stat(this, "damage")
 					damage["item_source"] = this
-					grid.deal_damage(enemy, damage)
-					#var destroy_valid_items = []
-					#for item in enemy.equipment:
-						#if not item.get("destroyed"):
-							#destroy_valid_items.append(item)
-					#if destroy_valid_items.size() > 0:
-						#var item_to_destroy = destroy_valid_items.pick_random()
-						#enemy.disconnect_item(item_to_destroy)
-						#item_to_destroy["destroyed"] = true
-						#item_to_destroy["item_scene"].kill()
-					enemy.add_stat("charge", -2)
+					if grid.attack(enemy, damage):
+						#var destroy_valid_items = []
+						#for item in enemy.equipment:
+							#if not item.get("destroyed"):
+								#destroy_valid_items.append(item)
+						#if destroy_valid_items.size() > 0:
+							#var item_to_destroy = destroy_valid_items.pick_random()
+							#enemy.disconnect_item(item_to_destroy)
+							#item_to_destroy["destroyed"] = true
+							#item_to_destroy["item_scene"].kill()
+						enemy.add_stat("charge", -2)
 					grid.disconnect_item(this)
 					this["destroyed"] = true
 					this["item_scene"].kill()},
@@ -262,10 +262,10 @@ func _init() -> void:
 			if hp <= max_hp * 0.5:
 				damage = grid.get_item_stat(this, "damage")
 				damage["item_source"] = this
-				grid.deal_damage(enemy, damage)
+				grid.attack(enemy, damage)
 			damage = grid.get_item_stat(this, "damage")
 			damage["item_source"] = this
-			grid.deal_damage(enemy, damage),
+			grid.attack(enemy, damage),
 		tags = ["treasure_loot"]
 	})
 	

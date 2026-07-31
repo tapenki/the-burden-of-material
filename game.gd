@@ -4,7 +4,7 @@ extends Control
 @onready var enemy_equipment = get_node("EnemyEquipment")
 
 var zone: String
-var zone_tier = -1
+var zone_tier = 0#-1
 var day = 0
 var seen_encounters: Array
 

@@ -42,6 +42,7 @@ signal item_stat_modifiers(arguments)
 
 signal damage_dealt(arguments)
 signal damage_taken(arguments)
+signal check_evasion(arguments)
 
 signal game_tick(arguments)
 
@@ -54,6 +55,7 @@ var signals = [
 	item_stat_modifiers,
 	damage_dealt,
 	damage_taken,
+	check_evasion,
 	game_tick,
 	fatigue_start,
 	battle_start,
@@ -318,6 +320,16 @@ func take_damage(damage):
 func deal_damage(target, damage):
 	target.take_damage(damage)
 	damage_dealt.emit([damage, target, self])
+
+func attack(target, damage):
+	var attack_landed = {landed = true}
+	target.check_evasion.emit([attack_landed, target])
+	if not attack_landed["landed"]:
+		target.text_effect("message_miss", Color.RED)
+		return false
+	damage["attack"] = true
+	deal_damage(target, damage)
+	return true
 
 func recover_health(recovery):
 	var hp = get_stat("health")["final"]

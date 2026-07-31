@@ -33,12 +33,15 @@ msgstr "Gift From Grandma"
 msgid "message_fatigue"
 msgstr "FATIGUE"
 
+msgid "message_miss"
+msgstr "MISS"
+
 # item descriptions
 
 msgid "item_salt_title"
 msgstr "Salt"
 msgid "item_salt_description"
-msgstr "•Use (enemy health is below 50%): Salt the enemy wounds, dealing *{damage}* damage."
+msgstr "•Use (enemy health is below 50%): Salt the enemy wounds, dealing *{damage}* attack damage."
 
 msgid "item_cheese_title"
 msgstr "Cheese"
@@ -48,7 +51,7 @@ msgstr "•Use (have poison): Eat the cheese, recovering *{recovery}* health and
 msgid "item_shiv_title"
 msgstr "Shiv"
 msgid "item_shiv_description"
-msgstr "•Use: Stab an enemy, dealing *{damage}* damage."
+msgstr "•Use: Stab an enemy, dealing *{damage}* attack damage."
 
 msgid "item_bandana_title"
 msgstr "Bandana"
@@ -58,7 +61,7 @@ msgstr "•Steal +1 item when defeating an enemy."
 msgid "item_roots_title"
 msgstr "Roots"
 msgid "item_roots_description"
-msgstr "•Use: Absorb nutrients, gaining *{recovery}* bonus health."
+msgstr "•Every 2 seconds: Absorb nutrients, gaining *{recovery}* bonus health."
 
 msgid "item_flower_title"
 msgstr "Flower"
@@ -68,7 +71,7 @@ msgstr "•Connected items have +2 recovery."
 msgid "item_pitchfork_title"
 msgstr "Pitchfork"
 msgid "item_pitchfork_description"
-msgstr "•Use: Stab an enemy, dealing *{damage}* damage 3 times."
+msgstr "•Use: Stab an enemy, dealing *{damage}* attack damage 3 times."
 
 msgid "item_straw_hat_title"
 msgstr "Straw Hat"
@@ -78,7 +81,7 @@ msgstr "•Connected item dealt damage: Draw power from the hat, recovering *{re
 msgid "item_cow_slam_title"
 msgstr "Technique: Cow Slam!"
 msgid "item_cow_slam_description"
-msgstr "•Use: Cow Slam! an enemy, dealing *{damage}* damage.[br]•Has +1 damage for each 8 health you have."
+msgstr "•Use: Cow Slam! an enemy, dealing *{damage}* attack damage.[br]•Has +1 damage for each 8 health you have."
 
 msgid "item_beef_title"
 msgstr "Beef"
@@ -93,12 +96,12 @@ msgstr "•Battle start: Build a wall, gaining *{shield}* shield."
 msgid "item_wise_words_title"
 msgstr "Technique: Wise Words"
 msgid "item_wise_words_description"
-msgstr "•Use: Speak wisely, progressing enemy fatigue by 0.5 seconds."
+msgstr "•Use: Speak wisely, progressing enemy fatigue by 0.75 seconds."
 
 msgid "item_axe_title"
 msgstr "Axe"
 msgid "item_axe_description"
-msgstr "•Use: Chop an enemy, dealing *{damage}* damage. Hits twice against shielded enemies."
+msgstr "•Use: Chop an enemy, dealing *{damage}* attack damage. Hits twice against shielded enemies."
 
 msgid "item_pillow_title"
 msgstr "Pillow"
@@ -108,22 +111,32 @@ msgstr "•Fatigue start: Sleep on pillow, recovering *{recovery}* health."
 msgid "item_beehive_title"
 msgstr "Beehive"
 msgid "item_beehive_description"
-msgstr "•Damage taken: Bees retaliate, applying *{status}* poison."
+msgstr "•Attack damage taken: Bees retaliate, applying *{status}* poison."
 
 msgid "item_honeycomb_title"
 msgstr "Honeycomb"
 msgid "item_honeycomb_description"
-msgstr "•Every 2 seconds: Absorb honey, gaining *{recovery}* bonus health."
+msgstr "•Use: Eat honey, gaining *{recovery}* bonus health."
 
 msgid "item_stinger_title"
 msgstr "Stinger"
 msgid "item_stinger_description"
-msgstr "•Use: Sting an enemy, dealing *{damage}* damage and applying *{status}* poison."
+msgstr "•Use: Sting an enemy, dealing *{damage}* attack damage and applying *{status}* poison."
 
 msgid "item_hunting_rifle_title"
 msgstr "Hunting Rifle"
 msgid "item_hunting_rifle_description"
-msgstr "•Use (after 8 seconds): Shoot the enemy, dealing *{damage}* damage."
+msgstr "•Use (after 8 seconds): Shoot the enemy, dealing *{damage}* attack damage."
+
+msgid "item_berries_title"
+msgstr "Berries"
+msgid "item_berries_description"
+msgstr "•Has *{uses}* use(s).[br]•Use (health is below 50%): Eat the berries, recovering *{recovery}* health."
+
+msgid "item_fish_title"
+msgstr "Fish"
+msgid "item_fish_description"
+msgstr "•Has *{uses}* use(s).[br]•Use: Eat the fish, gaining 1 dodge."
 
 # statuses
 
@@ -137,12 +150,17 @@ msgstr "Burn"
 msgid "status_burn_description"
 msgstr "•Every half a second: Take 1 damage for each stack of burn then lose 10% of your burn."
 
+msgid "status_dodge_title"
+msgstr "Dodge"
+msgid "status_dodge_description"
+msgstr "•Attack incoming: Lose 1 stack of dodge and avoid the attack."
+
 # knight
 
 msgid "item_zweihander_title"
 msgstr "Zweihander"
 msgid "item_zweihander_description"
-msgstr "•Use: Slash an enemy, dealing *{damage}* damage. Then, if the enemy health is below 20%, execute your foe."
+msgstr "•Use: Slash an enemy, dealing *{damage}* attack damage. Then, if the enemy health is below 20%, execute your foe."
 
 msgid "item_whetstone_title"
 msgstr "Whetstone"
@@ -157,7 +175,7 @@ msgstr "EXECUTION"
 msgid "item_frying_pan_title"
 msgstr "Frying Pan"
 msgid "item_frying_pan_description"
-msgstr "•Use: Bludgeon an enemy, dealing *{damage}* damage.[br]•Connected items have +100% recovery."
+msgstr "•Use: Bludgeon an enemy, dealing *{damage}* attack damage.[br]•Connected items have +100% recovery."
 
 msgid "item_milk_title"
 msgstr "Milk"
@@ -169,7 +187,7 @@ msgstr "•Use (health is below 50%): Sip the milk, recovering *{recovery}* heal
 msgid "item_bomb_title"
 msgstr "Bomb"
 msgid "item_bomb_description"
-msgstr "•After 5 seconds: Explode an enemy, dealing *{damage}* damage and stunning them for 2 seconds."
+msgstr "•After 5 seconds: Explode an enemy, dealing *{damage}* attack damage and stunning them for 2 seconds."
 
 msgid "item_matches_title"
 msgstr "Matches"
@@ -181,7 +199,7 @@ msgstr "•Use: Set an enemy on fire, applying *{status}* burn.[br]•Connected 
 msgid "item_fisticuffs_title"
 msgstr "Fisticuffs"
 msgid "item_fisticuffs_description"
-msgstr "•Use: Punch an enemy, dealing *{damage}* damage. Hits twice when below 50% health."
+msgstr "•Use: Punch an enemy, dealing *{damage}* attack damage. Hits twice when below 50% health."
 
 msgid "item_beer_title"
 msgstr "Beer"

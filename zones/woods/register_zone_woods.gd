@@ -49,7 +49,7 @@ func _init() -> void:
 					[false, true , true , true , true , true , true , false],
 					[false, true , true , true , true , true , true , false],
 					[false, false, true , true , true , true , false, false],
-					[false, false, false, false, false, false, false, false],
+					[false, false, false, true , true , false, false, false],
 					[false, false, false, false, false, false, false, false]
 				],
 				equipment = [{
@@ -98,6 +98,41 @@ func _init() -> void:
 					}, {
 						type = "hunting_rifle",
 						position = Vector2(3, 2),
+						rotation = 0,
+					}]
+			}
+		]
+	}, ["woods"])
+	
+	Registry.register_encounter("bear", {
+		enemies = [
+			{
+				character = preload("res://zones/woods/bear/bear.png"),
+				layout = [
+					[false, false, false, false, false, false, false, false],
+					[false, false, false, false, false, false, false, false],
+					[false, true , true , true , true , true , true , false],
+					[false, true , true , true , true , true , true , false],
+					[false, true , true , true , true , true , true , false],
+					[false, true , true , true , true , true , true , false],
+					[false, false, false, false, false, false, false, false],
+					[false, false, false, false, false, false, false, false]
+				],
+				equipment = [{
+						type = "pillow",
+						position = Vector2(1, 3),
+						rotation = 0,
+					}, {
+						type = "fish",
+						position = Vector2(4, 4),
+						rotation = 0,
+					}, {
+						type = "berries",
+						position = Vector2(4, 3),
+						rotation = 0,
+					}, {
+						type = "honeycomb",
+						position = Vector2(5, 3),
 						rotation = 0,
 					}]
 			}

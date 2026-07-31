@@ -63,6 +63,13 @@ func _init() -> void:
 					grid.add_status("burn", -int(ceil(this["stacks"]*0.1)))}
 	})
 	
+	register_status("dodge", {
+		passive_ability = {
+			check_evasion = func(attack_landed, grid, _this):
+				attack_landed["landed"] = false
+				grid.add_status("dodge", -1)}
+	})
+	
 	#region register items
 	register_item("salt", {
 		scene = preload("res://equipment/salt/salt.tscn"),
@@ -81,7 +88,7 @@ func _init() -> void:
 			var enemy = grid.get_enemy()
 			var damage = grid.get_item_stat(this, "damage")
 			damage["item_source"] = this
-			grid.deal_damage(enemy, damage),
+			grid.attack(enemy, damage),
 		tags = ["treasure_loot"]
 	})
 	
@@ -115,7 +122,7 @@ func _init() -> void:
 			var enemy = grid.get_enemy()
 			var damage = grid.get_item_stat(this, "damage")
 			damage["item_source"] = this
-			grid.deal_damage(enemy, damage),
+			grid.attack(enemy, damage),
 		tags = ["treasure_loot"]
 	})
 	
@@ -147,10 +154,10 @@ func _init() -> void:
 			if enemy.get_stat("shield")["final"] > 0:
 				damage = grid.get_item_stat(this, "damage")
 				damage["item_source"] = this
-				grid.deal_damage(enemy, damage)
+				grid.attack(enemy, damage)
 			damage = grid.get_item_stat(this, "damage")
 			damage["item_source"] = this
-			grid.deal_damage(enemy, damage),
+			grid.attack(enemy, damage),
 		tags = ["treasure_loot"]
 	})
 	
@@ -182,12 +189,16 @@ func _init() -> void:
 			[true , true ],
 		],
 		stats = {
-			recovery = 6
+			recovery = 3
 		},
-		active_ability = func(grid, this):
-			var recovery = grid.get_item_stat(this, "recovery")
-			grid.add_stat("max_health", recovery["final"])
-			grid.recover_health(recovery)
+		passive_ability = {
+			game_tick = func(tick, grid, this):
+				grid.add_item_stat(this, "charge", tick, "base")
+				if grid.get_item_stat(this, "charge")["final"] >= 2.0:
+					grid.add_item_stat(this, "charge", -2.0, "base")
+					var recovery = grid.get_item_stat(this, "recovery")
+					grid.add_stat("max_health", recovery["final"])
+					grid.recover_health(recovery)}
 	})
 	
 	register_item("pitchfork", {
@@ -206,7 +217,7 @@ func _init() -> void:
 			for i in 3:
 				var damage = grid.get_item_stat(this, "damage")
 				damage["item_source"] = this
-				grid.deal_damage(enemy, damage)
+				grid.attack(enemy, damage)
 	})
 	
 	register_item("straw_hat", {
@@ -232,7 +243,8 @@ func _init() -> void:
 			damage_dealt = func(damage, _target, grid, this):
 				if damage.has("item_source") and grid.get_connected_items(this, 0).has(damage["item_source"]):
 					var recovery = grid.get_item_stat(this, "recovery")
-					grid.recover_health(recovery)}
+					grid.recover_health(recovery)},
+		tags = ["treasure_loot"]
 	})
 	
 	register_item("beef", {
@@ -248,7 +260,8 @@ func _init() -> void:
 			battle_start = func(grid, this):
 				var recovery = grid.get_item_stat(this, "recovery")
 				grid.add_stat("max_health", recovery["final"])
-				grid.recover_health(recovery)}
+				grid.recover_health(recovery)},
+		tags = ["treasure_loot"]
 	})
 	
 	register_item("cow_slam", {
@@ -264,7 +277,7 @@ func _init() -> void:
 			var enemy = grid.get_enemy()
 			var damage = grid.get_item_stat(this, "damage")
 			damage["item_source"] = this
-			grid.deal_damage(enemy, damage),
+			grid.attack(enemy, damage),
 		passive_ability = {
 			item_stat_modifiers = func(stat, modifiers, grid, item, this):
 				if stat == "damage" and item == this:
@@ -278,12 +291,13 @@ func _init() -> void:
 			[true , true , true ],
 		],
 		stats = {
-			shield = 30
+			shield = 20
 		},
 		passive_ability = {
 			battle_start = func(grid, this):
 				var shield = grid.get_item_stat(this, "shield")
-				grid.recover_shield(shield)}
+				grid.recover_shield(shield)},
+		tags = ["treasure_loot"]
 	})
 	
 	register_item("wise_words", {
@@ -294,7 +308,7 @@ func _init() -> void:
 		],
 		active_ability = func(grid, _this):
 			var enemy = grid.get_enemy()
-			enemy.progress_fatigue(0.5)
+			enemy.progress_fatigue(0.75)
 	})
 	
 	register_item("pillow", {
@@ -323,10 +337,11 @@ func _init() -> void:
 			status = 1
 		},
 		passive_ability = {
-			damage_taken = func(_damage, grid, this):
-				var enemy = grid.get_enemy()
-				var status_applied = grid.get_item_stat(this, "status")["final"]
-				enemy.add_status("poison", status_applied)},
+			damage_taken = func(damage, grid, this):
+				if damage.get("attack"):
+					var enemy = grid.get_enemy()
+					var status_applied = grid.get_item_stat(this, "status")["final"]
+					enemy.add_status("poison", status_applied)},
 	})
 	
 	register_item("stinger", {
@@ -343,9 +358,9 @@ func _init() -> void:
 			var enemy = grid.get_enemy()
 			var damage = grid.get_item_stat(this, "damage")
 			damage["item_source"] = this
-			grid.deal_damage(enemy, damage)
-			var status_applied = grid.get_item_stat(this, "status")["final"]
-			enemy.add_status("poison", status_applied),
+			if grid.attack(enemy, damage):
+				var status_applied = grid.get_item_stat(this, "status")["final"]
+				enemy.add_status("poison", status_applied),
 	})
 	
 	register_item("honeycomb", {
@@ -354,16 +369,12 @@ func _init() -> void:
 			[true , true ],
 		],
 		stats = {
-			recovery = 3
+			recovery = 8
 		},
-		passive_ability = {
-			game_tick = func(tick, grid, this):
-				grid.add_item_stat(this, "charge", tick, "base")
-				if grid.get_item_stat(this, "charge")["final"] >= 2.0:
-					grid.add_item_stat(this, "charge", -2.0, "base")
-					var recovery = grid.get_item_stat(this, "recovery")
-					grid.add_stat("max_health", recovery["final"])
-					grid.recover_health(recovery)}
+		active_ability = func(grid, this):
+			var recovery = grid.get_item_stat(this, "recovery")
+			grid.add_stat("max_health", recovery["final"])
+			grid.recover_health(recovery)
 	})
 	
 	register_item("hunting_rifle", {
@@ -380,10 +391,46 @@ func _init() -> void:
 			var enemy = grid.get_enemy()
 			var damage = grid.get_item_stat(this, "damage")
 			damage["item_source"] = this
-			grid.deal_damage(enemy, damage),
+			grid.attack(enemy, damage),
 		passive_ability = {
 			game_tick = func(tick, grid, this):
 				grid.add_item_stat(this, "charge", tick, "base")},
+		tags = ["treasure_loot"]
+	})
+	
+	register_item("berries", {
+		scene = preload("res://equipment/berries/berries.tscn"),
+		shape = [
+			[true ],
+		],
+		stats = {
+			recovery = 12,
+			uses = 1
+		},
+		active_requirement = func(grid, this):
+			var hp = grid.get_stat("health")["final"]
+			var max_hp = grid.get_stat("max_health")["final"]
+			return hp <= max_hp * 0.5 and grid.get_item_stat(this, "uses")["final"] >= 1,
+		active_ability = func(grid, this):
+			var recovery = grid.get_item_stat(this, "recovery")
+			grid.recover_health(recovery)
+			grid.add_item_stat(this, "uses", -1, "base"),
+		tags = ["treasure_loot"]
+	})
+	
+	register_item("fish", {
+		scene = preload("res://equipment/fish/fish.tscn"),
+		shape = [
+			[true , true , true ],
+		],
+		stats = {
+			uses = 3
+		},
+		active_requirement = func(grid, this):
+			return grid.get_item_stat(this, "uses")["final"] >= 1,
+		active_ability = func(grid, this):
+			grid.add_status("dodge", 1)
+			grid.add_item_stat(this, "uses", -1, "base"),
 		tags = ["treasure_loot"]
 	})
 	#endregion
