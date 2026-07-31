@@ -38,7 +38,12 @@ msgstr "FATIGUE"
 msgid "item_salt_title"
 msgstr "Salt"
 msgid "item_salt_description"
-msgstr "•Use (enemy health is below 50%): Salt the wounds, dealing *{damage}* damage."
+msgstr "•Use (enemy health is below 50%): Salt the enemy wounds, dealing *{damage}* damage."
+
+msgid "item_cheese_title"
+msgstr "Cheese"
+msgid "item_cheese_description"
+msgstr "•Use (have poison): Eat the cheese, recovering *{recovery}* health and removing *{recovery}* poison."
 
 msgid "item_shiv_title"
 msgstr "Shiv"
@@ -68,7 +73,7 @@ msgstr "•Use: Stab an enemy, dealing *{damage}* damage 3 times."
 msgid "item_straw_hat_title"
 msgstr "Straw Hat"
 msgid "item_straw_hat_description"
-msgstr "•Connected item deals damage: Draw power from the hat, recovering *{recovery}* health."
+msgstr "•Connected item dealt damage: Draw power from the hat, recovering *{recovery}* health."
 
 msgid "item_cow_slam_title"
 msgstr "Technique: Cow Slam!"
@@ -103,7 +108,7 @@ msgstr "•Fatigue start: Sleep on pillow, recovering *{recovery}* health."
 msgid "item_beehive_title"
 msgstr "Beehive"
 msgid "item_beehive_description"
-msgstr "•Damage Taken: Bees retaliate, applying *{status}* poison."
+msgstr "•Damage taken: Bees retaliate, applying *{status}* poison."
 
 msgid "item_honeycomb_title"
 msgstr "Honeycomb"
@@ -114,6 +119,11 @@ msgid "item_stinger_title"
 msgstr "Stinger"
 msgid "item_stinger_description"
 msgstr "•Use: Sting an enemy, dealing *{damage}* damage and applying *{status}* poison."
+
+msgid "item_hunting_rifle_title"
+msgstr "Hunting Rifle"
+msgid "item_hunting_rifle_description"
+msgstr "•Use (after 8 seconds): Shoot the enemy, dealing *{damage}* damage."
 
 # statuses
 

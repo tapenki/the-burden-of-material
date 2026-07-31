@@ -72,3 +72,38 @@ func _init() -> void:
 			}
 		]
 	}, ["woods"])
+	
+	Registry.register_encounter("woodsman", {
+		enemies = [
+			{
+				character = preload("res://zones/woods/woodsman/woodsman.png"),
+				layout = [
+					[false, false, false, false, false, false, false, false],
+					[false, false, false, false, false, false, false, false],
+					[false, true , true , true , true , true , true , false],
+					[false, true , true , true , true , true , true , false],
+					[false, true , true , true , true , true , true , false],
+					[false, true , true , true , true , true , true , false],
+					[false, false, false, false, false, false, false, false],
+					[false, false, false, false, false, false, false, false]
+				],
+				equipment = [{
+						type = "axe",
+						position = Vector2(1, 3),
+						rotation = 0,
+					}, {
+						type = "wood",
+						position = Vector2(2, 4),
+						rotation = 0,
+					}, {
+						type = "wood",
+						position = Vector2(2, 5),
+						rotation = 0,
+					}, {
+						type = "hunting_rifle",
+						position = Vector2(3, 2),
+						rotation = 0,
+					}]
+			}
+		]
+	}, ["woods"])

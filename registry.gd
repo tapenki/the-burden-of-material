@@ -85,6 +85,23 @@ func _init() -> void:
 		tags = ["treasure_loot"]
 	})
 	
+	register_item("cheese", {
+		scene = preload("res://equipment/cheese/cheese.tscn"),
+		shape = [
+			[true , true ],
+		],
+		stats = {
+			recovery = 4
+		},
+		active_requirement = func(grid, _this):
+			return grid.statuses.has("poison"),
+		active_ability = func(grid, this):
+			var recovery = grid.get_item_stat(this, "recovery")
+			grid.add_status("poison", -recovery["final"])
+			grid.recover_health(recovery),
+		tags = ["treasure_loot"]
+	})
+	
 	register_item("shiv", {
 		scene = preload("res://equipment/shiv/shiv.tscn"),
 		shape = [
@@ -341,13 +358,32 @@ func _init() -> void:
 		},
 		passive_ability = {
 			game_tick = func(tick, grid, this):
-				if not this.has("charge"):
-					this["charge"] = 0
-				this["charge"] += tick
-				if this["charge"] >= 2.0:
-					this["charge"] -= 2.0
+				grid.add_item_stat(this, "charge", tick, "base")
+				if grid.get_item_stat(this, "charge")["final"] >= 2.0:
+					grid.add_item_stat(this, "charge", -2.0, "base")
 					var recovery = grid.get_item_stat(this, "recovery")
 					grid.add_stat("max_health", recovery["final"])
 					grid.recover_health(recovery)}
+	})
+	
+	register_item("hunting_rifle", {
+		scene = preload("res://equipment/hunting_rifle/hunting_rifle.tscn"),
+		shape = [
+			[true , true , true , true ],
+		],
+		stats = {
+			damage = 15
+		},
+		active_requirement = func(grid, this):
+			return grid.get_item_stat(this, "charge")["final"] >= 8.0,
+		active_ability = func(grid, this):
+			var enemy = grid.get_enemy()
+			var damage = grid.get_item_stat(this, "damage")
+			damage["item_source"] = this
+			grid.deal_damage(enemy, damage),
+		passive_ability = {
+			game_tick = func(tick, grid, this):
+				grid.add_item_stat(this, "charge", tick, "base")},
+		tags = ["treasure_loot"]
 	})
 	#endregion
