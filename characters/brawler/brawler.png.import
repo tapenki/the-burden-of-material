@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://1vkpcc7x1bob"
-path="res://.godot/imported/bum.png-f1321781fe8fd993cd15e6582619aa34.ctex"
+path="res://.godot/imported/brawler.png-8cacf2ed950692b8ffbd3bc95fa80fac.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://characters/bum/bum.png"
-dest_files=["res://.godot/imported/bum.png-f1321781fe8fd993cd15e6582619aa34.ctex"]
+source_file="res://characters/brawler/brawler.png"
+dest_files=["res://.godot/imported/brawler.png-8cacf2ed950692b8ffbd3bc95fa80fac.ctex"]
 
 [params]
 

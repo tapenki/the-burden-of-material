@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://be4xmdi5486k0"
-path="res://.godot/imported/beer.png-19dab0788acd096c07b0494005c3f3da.ctex"
+path="res://.godot/imported/beer.png-2719dadbacd229575496caee93f8a0b7.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://characters/bum/beer/beer.png"
-dest_files=["res://.godot/imported/beer.png-19dab0788acd096c07b0494005c3f3da.ctex"]
+source_file="res://characters/brawler/beer/beer.png"
+dest_files=["res://.godot/imported/beer.png-2719dadbacd229575496caee93f8a0b7.ctex"]
 
 [params]
 

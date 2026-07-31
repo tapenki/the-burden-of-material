@@ -4,7 +4,7 @@ extends Control
 @onready var enemy_equipment = get_node("EnemyEquipment")
 
 var zone: String
-var zone_tier = 0#-1
+var zone_tier = -1
 var day = 0
 var seen_encounters: Array
 
@@ -124,24 +124,36 @@ func proceed_to_battle():
 	get_node("DayCounter").text = tr("ui_day_counter").format({day = day})
 	init_battle(encounter)
 
-func generate_reward_from_pool(pool, quantity):
+func items_from_pool(list, pool, quantity):
 	if not Registry.item_tag_lists.has(pool):
 		return
-	var rotation_offset = PI*0.5# randf_range(0, TAU)
+	var valid_items = Registry.item_tag_lists[pool].duplicate()
 	for i in quantity:
-		var chosen_item = Registry.item_tag_lists[pool].pick_random()
+		if valid_items.size() == 0:
+			return
+		var chosen_item = valid_items.pick_random()
+		list.append(chosen_item)
+		valid_items.erase(chosen_item)
+
+func generate_reward(items):
+	for i in items.size():
+		var item = items[i]
 		var prize_item = {}
-		prize_item["type"] = chosen_item
+		prize_item["type"] = item
 		prize_item["rotation"] = 0
-		var item_data = Registry.item_data[chosen_item]
+		var item_data = Registry.item_data[item]
 		var offset = Vector2(item_data["shape"][0].size(), item_data["shape"].size()) * 0.5
-		prize_item["position"] = Vector2(2, 0).rotated(TAU/quantity*i + rotation_offset) - offset + Vector2(14, 4)
+		if items.size()== 1:
+			prize_item["position"] = Vector2(14, 4) - offset
+		else:
+			prize_item["position"] = Vector2(0, 2).rotated(TAU/items.size()*i) - offset + Vector2(14, 4)
 		prize_item["equipped"] = false
 		player_equipment.equipment.append(prize_item)
 
 func proceed_to_rewards():
 	if not battle.has("won"):
 		return
+	var rewards = []
 	if battle["won"]:
 		var valid_loot = []
 		
@@ -152,38 +164,28 @@ func proceed_to_rewards():
 			if valid_loot.size() <= 0:
 				break
 			var chosen_item = valid_loot.pick_random()
-			var prize_item = {}
-			prize_item["type"] = chosen_item["type"]
-			prize_item["position"] = chosen_item["position"]
-			prize_item["position"].x += 10
-			prize_item["rotation"] = chosen_item["rotation"]
-			prize_item["equipped"] = false
-			player_equipment.equipment.append(prize_item)
+			rewards.append(chosen_item["type"])
 			valid_loot.erase(chosen_item)
 		
-		if day % 4 == 0:
-			generate_reward_from_pool("treasure_loot", 3)
-			var character_data = Registry.character_data[player_equipment.character]
-			if character_data["layouts"].size() > player_equipment.layout_tier + 1:
-				player_equipment.layout_tier += 1
-				player_equipment.layout = character_data["layouts"][player_equipment.layout_tier].duplicate(true)
-			get_node("RewardBackground/Title").text = "ui_found_treasure"
-		else:
 			get_node("RewardBackground/Title").text = "ui_stolen_goods"
 	else:
 		if lives <= 0:
 			get_tree().reload_current_scene()
 			return
-		if day % 4 == 0:
-			generate_reward_from_pool("treasure_loot", 3)
-			var character_data = Registry.character_data[player_equipment.character]
-			if character_data["layouts"].get(player_equipment.layout_tier + 1):
-				player_equipment.layout_tier += 1
-				player_equipment.layout = character_data["layouts"][player_equipment.layout_tier].duplicate(true)
-			get_node("RewardBackground/Title").text = "ui_found_treasure"
 		else:
-			generate_reward_from_pool("treasure_loot", 3)
+			items_from_pool(rewards, "treasure_loot", 3)
 			get_node("RewardBackground/Title").text = "ui_gift_from_grandma"
+	
+	if day % 4 == 0:
+		get_node("RewardBackground/Title").text = "ui_found_treasure"
+		items_from_pool(rewards, "treasure_loot", 3)
+		var character_data = Registry.character_data[player_equipment.character]
+		if character_data["layouts"].get(player_equipment.layout_tier + 1):
+			player_equipment.layout_tier += 1
+			player_equipment.layout = character_data["layouts"][player_equipment.layout_tier].duplicate(true)
+	
+	generate_reward(rewards)
+	
 	for team in battle["teams"]:
 		for battler in team:
 			battler.character_sprite.get_node("DeathOverlay").visible = false

@@ -1,18 +1,18 @@
-[gd_scene format=3 uid="uid://bj818ip2aq33b"]
+[gd_scene format=3 uid="uid://blhrsavjy8i8b"]
 
-[ext_resource type="Script" uid="uid://hcvljlmyr8es" path="res://ui/equipment_item.gd" id="1_ewt0g"]
-[ext_resource type="Texture2D" uid="uid://d0mvdxmgpiphg" path="res://characters/bum/fisticuffs/fisticuffs.png" id="2_muk16"]
+[ext_resource type="Script" uid="uid://hcvljlmyr8es" path="res://ui/equipment_item.gd" id="1_34lgw"]
+[ext_resource type="Texture2D" uid="uid://be4xmdi5486k0" path="res://characters/brawler/beer/beer.png" id="2_irt4o"]
 
-[node name="Fisticuffs" type="Control" unique_id=1620977827]
+[node name="Beer" type="Control" unique_id=1620977827]
 layout_mode = 3
 anchors_preset = 0
-script = ExtResource("1_ewt0g")
+script = ExtResource("1_34lgw")
 
 [node name="Sprite" type="TextureRect" parent="." unique_id=1247240217]
 layout_mode = 0
 pivot_offset_ratio = Vector2(0.5, 0.5)
 mouse_filter = 2
-texture = ExtResource("2_muk16")
+texture = ExtResource("2_irt4o")
 
 [node name="SelectionArea" type="Control" parent="." unique_id=761036972]
 anchors_preset = 0
@@ -20,8 +20,8 @@ mouse_filter = 1
 
 [node name="Shape1" type="Control" parent="SelectionArea" unique_id=1430213690]
 anchors_preset = 0
-offset_right = 96.0
-offset_bottom = 48.0
+offset_right = 48.0
+offset_bottom = 96.0
 mouse_filter = 1
 mouse_default_cursor_shape = 2
 

@@ -247,7 +247,7 @@ func _init() -> void:
 	## bum
 	
 	Registry.register_item("fisticuffs", {
-		scene = preload("res://characters/bum/fisticuffs/fisticuffs.tscn"),
+		scene = preload("res://characters/brawler/fisticuffs/fisticuffs.tscn"),
 		shape = [
 			[true ,true ],
 		],
@@ -270,7 +270,7 @@ func _init() -> void:
 	})
 	
 	Registry.register_item("beer", {
-		scene = preload("res://characters/bum/beer/beer.tscn"),
+		scene = preload("res://characters/brawler/beer/beer.tscn"),
 		shape = [
 			[true ],
 			[true ]
@@ -287,9 +287,9 @@ func _init() -> void:
 		tags = ["heirloom"]
 	})
 	
-	Registry.register_character("bum", {
-		character = preload("res://characters/bum/bum.png"),
-		button_scene = preload("res://characters/bum/bum_button.tscn"),
+	Registry.register_character("brawler", {
+		character = preload("res://characters/brawler/brawler.png"),
+		button_scene = preload("res://characters/brawler/brawler_button.tscn"),
 		layouts = basic_layouts,
 		equipment = [{
 			type = "beer",

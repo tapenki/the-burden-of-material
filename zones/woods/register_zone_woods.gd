@@ -93,10 +93,6 @@ func _init() -> void:
 						rotation = 0,
 					}, {
 						type = "wood",
-						position = Vector2(2, 4),
-						rotation = 0,
-					}, {
-						type = "wood",
 						position = Vector2(2, 5),
 						rotation = 0,
 					}, {
