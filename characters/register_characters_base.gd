@@ -91,7 +91,7 @@ func _init() -> void:
 		active_ability = func(grid, this):
 			var recovery = grid.get_item_stat(this, "recovery")
 			grid.recover_health(recovery),
-			tags = ["treasure_loot"]
+		tags = ["treasure_loot"]
 	})
 	
 	Registry.register_item("frying_pan", {

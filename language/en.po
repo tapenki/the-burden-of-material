@@ -48,6 +48,30 @@ msgstr "Magic Pockets (I)"
 msgid "item_magic_pockets_i_description"
 msgstr "•Expands your pocket size."
 
+msgid "item_magic_pockets_t_title"
+msgstr "Magic Pockets (T)"
+msgid "item_magic_pockets_t_description"
+msgstr "•Expands your pocket size."
+
+msgid "item_magic_pockets_s_title"
+msgstr "Magic Pockets (S)"
+msgid "item_magic_pockets_s_description"
+msgstr "•Expands your pocket size."
+
+msgid "item_magic_pockets_z_title"
+msgstr "Magic Pockets (Z)"
+msgid "item_magic_pockets_z_description"
+msgstr "•Expands your pocket size."
+
+msgid "item_magic_pockets_l_title"
+msgstr "Magic Pockets (L)"
+msgid "item_magic_pockets_l_description"
+msgstr "•Expands your pocket size."
+
+msgid "item_magic_pockets_j_title"
+msgstr "Magic Pockets (J)"
+msgid "item_magic_pockets_j_description"
+msgstr "•Expands your pocket size."
 
 msgid "item_salt_title"
 msgstr "Salt"
@@ -148,6 +172,11 @@ msgid "item_fish_title"
 msgstr "Fish"
 msgid "item_fish_description"
 msgstr "•Has *{uses}* use(s).[br]•Use: Eat the fish, gaining 1 dodge."
+
+msgid "item_mushroom_title"
+msgstr "Mushroom"
+msgid "item_mushroom_description"
+msgstr "•Use: Spread the spores, recovering *{recovery}* health and applying *{status}* poison to an enemy."
 
 # statuses
 

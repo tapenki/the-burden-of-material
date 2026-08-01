@@ -491,4 +491,23 @@ func _init() -> void:
 			grid.add_item_stat(this, "uses", -1, "base"),
 		tags = ["treasure_loot"]
 	})
+	
+	register_item("mushroom", {
+		scene = preload("res://equipment/mushroom/mushroom.tscn"),
+		shape = [
+			[true ],
+			[true ]
+		],
+		stats = {
+			recovery = 4,
+			status = 1
+		},
+		active_ability = func(grid, this):
+			var recovery = grid.get_item_stat(this, "recovery")
+			grid.recover_health(recovery)
+			var enemy = grid.get_enemy()
+			var status_applied = grid.get_item_stat(this, "status")["final"]
+			enemy.add_status("poison", status_applied),
+		tags = ["treasure_loot"]
+	})
 	#endregion
