@@ -142,6 +142,8 @@ func proceed_to_rewards():
 	if not battle.has("won"):
 		return
 	var rewards = []
+	var pocket_reward = []
+	
 	if battle["won"]:
 		var valid_loot = []
 		
@@ -166,6 +168,9 @@ func proceed_to_rewards():
 	
 	items_from_pool(rewards, "treasure_loot", 2)
 	generate_reward(rewards)
+	
+	items_from_pool(pocket_reward, "pockets", 1)
+	generate_reward(pocket_reward)
 	
 	for team in battle["teams"]:
 		for battler in team:

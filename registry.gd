@@ -64,6 +64,18 @@ func _init() -> void:
 				grid.add_status("dodge", -1)}
 	})
 	
+	register_item("magic_pockets_o", {
+		scene = preload("res://equipment/magic_pockets/pockets_o.tscn"),
+		shape = [
+			[true , true ],
+			[true , true ],
+		],
+		stats = {
+			recovery = 25
+		},
+		tags = ["pockets"]
+	})
+	
 	#region register items
 	register_item("salt", {
 		scene = preload("res://equipment/salt/salt.tscn"),
@@ -248,7 +260,7 @@ func _init() -> void:
 			[true , true ],
 		],
 		stats = {
-			recovery = 20
+			recovery = 25
 		},
 		passive_ability = {
 			battle_start = func(grid, this):
@@ -285,7 +297,7 @@ func _init() -> void:
 			[true , true , true ],
 		],
 		stats = {
-			shield = 20
+			shield = 25
 		},
 		passive_ability = {
 			battle_start = func(grid, this):

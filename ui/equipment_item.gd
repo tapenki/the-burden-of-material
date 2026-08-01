@@ -1,4 +1,4 @@
-extends Control 
+class_name EquipmentItem extends Control 
 
 @export var drag_offset: Vector2
 

@@ -215,11 +215,18 @@ func load_grid():
 		for x in row.size():
 			var value = row[x]
 			if value:
-				var grid = preload("res://ui/grid_slot.tscn").instantiate()
-				grid.position = Vector2(48 * (x - offset_x), 48 * (y - offset_y))
-				add_child(grid)
+				var grid_slot = preload("res://ui/grid_slot.tscn").instantiate()
+				grid_slot.position = Vector2(48 * (x - offset_x), 48 * (y - offset_y))
+				add_child(grid_slot)
 	for item in equipment:
 		load_item(item)
+
+func unlock_slot(x, y):
+	if not layout[y][x]:
+		layout[y][x] = true
+		var grid_slot = preload("res://ui/grid_slot.tscn").instantiate()
+		grid_slot.position = Vector2(48 * (x - offset_x), 48 * (y - offset_y))
+		add_child(grid_slot)
 
 func _ready() -> void:
 	get_node("/root/Game").tick.connect(_on_game_tick)

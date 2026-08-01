@@ -38,6 +38,11 @@ msgstr "MISS"
 
 # item descriptions
 
+msgid "item_magic_pockets_o_title"
+msgstr "Magic Pockets (O)"
+msgid "item_magic_pockets_o_description"
+msgstr "•Expands your pocket size."
+
 msgid "item_salt_title"
 msgstr "Salt"
 msgid "item_salt_description"
