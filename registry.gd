@@ -70,9 +70,61 @@ func _init() -> void:
 			[true , true ],
 			[true , true ],
 		],
-		stats = {
-			recovery = 25
-		},
+		tags = ["pockets"]
+	})
+	
+	register_item("magic_pockets_i", {
+		scene = preload("res://equipment/magic_pockets/pockets_i.tscn"),
+		shape = [
+			[true , true , true , true ],
+		],
+		tags = ["pockets"]
+	})
+	
+	register_item("magic_pockets_t", {
+		scene = preload("res://equipment/magic_pockets/pockets_t.tscn"),
+		shape = [
+			[true , true , true ],
+			[false, true , false],
+		],
+		tags = ["pockets"]
+	})
+	
+	register_item("magic_pockets_s", {
+		scene = preload("res://equipment/magic_pockets/pockets_s.tscn"),
+		shape = [
+			[false, true , true ],
+			[true , true , false],
+		],
+		tags = ["pockets"]
+	})
+	
+	register_item("magic_pockets_z", {
+		scene = preload("res://equipment/magic_pockets/pockets_z.tscn"),
+		shape = [
+			[true , true , false],
+			[false, true , true ],
+		],
+		tags = ["pockets"]
+	})
+	
+	register_item("magic_pockets_l", {
+		scene = preload("res://equipment/magic_pockets/pockets_l.tscn"),
+		shape = [
+			[true , false],
+			[true , false],
+			[true , true ],
+		],
+		tags = ["pockets"]
+	})
+	
+	register_item("magic_pockets_j", {
+		scene = preload("res://equipment/magic_pockets/pockets_j.tscn"),
+		shape = [
+			[false, true ],
+			[false, true ],
+			[true , true ],
+		],
 		tags = ["pockets"]
 	})
 	

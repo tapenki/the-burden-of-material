@@ -15,7 +15,6 @@ var layout = [
 	[true , true , true , true , true , true , true , true ],
 	[true , true , true , true , true , true , true , true ]
 ]
-var layout_tier = 0
 var offset_x = 4
 var offset_y = 4
 

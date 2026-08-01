@@ -29,14 +29,17 @@ func equip(from_position):
 	from_position = pos_and_shape.position
 	var rotated_grid_shape = pos_and_shape.shape
 	
+	var unequipped = false
 	var applied = false
 	for y in rotated_grid_shape.size():
 		var row = rotated_grid_shape[y]
 		for x in row.size():
 			if row[x]:
 				if from_position.x + x < 0 or from_position.y + y < 0:
+					unequipped = true
 					continue
 				if from_position.x + x >= grid.layout[0].size() or from_position.y + y >= grid.layout.size():
+					unequipped = true
 					continue
 				if not grid.layout[from_position.y + y][from_position.x + x]:
 					grid.unlock_slot(from_position.x + x, from_position.y + y)
@@ -44,6 +47,9 @@ func equip(from_position):
 	if applied:
 		grid.equipment.erase(equipment_reference)
 		kill()
+		return false
+	elif unequipped:
+		unequip()
 		return false
 	
 	for y in rotated_grid_shape.size():

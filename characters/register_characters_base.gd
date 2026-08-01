@@ -1,36 +1,14 @@
 extends Node
 
-var basic_layouts = [
-	[
-		[false, false, false, false, false, false, false, false],
-		[false, false, false, false, false, false, false, false],
-		[false, false, true , true , true , true , false, false],
-		[false, false, true , true , true , true , false, false],
-		[false, false, true , true , true , true , false, false],
-		[false, false, true , true , true , true , false, false],
-		[false, false, false, false, false, false, false, false],
-		[false, false, false, false, false, false, false, false]
-	],
-	[
-		[false, false, false, false, false, false, false, false],
-		[false, false, false, false, false, false, false, false],
-		[false, true , true , true , true , true , true , false],
-		[false, true , true , true , true , true , true , false],
-		[false, true , true , true , true , true , true , false],
-		[false, true , true , true , true , true , true , false],
-		[false, false, false, false, false, false, false, false],
-		[false, false, false, false, false, false, false, false]
-	],
-	[
-		[false, false, false, false, false, false, false, false],
-		[false, true , true , true , true , true , true , false],
-		[false, true , true , true , true , true , true , false],
-		[false, true , true , true , true , true , true , false],
-		[false, true , true , true , true , true , true , false],
-		[false, true , true , true , true , true , true , false],
-		[false, true , true , true , true , true , true , false],
-		[false, false, false, false, false, false, false, false]
-	],
+var basic_layout = [
+	[false, false, false, false, false, false, false, false],
+	[false, false, false, false, false, false, false, false],
+	[false, false, true , true , true , true , false, false],
+	[false, false, true , true , true , true , false, false],
+	[false, false, true , true , true , true , false, false],
+	[false, false, true , true , true , true , false, false],
+	[false, false, false, false, false, false, false, false],
+	[false, false, false, false, false, false, false, false]
 ]
 
 func _init() -> void:
@@ -84,7 +62,7 @@ func _init() -> void:
 	Registry.register_character("knight", {
 		character = preload("res://characters/knight/knight.png"),
 		button_scene = preload("res://characters/knight/knight_button.tscn"),
-		layouts = basic_layouts,
+		layout = basic_layout,
 		equipment = [{
 			type = "zweihander",
 			position = Vector2(3, 2),
@@ -153,7 +131,7 @@ func _init() -> void:
 	Registry.register_character("chef", {
 		character = preload("res://characters/chef/chef.png"),
 		button_scene = preload("res://characters/chef/chef_button.tscn"),
-		layouts = basic_layouts,
+		layout = basic_layout,
 		equipment = [{
 			type = "frying_pan",
 			position = Vector2(3, 3),
@@ -232,7 +210,7 @@ func _init() -> void:
 	Registry.register_character("bomber", {
 		character = preload("res://characters/bomber/bomber.png"),
 		button_scene = preload("res://characters/bomber/bomber_button.tscn"),
-		layouts = basic_layouts,
+		layout = basic_layout,
 		equipment = [{
 			type = "bomb",
 			position = Vector2(3, 3),
@@ -290,7 +268,7 @@ func _init() -> void:
 	Registry.register_character("brawler", {
 		character = preload("res://characters/brawler/brawler.png"),
 		button_scene = preload("res://characters/brawler/brawler_button.tscn"),
-		layouts = basic_layouts,
+		layout = basic_layout,
 		equipment = [{
 			type = "beer",
 			position = Vector2(2, 3),

@@ -7,6 +7,6 @@ func _on_pressed() -> void:
 	var character_data = Registry.character_data[character_name]
 	player_equipment.character_sprite.texture = character_data["character"]
 	player_equipment.character = character_name
-	player_equipment.layout = character_data["layouts"][0].duplicate(true)
+	player_equipment.layout = character_data["layout"].duplicate(true)
 	player_equipment.equipment = character_data["equipment"].duplicate(true)
 	player_equipment.load_grid()
