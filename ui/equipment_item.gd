@@ -59,7 +59,8 @@ func highlight_slot(x, y):
 
 func highlight_connection(x, y, active, inactive):
 	var highlight_instance
-	if grid.get_item_at_position(x, y):
+	var item = grid.get_item_at_position(x, y)
+	if item and not item.get("destroyed"):
 		highlight_instance = active.instantiate()
 	else:
 		highlight_instance = inactive.instantiate()

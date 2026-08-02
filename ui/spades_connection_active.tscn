@@ -1,0 +1,7 @@
+[gd_scene format=3 uid="uid://ctohccasks053"]
+
+[ext_resource type="Texture2D" uid="uid://b7ii7a1rt6rbh" path="res://ui/spades_connection_active.png" id="1_vlair"]
+
+[node name="Connection" type="TextureRect" unique_id=839607892]
+mouse_filter = 2
+texture = ExtResource("1_vlair")

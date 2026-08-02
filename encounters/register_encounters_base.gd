@@ -288,3 +288,46 @@ func _init() -> void:
 			}
 		]
 	}, [5])
+	
+	Registry.register_encounter("witch", {
+		enemies = [
+			{
+				character = preload("res://encounters/witch/witch.png"),
+				layout = [
+					[false, false, false, false, false, false, false, false],
+					[false, false, true , true , true , true , false, false],
+					[false, true , true , true , true , true , true , false],
+					[false, true , true , true , true , true , true , false],
+					[false, true , true , true , true , true , true , false],
+					[false, true , true , true , true , true , true , false],
+					[false, false, true , true , true , true , false, false],
+					[false, false, false, false, false, false, false, false]
+				],
+				equipment = [{
+						type = "cauldron",
+						position = Vector2(3, 4),
+						rotation = 0,
+					}, {
+						type = "mushroom",
+						position = Vector2(2, 2),
+						rotation = 1,
+					}, {
+						type = "mushroom",
+						position = Vector2(2, 3),
+						rotation = 1,
+					}, {
+						type = "mushroom",
+						position = Vector2(4, 2),
+						rotation = 1,
+					}, {
+						type = "mushroom",
+						position = Vector2(4, 3),
+						rotation = 1,
+					}, {
+						type = "magic_broom",
+						position = Vector2(2, 6),
+						rotation = 1,
+					},]
+			}
+		]
+	}, [6])

@@ -38,6 +38,8 @@ var dragging: Node
 
 signal stat_modifiers(arguments)
 signal item_stat_modifiers(arguments)
+
+signal item_used(arguments)
 signal can_use_item(arguments)
 
 signal damage_dealt(arguments)
@@ -55,6 +57,7 @@ signal battle_start(arguments)
 var signals = [
 	stat_modifiers,
 	item_stat_modifiers,
+	item_used,
 	can_use_item,
 	damage_dealt,
 	damage_taken,
@@ -203,6 +206,10 @@ func add_status(status, stacks):
 						statuses[status]["connected_callables"] = {}
 						statuses[status]["connected_callables"][key] = wrapper
 	statuses[status]["status_scene"].text = tr("status_"+status+"_title") + " ({stacks})".format({stacks = statuses[status]["stacks"]})
+	if stacks >= 0:
+		text_effect("+" + str(stacks), Color.WHITE)
+	else:
+		text_effect("-" + str(stacks), Color.WHITE)
 
 func unload_grid():
 	for check_signal in signals:
@@ -315,6 +322,8 @@ func get_connected_items(item, connections_index):
 
 func get_enemy():
 	var battle = get_node("/root/Game").battle
+	if not battle.get("active"):
+		return null
 	return battle["teams"][target_team][target_enemy]
 
 func take_damage(damage):
@@ -375,6 +384,7 @@ func use_item():
 		item["used"] = true
 		item["item_scene"].pop()
 		item_data["active_ability"].call(self, item)
+		item_used.emit([item, self])
 	else:
 		for item in equipment:
 			var item_data = Registry.item_data[item["type"]]

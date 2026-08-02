@@ -193,6 +193,17 @@ msgstr "Slime"
 msgid "item_slime_description"
 msgstr "•Connected item can only be used after 8 seconds have passed."
 
+msgid "item_cauldron_title"
+msgstr "Cauldron"
+msgid "item_cauldron_description"
+msgstr "•Use: Brew a potion, recovering *{health_gain}* health and applying *{status}* poison to an enemy.[br]•Connected item used: Add it to the cauldron, increasing health gain by 2 and status applied by 1."
+
+msgid "item_magic_broom_title"
+msgstr "Magic Broom"
+msgid "item_magic_broom_description"
+msgstr "•Battle start: Ride the broom, gaining *{status}* dodge."
+
+
 # statuses
 
 msgid "status_poison_title"

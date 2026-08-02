@@ -275,7 +275,8 @@ func _init() -> void:
 			for i in 3:
 				var damage = grid.get_item_stat(this, "damage")
 				damage["item_source"] = this
-				grid.attack(enemy, damage)
+				grid.attack(enemy, damage),
+		tags = ["treasure_loot"]
 	})
 	
 	register_item("straw_hat", {
@@ -543,8 +544,9 @@ func _init() -> void:
 			item_stat_modifiers = func(stat, modifiers, grid, item, this):
 				if stat == "health_gain" and item == this:
 					var enemy = grid.get_enemy()
-					if enemy.statuses.has("poison"):
-						modifiers["base"] += enemy.statuses["poison"]["stacks"]}
+					if enemy and enemy.statuses.has("poison"):
+						modifiers["base"] += enemy.statuses["poison"]["stacks"]},
+		tags = ["treasure_loot"]
 	})
 	
 	register_item("slime", {
@@ -554,8 +556,8 @@ func _init() -> void:
 		],
 		connections = [
 			{
-				active = preload("res://ui/diamonds_connection_active.tscn"),
-				inactive = preload("res://ui/diamonds_connection_inactive.tscn"),
+				active = preload("res://ui/spades_connection_active.tscn"),
+				inactive = preload("res://ui/spades_connection_inactive.tscn"),
 				shape = [
 					[true ],
 				],
@@ -568,6 +570,62 @@ func _init() -> void:
 					modifiers["usable"] = false,
 			game_tick = func(tick, grid, this):
 				grid.add_item_stat(this, "charge", tick, "base")},
+		tags = ["treasure_loot"]
+	})
+	
+	register_item("cauldron", {
+		scene = preload("res://equipment/cauldron/cauldron.tscn"),
+		shape = [
+			[true , true ],
+			[true , true ],
+		],
+		connections = [
+			{
+				active = preload("res://ui/spades_connection_active.tscn"),
+				inactive = preload("res://ui/spades_connection_inactive.tscn"),
+				shape = [
+					[true , true ],
+					[true , true ],
+				],
+				offset = Vector2i(0, -2)
+			}
+		],
+		stats = {
+			health_gain = 2,
+			status = 1,
+		},
+		active_ability = func(grid, this):
+			var health_gain = grid.get_item_stat(this, "health_gain")
+			grid.recover_health(health_gain)
+			var enemy = grid.get_enemy()
+			var status_applied = grid.get_item_stat(this, "status")["final"]
+			enemy.add_status("poison", status_applied),
+		passive_ability = {
+			item_used = func(item, grid, this):
+				if grid.get_connected_items(this, 0).has(item):
+					grid.add_item_stat(this, "health_gain", 2)
+					grid.add_item_stat(this, "status", 1)
+					grid.disconnect_item(item)
+					item["destroyed"] = true
+					item["item_scene"].kill()},
+		tags = ["treasure_loot"]
+	})
+	
+	register_item("magic_broom", {
+		scene = preload("res://equipment/magic_broom/magic_broom.tscn"),
+		shape = [
+			[true ],
+			[true ],
+			[true ],
+			[true ],
+		],
+		stats = {
+			status = 3
+		},
+		passive_ability = {
+			battle_start = func(grid, this):
+				var status_applied = grid.get_item_stat(this, "status")["final"]
+				grid.add_status("dodge", status_applied)},
 		tags = ["treasure_loot"]
 	})
 	#endregion

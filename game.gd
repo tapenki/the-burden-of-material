@@ -3,7 +3,7 @@ extends Control
 @onready var player_equipment = get_node("PlayerEquipment")
 @onready var enemy_equipment = get_node("EnemyEquipment")
 
-var day = 4
+var day = 0
 
 var lives = 3
 
