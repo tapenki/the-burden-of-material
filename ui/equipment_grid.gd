@@ -431,7 +431,7 @@ func progress_fatigue(time):
 	if threshold == 0:
 		fatigue_start.emit([self])
 		text_effect("message_fatigue", Color.PURPLE)
-	var fatigue_damage = int(pow(2, floor(threshold)))
+	var fatigue_damage = 1 + int(floor(threshold))
 	add_stat("fatigue_threshold", 0.5)
 	take_damage({"base" = fatigue_damage, "add_mult" = 1, "mult_mult" = 1, "final" = fatigue_damage, "fatigue" = true})
 

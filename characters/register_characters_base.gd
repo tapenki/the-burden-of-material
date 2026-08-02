@@ -261,7 +261,7 @@ func _init() -> void:
 				var status_applied = grid.get_item_stat(this, "status")["final"]
 				grid.add_status("poison", status_applied)
 				for item in grid.equipment:
-					grid.add_item_stat(item, "damage", 5)},
+					grid.add_item_stat(item, "damage", 4)},
 		tags = ["heirloom"]
 	})
 	

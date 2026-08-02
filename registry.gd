@@ -605,9 +605,10 @@ func _init() -> void:
 				if grid.get_connected_items(this, 0).has(item):
 					grid.add_item_stat(this, "health_gain", 2)
 					grid.add_item_stat(this, "status", 1)
-					grid.disconnect_item(item)
-					item["destroyed"] = true
-					item["item_scene"].kill()},
+					if not item.get("destroyed"):
+						grid.disconnect_item(item)
+						item["destroyed"] = true
+						item["item_scene"].kill()},
 		tags = ["treasure_loot"]
 	})
 	
@@ -626,6 +627,24 @@ func _init() -> void:
 			battle_start = func(grid, this):
 				var status_applied = grid.get_item_stat(this, "status")["final"]
 				grid.add_status("dodge", status_applied)},
+		tags = ["treasure_loot"]
+	})
+	
+	register_item("cactus", {
+		scene = preload("res://equipment/cactus/cactus.tscn"),
+		shape = [
+			[true , true ],
+			[true , true ],
+		],
+		stats = {
+			damage = 3
+		},
+		passive_ability = {
+			damage_taken = func(damage, grid, this):
+				if damage.get("attack"):
+					var enemy = grid.get_enemy()
+					var dealt_damage = grid.get_item_stat(this, "damage")
+					grid.deal_damage(enemy, dealt_damage)},
 		tags = ["treasure_loot"]
 	})
 	#endregion

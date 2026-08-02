@@ -331,3 +331,54 @@ func _init() -> void:
 			}
 		]
 	}, [6])
+	
+	Registry.register_encounter("cactus", {
+		enemies = [
+			{
+				character = preload("res://encounters/cactus/cactus.png"),
+				layout = [
+					[false, false, false, false, false, false, false, false],
+					[false, false, false, false, false, false, false, false],
+					[true , true , true , true , true , true , true , true ],
+					[true , true , true , true , true , true , true , true ],
+					[true , true , true , true , true , true , true , true ],
+					[true , true , true , true , true , true , true , true ],
+					[false, false, false, false, false, false, false, false],
+					[false, false, false, false, false, false, false, false]
+				],
+				equipment = [{
+						type = "cactus",
+						position = Vector2(0, 3),
+						rotation = 0,
+					}, {
+						type = "flower",
+						position = Vector2(2, 3),
+						rotation = 0,
+					}, {
+						type = "cactus",
+						position = Vector2(4, 3),
+						rotation = 0,
+					}, {
+						type = "flower",
+						position = Vector2(6, 3),
+						rotation = 0,
+					}, {
+						type = "roots",
+						position = Vector2(0, 5),
+						rotation = 0,
+					}, {
+						type = "roots",
+						position = Vector2(2, 5),
+						rotation = 0,
+					}, {
+						type = "roots",
+						position = Vector2(4, 5),
+						rotation = 0,
+					}, {
+						type = "roots",
+						position = Vector2(6, 5),
+						rotation = 0,
+					},]
+			}
+		]
+	}, [7])

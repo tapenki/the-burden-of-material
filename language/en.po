@@ -203,6 +203,10 @@ msgstr "Magic Broom"
 msgid "item_magic_broom_description"
 msgstr "•Battle start: Ride the broom, gaining *{status}* dodge."
 
+msgid "item_cactus_title"
+msgstr "Cactus"
+msgid "item_cactus_description"
+msgstr "•Attack damage taken: Cactus retaliates, dealing *{damage}* damage."
 
 # statuses
 
@@ -270,4 +274,4 @@ msgstr "•Use: Punch an enemy, dealing *{damage}* attack damage. Hits twice whe
 msgid "item_beer_title"
 msgstr "Beer"
 msgid "item_beer_description"
-msgstr "•Battle start: Imbibe alcohol, applying *{status}* poison and increasing the damage of all your items by 5."
+msgstr "•Battle start: Imbibe alcohol, applying *{status}* poison and increasing the damage of all your items by 4."
