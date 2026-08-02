@@ -3,7 +3,7 @@ extends Control
 @onready var player_equipment = get_node("PlayerEquipment")
 @onready var enemy_equipment = get_node("EnemyEquipment")
 
-var day = 0
+var day = 4
 
 var lives = 3
 
@@ -116,6 +116,8 @@ func items_from_pool(list, pool, quantity):
 	if not Registry.item_tag_lists.has(pool):
 		return
 	var valid_items = Registry.item_tag_lists[pool].duplicate()
+	for item in list:
+		valid_items.erase(item)
 	for i in quantity:
 		if valid_items.size() == 0:
 			return
@@ -163,10 +165,9 @@ func proceed_to_rewards():
 			get_tree().reload_current_scene()
 			return
 		else:
-			items_from_pool(rewards, "treasure_loot", 1)
 			get_node("RewardBackground/Title").text = "ui_gift_from_grandma"
 	
-	items_from_pool(rewards, "treasure_loot", 2)
+	items_from_pool(rewards, "treasure_loot", 3)
 	generate_reward(rewards)
 	
 	items_from_pool(pocket_reward, "pockets", 1)

@@ -81,7 +81,7 @@ msgstr "•Use (enemy health is below 50%): Salt the enemy wounds, dealing *{dam
 msgid "item_cheese_title"
 msgstr "Cheese"
 msgid "item_cheese_description"
-msgstr "•Use (have poison): Eat the cheese, recovering *{recovery}* health and removing *{recovery}* poison."
+msgstr "•Use (have poison): Eat the cheese, recovering *{health_gain}* health and removing *{health_gain}* poison."
 
 msgid "item_shiv_title"
 msgstr "Shiv"
@@ -96,12 +96,12 @@ msgstr "•Steal +1 item when defeating an enemy."
 msgid "item_roots_title"
 msgstr "Roots"
 msgid "item_roots_description"
-msgstr "•Every 2 seconds: Absorb nutrients, gaining *{recovery}* bonus health."
+msgstr "•Every 2 seconds: Absorb nutrients, gaining *{health_gain}* bonus health."
 
 msgid "item_flower_title"
 msgstr "Flower"
 msgid "item_flower_description"
-msgstr "•Connected items have +2 recovery."
+msgstr "•Connected items have +2 health gain."
 
 msgid "item_pitchfork_title"
 msgstr "Pitchfork"
@@ -111,7 +111,7 @@ msgstr "•Use: Stab an enemy, dealing *{damage}* attack damage 3 times."
 msgid "item_straw_hat_title"
 msgstr "Straw Hat"
 msgid "item_straw_hat_description"
-msgstr "•Connected item dealt damage: Draw power from the hat, recovering *{recovery}* health."
+msgstr "•Connected item dealt damage: Draw power from the hat, recovering *{health_gain}* health."
 
 msgid "item_cow_slam_title"
 msgstr "Technique: Cow Slam!"
@@ -121,7 +121,7 @@ msgstr "•Use: Cow Slam! an enemy, dealing *{damage}* attack damage.[br]•Has 
 msgid "item_beef_title"
 msgstr "Beef"
 msgid "item_beef_description"
-msgstr "•Battle start: Eat beef, gaining *{recovery}* bonus health."
+msgstr "•Battle start: Eat beef, gaining *{health_gain}* bonus health."
 
 msgid "item_wood_title"
 msgstr "Wood"
@@ -141,7 +141,7 @@ msgstr "•Use: Chop an enemy, dealing *{damage}* attack damage. Hits twice agai
 msgid "item_pillow_title"
 msgstr "Pillow"
 msgid "item_pillow_description"
-msgstr "•Fatigue start: Sleep on pillow, recovering *{recovery}* health."
+msgstr "•Fatigue start: Sleep on pillow, recovering *{health_gain}* health."
 
 msgid "item_beehive_title"
 msgstr "Beehive"
@@ -151,7 +151,7 @@ msgstr "•Attack damage taken: Bees retaliate, applying *{status}* poison."
 msgid "item_honeycomb_title"
 msgstr "Honeycomb"
 msgid "item_honeycomb_description"
-msgstr "•Use: Eat honey, gaining *{recovery}* bonus health."
+msgstr "•Use: Eat honey, gaining *{health_gain}* bonus health."
 
 msgid "item_stinger_title"
 msgstr "Stinger"
@@ -166,7 +166,7 @@ msgstr "•Use (after 8 seconds): Shoot the enemy, dealing *{damage}* attack dam
 msgid "item_berries_title"
 msgstr "Berries"
 msgid "item_berries_description"
-msgstr "•Has *{uses}* use(s).[br]•Use (health is below 50%): Eat the berries, recovering *{recovery}* health."
+msgstr "•Has *{uses}* use(s).[br]•Use (health is below 50%): Eat the berries, recovering *{health_gain}* health."
 
 msgid "item_fish_title"
 msgstr "Fish"
@@ -176,7 +176,22 @@ msgstr "•Has *{uses}* use(s).[br]•Use: Eat the fish, gaining 1 dodge."
 msgid "item_mushroom_title"
 msgstr "Mushroom"
 msgid "item_mushroom_description"
-msgstr "•Use: Spread the spores, recovering *{recovery}* health and applying *{status}* poison to an enemy."
+msgstr "•Use: Spread the spores, recovering *{health_gain}* health and applying *{status}* poison to an enemy."
+
+msgid "item_snail_shell_title"
+msgstr "Snail's Shell"
+msgid "item_snail_shell_description"
+msgstr "•Health gained: Harden shell, gaining shield equal to half the health gained."
+
+msgid "item_sippy_straw_title"
+msgstr "Sippy Straw"
+msgid "item_sippy_straw_description"
+msgstr "•Use: Sip enemy poison, gaining *{health_gain}* bonus health.[br]•Has +1 health gain for each poison the enemy has."
+
+msgid "item_slime_title"
+msgstr "Slime"
+msgid "item_slime_description"
+msgstr "•Connected item can only be used after 8 seconds have passed."
 
 # statuses
 
@@ -215,12 +230,12 @@ msgstr "EXECUTION"
 msgid "item_frying_pan_title"
 msgstr "Frying Pan"
 msgid "item_frying_pan_description"
-msgstr "•Use: Bludgeon an enemy, dealing *{damage}* attack damage.[br]•Connected items have +100% recovery."
+msgstr "•Use: Bludgeon an enemy, dealing *{damage}* attack damage.[br]•Connected items have +100% health gain."
 
 msgid "item_milk_title"
 msgstr "Milk"
 msgid "item_milk_description"
-msgstr "•Use (health is below 50%): Sip the milk, recovering *{recovery}* health."
+msgstr "•Use (health is below 50%): Sip the milk, recovering *{health_gain}* health."
 
 # bomber
 

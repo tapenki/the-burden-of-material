@@ -82,15 +82,15 @@ func _init() -> void:
 			[true ]
 		],
 		stats = {
-			recovery = 8
+			health_gain = 8
 		},
 		active_requirement = func(grid, _this):
 			var hp = grid.get_stat("health")["final"]
 			var max_hp = grid.get_stat("max_health")["final"]
 			return hp <= max_hp * 0.5,
 		active_ability = func(grid, this):
-			var recovery = grid.get_item_stat(this, "recovery")
-			grid.recover_health(recovery),
+			var health_gain = grid.get_item_stat(this, "health_gain")
+			grid.recover_health(health_gain),
 		tags = ["treasure_loot"]
 	})
 	
@@ -123,7 +123,7 @@ func _init() -> void:
 			grid.attack(enemy, damage),
 		passive_ability = {
 			item_stat_modifiers = func(stat, modifiers, grid, item, this):
-				if stat == "recovery" and grid.get_connected_items(this, 0).has(item):
+				if stat == "health_gain" and grid.get_connected_items(this, 0).has(item):
 					modifiers["add_mult"] += 1},
 		tags = ["heirloom"]
 	})

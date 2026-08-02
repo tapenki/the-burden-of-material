@@ -245,3 +245,46 @@ func _init() -> void:
 			}
 		]
 	}, [4])
+	
+	Registry.register_encounter("snail", {
+		enemies = [
+			{
+				character = preload("res://encounters/snail/snail.png"),
+				layout = [
+					[false, false, false, false, false, false, false, false],
+					[false, false, true , true , true , true , false, false],
+					[false, true , true , true , true , true , true , false],
+					[false, true , true , true , true , true , true , false],
+					[false, true , true , true , true , true , true , false],
+					[false, true , true , true , true , true , true , false],
+					[false, false, true , true , true , true , false, false],
+					[false, false, false, false, false, false, false, false]
+				],
+				equipment = [{
+						type = "sippy_straw",
+						position = Vector2(1, 4),
+						rotation = 1,
+					}, {
+						type = "slime",
+						position = Vector2(1, 3),
+						rotation = 0,
+					}, {
+						type = "snail_shell",
+						position = Vector2(3, 3),
+						rotation = 0,
+					}, {
+						type = "mushroom",
+						position = Vector2(5, 4),
+						rotation = 0,
+					}, {
+						type = "mushroom",
+						position = Vector2(6, 4),
+						rotation = 0,
+					}, {
+						type = "flower",
+						position = Vector2(5, 2),
+						rotation = 0,
+					}, ]
+			}
+		]
+	}, [5])

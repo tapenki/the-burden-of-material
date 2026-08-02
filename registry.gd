@@ -156,14 +156,14 @@ func _init() -> void:
 			[true , true ],
 		],
 		stats = {
-			recovery = 4
+			health_gain = 4
 		},
 		active_requirement = func(grid, _this):
 			return grid.statuses.has("poison"),
 		active_ability = func(grid, this):
-			var recovery = grid.get_item_stat(this, "recovery")
-			grid.add_status("poison", -recovery["final"])
-			grid.recover_health(recovery),
+			var health_gain = grid.get_item_stat(this, "health_gain")
+			grid.add_status("poison", -health_gain["final"])
+			grid.recover_health(health_gain),
 		tags = ["treasure_loot"]
 	})
 	
@@ -237,7 +237,7 @@ func _init() -> void:
 		],
 		passive_ability = {
 			item_stat_modifiers = func(stat, modifiers, grid, item, this):
-				if stat == "recovery" and grid.get_connected_items(this, 0).has(item):
+				if stat == "health_gain" and grid.get_connected_items(this, 0).has(item):
 					modifiers["base"] += 2}
 	})
 	
@@ -247,16 +247,16 @@ func _init() -> void:
 			[true , true ],
 		],
 		stats = {
-			recovery = 3
+			health_gain = 3
 		},
 		passive_ability = {
 			game_tick = func(tick, grid, this):
 				grid.add_item_stat(this, "charge", tick, "base")
 				if grid.get_item_stat(this, "charge")["final"] >= 2.0:
 					grid.add_item_stat(this, "charge", -2.0, "base")
-					var recovery = grid.get_item_stat(this, "recovery")
-					grid.add_stat("max_health", recovery["final"])
-					grid.recover_health(recovery)}
+					var health_gain = grid.get_item_stat(this, "health_gain")
+					grid.add_stat("max_health", health_gain["final"])
+					grid.recover_health(health_gain)}
 	})
 	
 	register_item("pitchfork", {
@@ -295,13 +295,13 @@ func _init() -> void:
 			}
 		],
 		stats = {
-			recovery = 2
+			health_gain = 2
 		},
 		passive_ability = {
 			damage_dealt = func(damage, _target, grid, this):
 				if damage.has("item_source") and grid.get_connected_items(this, 0).has(damage["item_source"]):
-					var recovery = grid.get_item_stat(this, "recovery")
-					grid.recover_health(recovery)},
+					var health_gain = grid.get_item_stat(this, "health_gain")
+					grid.recover_health(health_gain)},
 		tags = ["treasure_loot"]
 	})
 	
@@ -312,13 +312,13 @@ func _init() -> void:
 			[true , true ],
 		],
 		stats = {
-			recovery = 25
+			health_gain = 25
 		},
 		passive_ability = {
 			battle_start = func(grid, this):
-				var recovery = grid.get_item_stat(this, "recovery")
-				grid.add_stat("max_health", recovery["final"])
-				grid.recover_health(recovery)},
+				var health_gain = grid.get_item_stat(this, "health_gain")
+				grid.add_stat("max_health", health_gain["final"])
+				grid.recover_health(health_gain)},
 		tags = ["treasure_loot"]
 	})
 	
@@ -376,12 +376,12 @@ func _init() -> void:
 			[true , true ],
 		],
 		stats = {
-			recovery = 50
+			health_gain = 50
 		},
 		passive_ability = {
 			fatigue_start = func(grid, this):
-				var recovery = grid.get_item_stat(this, "recovery")
-				grid.recover_health(recovery)},
+				var health_gain = grid.get_item_stat(this, "health_gain")
+				grid.recover_health(health_gain)},
 		tags = ["treasure_loot"]
 	})
 	
@@ -427,12 +427,12 @@ func _init() -> void:
 			[true , true ],
 		],
 		stats = {
-			recovery = 8
+			health_gain = 8
 		},
 		active_ability = func(grid, this):
-			var recovery = grid.get_item_stat(this, "recovery")
-			grid.add_stat("max_health", recovery["final"])
-			grid.recover_health(recovery)
+			var health_gain = grid.get_item_stat(this, "health_gain")
+			grid.add_stat("max_health", health_gain["final"])
+			grid.recover_health(health_gain)
 	})
 	
 	register_item("hunting_rifle", {
@@ -462,7 +462,7 @@ func _init() -> void:
 			[true ],
 		],
 		stats = {
-			recovery = 16,
+			health_gain = 16,
 			uses = 1
 		},
 		active_requirement = func(grid, this):
@@ -470,8 +470,8 @@ func _init() -> void:
 			var max_hp = grid.get_stat("max_health")["final"]
 			return hp <= max_hp * 0.5 and grid.get_item_stat(this, "uses")["final"] >= 1,
 		active_ability = func(grid, this):
-			var recovery = grid.get_item_stat(this, "recovery")
-			grid.recover_health(recovery)
+			var health_gain = grid.get_item_stat(this, "health_gain")
+			grid.recover_health(health_gain)
 			grid.add_item_stat(this, "uses", -1, "base"),
 		tags = ["treasure_loot"]
 	})
@@ -499,15 +499,75 @@ func _init() -> void:
 			[true ]
 		],
 		stats = {
-			recovery = 4,
+			health_gain = 4,
 			status = 1
 		},
 		active_ability = func(grid, this):
-			var recovery = grid.get_item_stat(this, "recovery")
-			grid.recover_health(recovery)
+			var health_gain = grid.get_item_stat(this, "health_gain")
+			grid.recover_health(health_gain)
 			var enemy = grid.get_enemy()
 			var status_applied = grid.get_item_stat(this, "status")["final"]
 			enemy.add_status("poison", status_applied),
+		tags = ["treasure_loot"]
+	})
+	
+	register_item("snail_shell", {
+		scene = preload("res://equipment/snail_shell/snail_shell.tscn"),
+		shape = [
+			[true , true ],
+			[true , true ],
+		],
+		passive_ability = {
+			health_gained = func(gain, grid, _this):
+				var shield_gain = gain.duplicate()
+				shield_gain["mult_mult"] *= 0.5
+				grid.calculate_modifiers(shield_gain)
+				grid.recover_shield(shield_gain)},
+		tags = ["treasure_loot"]
+	})
+	
+	register_item("sippy_straw", {
+		scene = preload("res://equipment/sippy_straw/sippy_straw.tscn"),
+		shape = [
+			[true ],
+			[true ],
+		],
+		stats = {
+			health_gain = 2
+		},
+		active_ability = func(grid, this):
+			var health_gain = grid.get_item_stat(this, "health_gain")
+			grid.add_stat("max_health", health_gain["final"])
+			grid.recover_health(health_gain),
+		passive_ability = {
+			item_stat_modifiers = func(stat, modifiers, grid, item, this):
+				if stat == "health_gain" and item == this:
+					var enemy = grid.get_enemy()
+					if enemy.statuses.has("poison"):
+						modifiers["base"] += enemy.statuses["poison"]["stacks"]}
+	})
+	
+	register_item("slime", {
+		scene = preload("res://equipment/slime/slime.tscn"),
+		shape = [
+			[true ],
+		],
+		connections = [
+			{
+				active = preload("res://ui/diamonds_connection_active.tscn"),
+				inactive = preload("res://ui/diamonds_connection_inactive.tscn"),
+				shape = [
+					[true ],
+				],
+				offset = Vector2i(0, 1)
+			}
+		],
+		passive_ability = {
+			can_use_item = func(modifiers, item, grid, this): ## example ability boosting the damage of all connected items
+				if grid.get_connected_items(this, 0).has(item) and grid.get_item_stat(this, "charge")["final"] < 8.0:
+					modifiers["usable"] = false,
+			game_tick = func(tick, grid, this):
+				grid.add_item_stat(this, "charge", tick, "base")},
 		tags = ["treasure_loot"]
 	})
 	#endregion

@@ -38,10 +38,13 @@ var dragging: Node
 
 signal stat_modifiers(arguments)
 signal item_stat_modifiers(arguments)
+signal can_use_item(arguments)
 
 signal damage_dealt(arguments)
 signal damage_taken(arguments)
 signal check_evasion(arguments)
+
+signal health_gained(arguments)
 
 signal game_tick(arguments)
 
@@ -52,13 +55,20 @@ signal battle_start(arguments)
 var signals = [
 	stat_modifiers,
 	item_stat_modifiers,
+	can_use_item,
 	damage_dealt,
 	damage_taken,
 	check_evasion,
+	health_gained,
 	game_tick,
 	fatigue_start,
 	battle_start,
 ]
+
+func calculate_modifiers(modifiers):
+	modifiers["final"] = modifiers["base"] * modifiers["add_mult"] * modifiers["mult_mult"]
+	if modifiers["base"] is int:
+		modifiers["final"] = (int)(modifiers["final"])
 
 func get_stat(stat):
 	var modifiers = {"base" = 0, "add_mult" = 1, "mult_mult" = 1}
@@ -66,9 +76,7 @@ func get_stat(stat):
 		modifiers = stat_changes[stat].duplicate()
 	modifiers["base"] += stats.get(stat, 0)
 	stat_modifiers.emit([stat, modifiers, self])
-	modifiers["final"] = modifiers["base"] * modifiers["add_mult"] * modifiers["mult_mult"]
-	if modifiers["base"] is int:
-		modifiers["final"] = (int)(modifiers["final"])
+	calculate_modifiers(modifiers)
 	return modifiers
 
 func add_stat(stat, value, operation = "base"):
@@ -90,9 +98,7 @@ func get_item_stat(item, stat):
 	if item_data.has("stats"):
 		modifiers["base"] += item_data["stats"].get(stat, 0)
 	item_stat_modifiers.emit([stat, modifiers, self, item])
-	modifiers["final"] = modifiers["base"] * modifiers["add_mult"] * modifiers["mult_mult"]
-	if modifiers["base"] is int:
-		modifiers["final"] = (int)(modifiers["final"])
+	calculate_modifiers(modifiers)
 	return modifiers
 
 func add_item_stat(item, stat, value, operation = "base"):
@@ -337,24 +343,29 @@ func attack(target, damage):
 	deal_damage(target, damage)
 	return true
 
-func recover_health(recovery):
+func recover_health(gain):
 	var hp = get_stat("health")["final"]
 	var max_hp = get_stat("max_health")["final"]
-	if hp + recovery["final"] >= max_hp:
+	if hp + gain["final"] >= max_hp:
 		add_stat("health", max_hp - hp)
 	else:
-		add_stat("health", recovery["final"])
-	text_effect("+" + str(recovery["final"]), Color.GREEN)
+		add_stat("health", gain["final"])
+	text_effect("+" + str(gain["final"]), Color.GREEN)
+	health_gained.emit([gain, self])
 
-func recover_shield(recovery):
-	add_stat("shield", recovery["final"])
-	text_effect("+" + str(recovery["final"]), Color.ORANGE)
+func recover_shield(gain):
+	add_stat("shield", gain["final"])
+	text_effect("+" + str(gain["final"]), Color.ORANGE)
 
 func use_item():
 	var useable_items = []
 	for item in equipment:
 		var item_data = Registry.item_data[item["type"]]
 		if item_data.has("active_requirement") and not item_data["active_requirement"].call(self, item):
+			continue
+		var item_usability_modifiers = {usable = true}
+		can_use_item.emit([item_usability_modifiers, item, self])
+		if not item_usability_modifiers["usable"]:
 			continue
 		if item_data.has("active_ability") and not item.get("used") and not item.get("destroyed") and item.get("equipped", true):
 			useable_items.append(item)
