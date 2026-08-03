@@ -165,13 +165,13 @@ func _init() -> void:
 				if stat == "damage" and grid.get_connected_items(this, 0).has(item):
 					modifiers["add_mult"] += 0.25},
 		stats = {
-			status = 3
+			damage = 6
 		},
 		active_ability = func(grid, this):
 			var enemy = grid.get_enemy()
-			var status_applied = grid.get_item_stat(this, "status")["final"]
-			enemy.add_status("burn", status_applied),
-		tags = ["treasure_loot"],
+			var damage = grid.get_item_stat(this, "damage")
+			damage["item_source"] = this
+			grid.attack(enemy, damage),
 	})
 	
 	Registry.register_item("bomb", {

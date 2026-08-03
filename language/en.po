@@ -81,7 +81,7 @@ msgstr "•Use (enemy health is below 50%): Salt the enemy wounds, dealing *{dam
 msgid "item_cheese_title"
 msgstr "Cheese"
 msgid "item_cheese_description"
-msgstr "•Use (have poison): Eat the cheese, recovering *{health_gain}* health and removing *{health_gain}* poison."
+msgstr "•Use (have poison): Eat the cheese, recovering *{health_gain}* health and removing that much poison."
 
 msgid "item_shiv_title"
 msgstr "Shiv"
@@ -208,6 +208,26 @@ msgstr "Cactus"
 msgid "item_cactus_description"
 msgstr "•Attack damage taken: Cactus retaliates, dealing *{damage}* damage."
 
+msgid "item_plasma_core_title"
+msgstr "Plasma Core"
+msgid "item_plasma_core_description"
+msgstr "•Battle start: Burn bright, gaining *{health_gain}* bonus health and progressing fatigue by 5 seconds."
+
+msgid "item_sunglasses_title"
+msgstr "Sunglasses"
+msgid "item_sunglasses_description"
+msgstr "•Connected items have +100% damage during fatigue."
+
+msgid "item_laser_eyes_title"
+msgstr "Technique: Laser Eyes"
+msgid "item_laser_eyes_description"
+msgstr "•Use: Laser the enemy, dealing *{damage}* attack damage and reducing enemy max health by the same amount."
+
+msgid "item_globe_title"
+msgstr "Globe"
+msgid "item_globe_description"
+msgstr "•Use: Escape country, gaining 1 dodge and progressing fatigue by 0.5 seconds."
+
 # statuses
 
 msgid "status_poison_title"
@@ -262,7 +282,7 @@ msgstr "•After 5 seconds: Explode an enemy, dealing *{damage}* attack damage a
 msgid "item_matches_title"
 msgstr "Matches"
 msgid "item_matches_description"
-msgstr "•Use: Set an enemy on fire, applying *{status}* burn.[br]•Connected items have +25% damage."
+msgstr "•Use: Set an enemy on fire, dealing *{damage}* attack damage.[br]•Connected items have +25% damage."
 
 # bum
 

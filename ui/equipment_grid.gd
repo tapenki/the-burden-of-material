@@ -209,7 +209,7 @@ func add_status(status, stacks):
 	if stacks >= 0:
 		text_effect("+" + str(stacks), Color.WHITE)
 	else:
-		text_effect("-" + str(stacks), Color.WHITE)
+		text_effect(str(stacks), Color.WHITE)
 
 func unload_grid():
 	for check_signal in signals:

@@ -647,4 +647,78 @@ func _init() -> void:
 					grid.deal_damage(enemy, dealt_damage)},
 		tags = ["treasure_loot"]
 	})
+	
+	register_item("plasma_core", {
+		scene = preload("res://equipment/plasma_core/plasma_core.tscn"),
+		shape = [
+			[true , true , true ],
+			[true , true , true ],
+			[true , true , true ],
+		],
+		stats = {
+			health_gain = 75
+		},
+		passive_ability = {
+			battle_start = func(grid, this):
+				var health_gain = grid.get_item_stat(this, "health_gain")
+				grid.add_stat("max_health", health_gain["final"])
+				grid.recover_health(health_gain)
+				grid.progress_fatigue(5.0)},
+		tags = ["treasure_loot"]
+	})
+	
+	register_item("sunglasses", {
+		scene = preload("res://equipment/sunglasses/sunglasses.tscn"),
+		shape = [
+			[true , true ],
+		],
+		connections = [
+			{
+				active = preload("res://ui/diamonds_connection_active.tscn"),
+				inactive = preload("res://ui/diamonds_connection_inactive.tscn"),
+				shape = [
+					[true , true],
+					[true , true],
+				],
+				offset = Vector2i(0, 1)
+			}
+		],
+		passive_ability = {
+			item_stat_modifiers = func(stat, modifiers, grid, item, this):
+				var threshold = grid.get_stat("fatigue_threshold")["final"]
+				if threshold > 0 and stat == "damage" and grid.get_connected_items(this, 0).has(item):
+					modifiers["add_mult"] += 1.0},
+		tags = ["treasure_loot"]
+	})
+	
+	register_item("laser_eyes", {
+		scene = preload("res://equipment/laser_eyes/laser_eyes.tscn"),
+		shape = [
+			[true , true ],
+			[true , true ],
+		],
+		stats = {
+			damage = 4
+		},
+		active_ability = func(grid, this):
+			var enemy = grid.get_enemy()
+			var damage = grid.get_item_stat(this, "damage")
+			damage["item_source"] = this
+			if grid.attack(enemy, damage):
+				enemy.add_stat("health", -damage["final"])
+				enemy.add_stat("max_health", -damage["final"]),
+		tags = ["treasure_loot"]
+	})
+	
+	register_item("globe", {
+		scene = preload("res://equipment/globe/globe.tscn"),
+		shape = [
+			[true , true ],
+			[true , true ],
+		],
+		active_ability = func(grid, _this):
+			grid.add_status("dodge", 1)
+			grid.progress_fatigue(0.5),
+		tags = ["treasure_loot"]
+	})
 	#endregion

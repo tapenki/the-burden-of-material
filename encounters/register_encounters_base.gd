@@ -382,3 +382,42 @@ func _init() -> void:
 			}
 		]
 	}, [7])
+	
+	Registry.register_encounter("sun", {
+		enemies = [
+			{
+				character = preload("res://encounters/sun/sun.png"),
+				layout = [
+					[false, false, false, false, false, false, false, false],
+					[false, true , true , true , true , true , true , false],
+					[false, true , true , true , true , true , true , false],
+					[false, true , true , true , true , true , true , false],
+					[false, true , true , true , true , true , true , false],
+					[false, true , true , true , true , true , true , false],
+					[false, true , true , true , true , true , true , false],
+					[false, false, false, false, false, false, false, false]
+				],
+				equipment = [{
+						type = "laser_eyes",
+						position = Vector2(1, 3),
+						rotation = 0,
+					},{
+						type = "sunglasses",
+						position = Vector2(1, 1),
+						rotation = 0,
+					},{
+						type = "sunglasses",
+						position = Vector2(1, 2),
+						rotation = 0,
+					},{
+						type = "plasma_core",
+						position = Vector2(4, 4),
+						rotation = 0,
+					},{
+						type = "globe",
+						position = Vector2(5, 1),
+						rotation = 0,
+					},]
+			}
+		]
+	}, [8])
