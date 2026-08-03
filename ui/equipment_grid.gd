@@ -157,7 +157,7 @@ func connect_item(item):
 				self[key].connect(wrapper)
 				if not item.get("connected_callables"):
 					item["connected_callables"] = {}
-					item["connected_callables"][key] = wrapper
+				item["connected_callables"][key] = wrapper
 
 func disconnect_item(item):
 	if item.get("connected_callables"):

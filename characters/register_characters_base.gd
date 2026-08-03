@@ -47,15 +47,16 @@ func _init() -> void:
 				active = preload("res://ui/diamonds_connection_active.tscn"),
 				inactive = preload("res://ui/diamonds_connection_inactive.tscn"),
 				shape = [
-					[true , true , true ],
+					[true ],
 				],
-				offset = Vector2i(-1, -1)
+				offset = Vector2i(0, -1)
 			}
 		],
 		passive_ability = {
-			item_stat_modifiers = func(stat, modifiers, grid, item, this): ## example ability boosting the damage of all connected items
+			item_stat_modifiers = func(stat, modifiers, grid, item, this):
 				if stat == "damage" and grid.get_connected_items(this, 0).has(item):
-					modifiers["base"] += 1},
+					modifiers["base"] += 1
+					modifiers["add_mult"] += 0.1},
 		tags = ["treasure_loot"]
 	})
 	
@@ -70,7 +71,7 @@ func _init() -> void:
 		},{
 			type = "whetstone",
 			position = Vector2(4, 4),
-			rotation = 0,
+			rotation = 3,
 		}]
 	})
 	
@@ -116,7 +117,7 @@ func _init() -> void:
 		stats = {
 			damage = 8
 		},
-		active_ability = func(grid, this): ## example active ability
+		active_ability = func(grid, this):
 			var enemy = grid.get_enemy()
 			var damage = grid.get_item_stat(this, "damage")
 			damage["item_source"] = this
@@ -254,14 +255,17 @@ func _init() -> void:
 			[true ]
 		],
 		stats = {
-			status = 3
+			status = 3,
+			uses = 1
 		},
-		passive_ability = {
-			battle_start = func(grid, this):
-				var status_applied = grid.get_item_stat(this, "status")["final"]
-				grid.add_status("poison", status_applied)
-				for item in grid.equipment:
-					grid.add_item_stat(item, "damage", 4)},
+		active_requirement = func(grid, this):
+			return grid.get_item_stat(this, "uses")["final"] >= 1,
+		active_ability = func(grid, this):
+			var status_applied = grid.get_item_stat(this, "status")["final"]
+			grid.add_status("poison", status_applied)
+			for item in grid.equipment:
+				grid.add_item_stat(item, "damage", 4)
+			grid.add_item_stat(this, "uses", -1, "base"),
 		tags = ["heirloom"]
 	})
 	

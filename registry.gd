@@ -150,6 +150,21 @@ func _init() -> void:
 		tags = ["treasure_loot"]
 	})
 	
+	register_item("spinach", {
+		scene = preload("res://equipment/spinach/spinach.tscn"),
+		shape = [
+			[true ],
+		],
+		passive_ability = {
+			item_stat_modifiers = func(stat, modifiers, _grid, _item, _this):
+				if stat == "damage":
+					modifiers["base"] += 1,
+			stat_modifiers = func(stat, modifiers, _grid, _this):
+				if stat == "health" || stat == "max_health":
+					modifiers["base"] += 5},
+		tags = ["treasure_loot"]
+	})
+	
 	register_item("cheese", {
 		scene = preload("res://equipment/cheese/cheese.tscn"),
 		shape = [
@@ -193,7 +208,8 @@ func _init() -> void:
 		passive_ability = {
 			stat_modifiers = func(stat, modifiers, _grid, _this):
 				if stat == "loot_quantity":
-					modifiers["base"] += 1}
+					modifiers["base"] += 1},
+		tags = ["treasure_loot"]
 	})
 	
 	register_item("axe", {
@@ -238,7 +254,8 @@ func _init() -> void:
 		passive_ability = {
 			item_stat_modifiers = func(stat, modifiers, grid, item, this):
 				if stat == "health_gain" and grid.get_connected_items(this, 0).has(item):
-					modifiers["base"] += 2}
+					modifiers["base"] += 3},
+		tags = ["treasure_loot"]
 	})
 	
 	register_item("roots", {
@@ -247,7 +264,7 @@ func _init() -> void:
 			[true , true ],
 		],
 		stats = {
-			health_gain = 3
+			health_gain = 2
 		},
 		passive_ability = {
 			game_tick = func(tick, grid, this):
@@ -256,7 +273,8 @@ func _init() -> void:
 					grid.add_item_stat(this, "charge", -2.0, "base")
 					var health_gain = grid.get_item_stat(this, "health_gain")
 					grid.add_stat("max_health", health_gain["final"])
-					grid.recover_health(health_gain)}
+					grid.recover_health(health_gain)},
+		tags = ["treasure_loot"]
 	})
 	
 	register_item("pitchfork", {
@@ -312,14 +330,10 @@ func _init() -> void:
 			[true , true ],
 			[true , true ],
 		],
-		stats = {
-			health_gain = 25
-		},
 		passive_ability = {
-			battle_start = func(grid, this):
-				var health_gain = grid.get_item_stat(this, "health_gain")
-				grid.add_stat("max_health", health_gain["final"])
-				grid.recover_health(health_gain)},
+			stat_modifiers = func(stat, modifiers, _grid, _this):
+				if stat == "health" || stat == "max_health":
+					modifiers["base"] += 25},
 		tags = ["treasure_loot"]
 	})
 	
@@ -341,7 +355,8 @@ func _init() -> void:
 			item_stat_modifiers = func(stat, modifiers, grid, item, this):
 				if stat == "damage" and item == this:
 					var hp = grid.get_stat("health")
-					modifiers["base"] += int(hp["final"] / 8)}
+					modifiers["base"] += int(hp["final"] / 8)},
+		tags = ["treasure_loot"]
 	})
 	
 	register_item("wood", {
@@ -349,13 +364,10 @@ func _init() -> void:
 		shape = [
 			[true , true , true ],
 		],
-		stats = {
-			shield = 25
-		},
 		passive_ability = {
-			battle_start = func(grid, this):
-				var shield = grid.get_item_stat(this, "shield")
-				grid.recover_shield(shield)},
+			stat_modifiers = func(stat, modifiers, _grid, _this):
+				if stat == "shield":
+					modifiers["base"] += 25},
 		tags = ["treasure_loot"]
 	})
 	
@@ -367,7 +379,8 @@ func _init() -> void:
 		],
 		active_ability = func(grid, _this):
 			var enemy = grid.get_enemy()
-			enemy.progress_fatigue(0.75)
+			enemy.progress_fatigue(0.75),
+		tags = ["treasure_loot"]
 	})
 	
 	register_item("pillow", {
@@ -401,6 +414,7 @@ func _init() -> void:
 					var enemy = grid.get_enemy()
 					var status_applied = grid.get_item_stat(this, "status")["final"]
 					enemy.add_status("poison", status_applied)},
+		tags = ["treasure_loot"],
 	})
 	
 	register_item("stinger", {
@@ -420,6 +434,7 @@ func _init() -> void:
 			if grid.attack(enemy, damage):
 				var status_applied = grid.get_item_stat(this, "status")["final"]
 				enemy.add_status("poison", status_applied),
+		tags = ["treasure_loot"],
 	})
 	
 	register_item("honeycomb", {
@@ -433,7 +448,8 @@ func _init() -> void:
 		active_ability = func(grid, this):
 			var health_gain = grid.get_item_stat(this, "health_gain")
 			grid.add_stat("max_health", health_gain["final"])
-			grid.recover_health(health_gain)
+			grid.recover_health(health_gain),
+		tags = ["treasure_loot"]
 	})
 	
 	register_item("hunting_rifle", {
@@ -621,7 +637,7 @@ func _init() -> void:
 			[true ],
 		],
 		stats = {
-			status = 3
+			status = 2
 		},
 		passive_ability = {
 			battle_start = func(grid, this):
@@ -655,14 +671,11 @@ func _init() -> void:
 			[true , true , true ],
 			[true , true , true ],
 		],
-		stats = {
-			health_gain = 75
-		},
 		passive_ability = {
-			battle_start = func(grid, this):
-				var health_gain = grid.get_item_stat(this, "health_gain")
-				grid.add_stat("max_health", health_gain["final"])
-				grid.recover_health(health_gain)
+			stat_modifiers = func(stat, modifiers, _grid, _this):
+				if stat == "health" || stat == "max_health":
+					modifiers["base"] += 100,
+			battle_start = func(grid, _this):
 				grid.progress_fatigue(5.0)},
 		tags = ["treasure_loot"]
 	})
@@ -716,9 +729,12 @@ func _init() -> void:
 			[true , true ],
 			[true , true ],
 		],
+		active_requirement = func(grid, _this):
+			var threshold = grid.get_stat("fatigue_threshold")["final"]
+			return threshold == 0,
 		active_ability = func(grid, _this):
 			grid.add_status("dodge", 1)
-			grid.progress_fatigue(0.5),
+			grid.progress_fatigue(0.25),
 		tags = ["treasure_loot"]
 	})
 	#endregion

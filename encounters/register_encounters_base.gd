@@ -399,15 +399,23 @@ func _init() -> void:
 				],
 				equipment = [{
 						type = "laser_eyes",
-						position = Vector2(1, 3),
-						rotation = 0,
-					},{
-						type = "sunglasses",
-						position = Vector2(1, 1),
-						rotation = 0,
-					},{
-						type = "sunglasses",
 						position = Vector2(1, 2),
+						rotation = 0,
+					},{
+						type = "laser_eyes",
+						position = Vector2(3, 2),
+						rotation = 0,
+					},{
+						type = "sunglasses",
+						position = Vector2(2, 1),
+						rotation = 0,
+					},{
+						type = "spinach",
+						position = Vector2(1, 5),
+						rotation = 0,
+					},{
+						type = "spinach",
+						position = Vector2(2, 5),
 						rotation = 0,
 					},{
 						type = "plasma_core",

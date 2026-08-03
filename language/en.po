@@ -101,7 +101,7 @@ msgstr "•Every 2 seconds: Absorb nutrients, gaining *{health_gain}* bonus heal
 msgid "item_flower_title"
 msgstr "Flower"
 msgid "item_flower_description"
-msgstr "•Connected items have +2 health gain."
+msgstr "•Connected items have +3 health gain."
 
 msgid "item_pitchfork_title"
 msgstr "Pitchfork"
@@ -121,12 +121,12 @@ msgstr "•Use: Cow Slam! an enemy, dealing *{damage}* attack damage.[br]•Has 
 msgid "item_beef_title"
 msgstr "Beef"
 msgid "item_beef_description"
-msgstr "•Battle start: Eat beef, gaining *{health_gain}* bonus health."
+msgstr "•You have +25 health."
 
 msgid "item_wood_title"
 msgstr "Wood"
 msgid "item_wood_description"
-msgstr "•Battle start: Build a wall, gaining *{shield}* shield."
+msgstr "•You have +25 shield."
 
 msgid "item_wise_words_title"
 msgstr "Technique: Wise Words"
@@ -211,7 +211,7 @@ msgstr "•Attack damage taken: Cactus retaliates, dealing *{damage}* damage."
 msgid "item_plasma_core_title"
 msgstr "Plasma Core"
 msgid "item_plasma_core_description"
-msgstr "•Battle start: Burn bright, gaining *{health_gain}* bonus health and progressing fatigue by 5 seconds."
+msgstr "•Battle start: Burn bright, progressing fatigue by 5 seconds.[br]•You have +100 health"
 
 msgid "item_sunglasses_title"
 msgstr "Sunglasses"
@@ -226,7 +226,12 @@ msgstr "•Use: Laser the enemy, dealing *{damage}* attack damage and reducing e
 msgid "item_globe_title"
 msgstr "Globe"
 msgid "item_globe_description"
-msgstr "•Use: Escape country, gaining 1 dodge and progressing fatigue by 0.5 seconds."
+msgstr "•Use (fatigue hasn't started): Escape country, gaining 1 dodge and progressing fatigue by 0.25 seconds."
+
+msgid "item_spinach_title"
+msgstr "Spinach"
+msgid "item_spinach_description"
+msgstr "•You have +5 health and your items have +1 damage."
 
 # statuses
 
@@ -255,7 +260,7 @@ msgstr "•Use: Slash an enemy, dealing *{damage}* attack damage. Then, if the e
 msgid "item_whetstone_title"
 msgstr "Whetstone"
 msgid "item_whetstone_description"
-msgstr "•Connected items have +1 damage."
+msgstr "•Connected item has +1 and +10% damage."
 
 msgid "message_execution"
 msgstr "EXECUTION"
@@ -294,4 +299,4 @@ msgstr "•Use: Punch an enemy, dealing *{damage}* attack damage. Hits twice whe
 msgid "item_beer_title"
 msgstr "Beer"
 msgid "item_beer_description"
-msgstr "•Battle start: Imbibe alcohol, applying *{status}* poison and increasing the damage of all your items by 4."
+msgstr "•Has *{uses}* use(s).[br]•Use: Imbibe alcohol, applying *{status}* poison and increasing the damage of all your items by 4."
