@@ -755,4 +755,62 @@ func _init() -> void:
 					modifiers["mult_mult"] *= 0.5},
 		tags = ["treasure_loot"]
 	})
+	
+	register_item("badge", {
+		scene = preload("res://equipment/badge/badge.tscn"),
+		shape = [
+			[true ],
+		],
+		passive_ability = {
+			stat_modifiers = func(stat, modifiers, _grid, _this):
+				if stat == "shield":
+					modifiers["base"] += 5,
+			battle_start = func(grid, _this):
+				var enemy = grid.get_enemy()
+				enemy.add_stat("charge", -0.2)},
+		tags = ["treasure_loot"]
+	})
+	
+	register_item("sulphur", {
+		scene = preload("res://equipment/sulphur/sulphur.tscn"),
+		shape = [
+			[true ],
+		],
+		connections = [
+			{
+				active = preload("res://ui/diamonds_connection_active.tscn"),
+				inactive = preload("res://ui/diamonds_connection_inactive.tscn"),
+				shape = [
+					[true ],
+					[true ],
+				],
+				offset = Vector2i(0, -3)
+			}
+		],
+		passive_ability = {
+			game_tick = func(tick, grid, this):
+				grid.add_item_stat(this, "charge", tick),
+			item_stat_modifiers = func(stat, modifiers, grid, item, this):
+				if stat == "damage" and grid.get_connected_items(this, 0).has(item) and grid.get_item_stat(this, "charge")["final"] >= 8:
+					modifiers["base"] += 3},
+		tags = ["treasure_loot"]
+	})
+	
+	register_item("riot_shield", {
+		scene = preload("res://equipment/riot_shield/riot_shield.tscn"),
+		shape = [
+			[true , true ],
+			[true , true ],
+			[true , true ],
+		],
+		stats = {
+			shield_gain = 8
+		},
+		active_ability = func(grid, this):
+			var shield_gain = grid.get_item_stat(this, "shield_gain")
+			grid.add_stat("shield", shield_gain["final"])
+			var enemy = grid.get_enemy()
+			enemy.add_stat("charge", -0.2),
+		tags = ["treasure_loot"]
+	})
 	#endregion

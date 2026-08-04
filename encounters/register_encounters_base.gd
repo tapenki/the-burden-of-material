@@ -410,20 +410,20 @@ func _init() -> void:
 						position = Vector2(2, 1),
 						rotation = 0,
 					},{
-						type = "spinach",
-						position = Vector2(1, 5),
-						rotation = 0,
+						type = "sulphur",
+						position = Vector2(5, 2),
+						rotation = 3,
 					},{
-						type = "spinach",
-						position = Vector2(2, 5),
-						rotation = 0,
+						type = "sulphur",
+						position = Vector2(5, 3),
+						rotation = 3,
 					},{
 						type = "plasma_core",
 						position = Vector2(4, 4),
 						rotation = 0,
 					},{
 						type = "globe",
-						position = Vector2(5, 1),
+						position = Vector2(1, 5),
 						rotation = 0,
 					},]
 			}

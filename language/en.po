@@ -211,7 +211,7 @@ msgstr "•Attack damage taken: Cactus retaliates, dealing *{damage}* damage."
 msgid "item_plasma_core_title"
 msgstr "Plasma Core"
 msgid "item_plasma_core_description"
-msgstr "•Battle start: Burn bright, progressing fatigue by 5 seconds.[br]•You have +100 shield"
+msgstr "•Battle start: Burn bright, progressing fatigue by 5 seconds.[br]•You have +100 shield."
 
 msgid "item_sunglasses_title"
 msgstr "Sunglasses"
@@ -236,7 +236,22 @@ msgstr "•You have +5 health and your items have +1 damage."
 msgid "item_deal_with_the_devil_title"
 msgstr "Deal With The Devil"
 msgid "item_deal_with_the_devil_description"
-msgstr "•You have x0.5 health and your items have +50% damage."
+msgstr "•You have x0.5 health and your items have +50% damage.[br]•Death: The Phobiarch takes your soul."
+
+msgid "item_badge_title"
+msgstr "Badge"
+msgid "item_badge_description"
+msgstr "•Battle start: Show the badge, stunning the enemy for 0.2 seconds.[br]•You have +5 shield."
+
+msgid "item_sulphur_title"
+msgstr "Sulphur"
+msgid "item_sulphur_description"
+msgstr "•Connected items have +3 damage after 8 seconds have passed."
+
+msgid "item_riot_shield_title"
+msgstr "Riot Shield"
+msgid "item_riot_shield_description"
+msgstr "•Use: Raise shield, gaining *{shield_gain}* shield and stunning the enemy for 0.2 seconds."
 
 # statuses
 

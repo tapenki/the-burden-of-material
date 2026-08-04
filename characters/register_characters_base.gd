@@ -157,8 +157,10 @@ func _init() -> void:
 				inactive = preload("res://ui/diamonds_connection_inactive.tscn"),
 				shape = [
 					[true ],
+					[true ],
+					[true ],
 				],
-				offset = Vector2i(0, -1)
+				offset = Vector2i(0, -3)
 			}
 		],
 		passive_ability = {
@@ -280,6 +282,10 @@ func _init() -> void:
 		}, {
 			type = "fisticuffs",
 			position = Vector2(3, 4),
+			rotation = 0,
+		}, {
+			type = "riot_shield",
+			position = Vector2(3, 5),
 			rotation = 0,
 		}]
 	})
