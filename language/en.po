@@ -236,7 +236,7 @@ msgstr "•You have +5 health and your items have +1 damage."
 msgid "item_deal_with_the_devil_title"
 msgstr "Deal With The Devil"
 msgid "item_deal_with_the_devil_description"
-msgstr "•You have x0.5 health and your items have +50% damage.[br]•Death: The Phobiarch takes your soul."
+msgstr "•You have -25 health and can use +1 item at a time.[br]•Death: The Phobiarch takes your soul."
 
 msgid "item_badge_title"
 msgstr "Badge"
@@ -252,6 +252,16 @@ msgid "item_riot_shield_title"
 msgstr "Riot Shield"
 msgid "item_riot_shield_description"
 msgstr "•Use: Raise shield, gaining *{shield_gain}* shield and stunning the enemy for 0.2 seconds."
+
+msgid "item_bulletproof_vest_title"
+msgstr "Bulletproof Vest"
+msgid "item_bulletproof_vest_description"
+msgstr "•You have +25 shield.[br]•10 or more attack damage taken: The vest retaliates, stunning the enemy for 0.2 seconds."
+
+msgid "item_baton_title"
+msgstr "Baton"
+msgid "item_baton_description"
+msgstr "•Use: Clobber the enemy dealing *{damage}* attack damage and stunning for 0.2 seconds."
 
 # statuses
 

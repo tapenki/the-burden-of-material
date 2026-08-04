@@ -747,12 +747,11 @@ func _init() -> void:
 			[true , true ],
 		],
 		passive_ability = {
-			item_stat_modifiers = func(stat, modifiers, _grid, _item, _this):
-				if stat == "damage":
-					modifiers["add_mult"] += 0.5,
 			stat_modifiers = func(stat, modifiers, _grid, _this):
 				if stat == "max_health" or stat == "health":
-					modifiers["mult_mult"] *= 0.5},
+					modifiers["base"] -= 25
+				if stat == "multitasking":
+					modifiers["base"] += 1},
 		tags = ["treasure_loot"]
 	})
 	
@@ -812,5 +811,41 @@ func _init() -> void:
 			var enemy = grid.get_enemy()
 			enemy.add_stat("charge", -0.2),
 		tags = ["treasure_loot"]
+	})
+	
+	register_item("bulletproof_vest", {
+		scene = preload("res://equipment/bulletproof_vest/bulletproof_vest.tscn"),
+		shape = [
+			[true , true ],
+			[true , true ],
+		],
+		passive_ability = {
+			damage_taken = func(damage, grid, _this):
+				if damage.get("attack") and damage["final"] >= 10:
+					var enemy = grid.get_enemy()
+					enemy.add_stat("charge", -0.2),
+			stat_modifiers = func(stat, modifiers, _grid, _this):
+				if stat == "shield":
+					modifiers["base"] += 25},
+		tags = ["treasure_loot"]
+	})
+	
+	register_item("baton", {
+		scene = preload("res://equipment/baton/baton.tscn"),
+		shape = [
+			[true ],
+			[true ],
+			[true ]
+		],
+		stats = {
+			damage = 6,
+		},
+		active_ability = func(grid, this):
+			var enemy = grid.get_enemy()
+			var damage = grid.get_item_stat(this, "damage")
+			damage["item_source"] = this
+			if grid.attack(enemy, damage):
+				enemy.add_stat("charge", -0.2),
+		tags = ["treasure_loot"],
 	})
 	#endregion

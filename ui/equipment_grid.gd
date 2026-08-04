@@ -25,7 +25,8 @@ var stats = {
 	max_health = 50,
 	health = 50,
 	cooldown = 1.0,
-	loot_quantity = 1
+	loot_quantity = 1,
+	multitasking = 1
 }
 
 var stat_changes: Dictionary
@@ -379,12 +380,17 @@ func use_item():
 		if item_data.has("active_ability") and not item.get("used") and not item.get("destroyed") and item.get("equipped", true):
 			useable_items.append(item)
 	if useable_items.size() > 0:
-		var item = useable_items.pick_random()
-		var item_data = Registry.item_data[item["type"]]
-		item["used"] = true
-		item["item_scene"].pop()
-		item_data["active_ability"].call(self, item)
-		item_used.emit([item, self])
+		for i in get_stat("multitasking")["final"]:
+			if useable_items.size() > 0:
+				var item = useable_items.pick_random()
+				var item_data = Registry.item_data[item["type"]]
+				item["used"] = true
+				item["item_scene"].pop()
+				item_data["active_ability"].call(self, item)
+				item_used.emit([item, self])
+				useable_items.erase(item)
+			else:
+				break
 	else:
 		for item in equipment:
 			var item_data = Registry.item_data[item["type"]]

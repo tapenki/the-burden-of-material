@@ -429,3 +429,54 @@ func _init() -> void:
 			}
 		]
 	}, [8])
+	
+	Registry.register_encounter("police", {
+		enemies = [
+			{
+				character = preload("res://encounters/police/police.png"),
+				layout = [
+					[false, false, false, false, false, false, false, false],
+					[false, true , true , true , true , true , true , false],
+					[false, true , true , true , true , true , true , false],
+					[false, true , true , true , true , true , true , false],
+					[false, true , true , true , true , true , true , false],
+					[false, true , true , true , true , true , true , false],
+					[false, true , true , true , true , true , true , false],
+					[false, false, false, false, false, false, false, false]
+				],
+				equipment = [{
+						type = "riot_shield",
+						position = Vector2(1, 1),
+						rotation = 0,
+					}, {
+						type = "baton",
+						position = Vector2(3, 1),
+						rotation = 0,
+					}, {
+						type = "sulphur",
+						position = Vector2(5, 1),
+						rotation = 3,
+					}, {
+						type = "sulphur",
+						position = Vector2(5, 3),
+						rotation = 3,
+					}, {
+						type = "badge",
+						position = Vector2(5, 2),
+						rotation = 0,
+					}, {
+						type = "bulletproof_vest",
+						position = Vector2(1, 5),
+						rotation = 0,
+					}, {
+						type = "bulletproof_vest",
+						position = Vector2(3, 5),
+						rotation = 0,
+					}, {
+						type = "deal_with_the_devil",
+						position = Vector2(5, 5),
+						rotation = 0,
+					},]
+			}
+		]
+	}, [9])
