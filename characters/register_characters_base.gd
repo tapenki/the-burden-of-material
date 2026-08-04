@@ -47,16 +47,15 @@ func _init() -> void:
 				active = preload("res://ui/diamonds_connection_active.tscn"),
 				inactive = preload("res://ui/diamonds_connection_inactive.tscn"),
 				shape = [
-					[true ],
+					[true , true , true ],
 				],
-				offset = Vector2i(0, -1)
+				offset = Vector2i(-1, -1)
 			}
 		],
 		passive_ability = {
 			item_stat_modifiers = func(stat, modifiers, grid, item, this):
 				if stat == "damage" and grid.get_connected_items(this, 0).has(item):
-					modifiers["base"] += 1
-					modifiers["add_mult"] += 0.1},
+					modifiers["add_mult"] += 0.15},
 		tags = ["treasure_loot"]
 	})
 	

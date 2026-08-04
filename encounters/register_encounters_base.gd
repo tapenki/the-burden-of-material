@@ -465,6 +465,14 @@ func _init() -> void:
 						position = Vector2(5, 2),
 						rotation = 0,
 					}, {
+						type = "salt",
+						position = Vector2(4, 2),
+						rotation = 0,
+					}, {
+						type = "salt",
+						position = Vector2(6, 2),
+						rotation = 0,
+					}, {
 						type = "bulletproof_vest",
 						position = Vector2(1, 5),
 						rotation = 0,

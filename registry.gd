@@ -134,19 +134,10 @@ func _init() -> void:
 		shape = [
 			[true ],
 		],
-		stats = {
-			damage = 8
-		},
-		active_requirement = func(grid, _this):
-			var enemy = grid.get_enemy()
-			var hp = enemy.get_stat("health")["final"]
-			var max_hp = enemy.get_stat("max_health")["final"]
-			return hp <= max_hp * 0.5,
-		active_ability = func(grid, this):
-			var enemy = grid.get_enemy()
-			var damage = grid.get_item_stat(this, "damage")
-			damage["item_source"] = this
-			grid.attack(enemy, damage),
+		passive_ability = {
+			item_stat_modifiers = func(stat, modifiers, _grid, _item, _this):
+				if stat == "health_gain" or stat == "shield_gain":
+					modifiers["base"] += 1},
 		tags = ["treasure_loot"]
 	})
 	
@@ -660,6 +651,7 @@ func _init() -> void:
 				if damage.get("attack"):
 					var enemy = grid.get_enemy()
 					var dealt_damage = grid.get_item_stat(this, "damage")
+					dealt_damage["item_source"] = this
 					grid.deal_damage(enemy, dealt_damage)},
 		tags = ["treasure_loot"]
 	})
@@ -766,7 +758,7 @@ func _init() -> void:
 					modifiers["base"] += 5,
 			battle_start = func(grid, _this):
 				var enemy = grid.get_enemy()
-				enemy.add_stat("charge", -0.2)},
+				enemy.add_stat("charge", -0.4)},
 		tags = ["treasure_loot"]
 	})
 	
@@ -803,7 +795,7 @@ func _init() -> void:
 			[true , true ],
 		],
 		stats = {
-			shield_gain = 8
+			shield_gain = 10
 		},
 		active_ability = func(grid, this):
 			var shield_gain = grid.get_item_stat(this, "shield_gain")
@@ -838,7 +830,7 @@ func _init() -> void:
 			[true ]
 		],
 		stats = {
-			damage = 6,
+			damage = 8,
 		},
 		active_ability = func(grid, this):
 			var enemy = grid.get_enemy()

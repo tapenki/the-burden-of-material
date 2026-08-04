@@ -76,7 +76,7 @@ msgstr "•Expands your pocket size."
 msgid "item_salt_title"
 msgstr "Salt"
 msgid "item_salt_description"
-msgstr "•Use (enemy health is below 50%): Salt the enemy wounds, dealing *{damage}* attack damage."
+msgstr "•Your items have +1 health and shield gain."
 
 msgid "item_cheese_title"
 msgstr "Cheese"
@@ -241,7 +241,7 @@ msgstr "•You have -25 health and can use +1 item at a time.[br]•Death: The P
 msgid "item_badge_title"
 msgstr "Badge"
 msgid "item_badge_description"
-msgstr "•Battle start: Show the badge, stunning the enemy for 0.2 seconds.[br]•You have +5 shield."
+msgstr "•Battle start: Show the badge, stunning the enemy for 0.4 seconds.[br]•You have +5 shield."
 
 msgid "item_sulphur_title"
 msgstr "Sulphur"
@@ -290,7 +290,7 @@ msgstr "•Use: Slash an enemy, dealing *{damage}* attack damage. Then, if the e
 msgid "item_whetstone_title"
 msgstr "Whetstone"
 msgid "item_whetstone_description"
-msgstr "•Connected item has +1 and +10% damage."
+msgstr "•Connected items have +15% damage."
 
 msgid "message_execution"
 msgstr "EXECUTION"
