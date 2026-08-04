@@ -211,7 +211,7 @@ msgstr "•Attack damage taken: Cactus retaliates, dealing *{damage}* damage."
 msgid "item_plasma_core_title"
 msgstr "Plasma Core"
 msgid "item_plasma_core_description"
-msgstr "•Battle start: Burn bright, progressing fatigue by 5 seconds.[br]•You have +100 health"
+msgstr "•Battle start: Burn bright, progressing fatigue by 5 seconds.[br]•You have +100 shield"
 
 msgid "item_sunglasses_title"
 msgstr "Sunglasses"
@@ -226,12 +226,17 @@ msgstr "•Use: Laser the enemy, dealing *{damage}* attack damage and reducing e
 msgid "item_globe_title"
 msgstr "Globe"
 msgid "item_globe_description"
-msgstr "•Use (fatigue hasn't started): Escape country, gaining 1 dodge and progressing fatigue by 0.25 seconds."
+msgstr "•Use: Escape country, gaining *{shield_gain}* shield, 1 dodge, and progressing fatigue by 0.5 seconds."
 
 msgid "item_spinach_title"
 msgstr "Spinach"
 msgid "item_spinach_description"
 msgstr "•You have +5 health and your items have +1 damage."
+
+msgid "item_deal_with_the_devil_title"
+msgstr "Deal With The Devil"
+msgid "item_deal_with_the_devil_description"
+msgstr "•You have x0.5 health and your items have +50% damage."
 
 # statuses
 

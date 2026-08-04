@@ -673,7 +673,7 @@ func _init() -> void:
 		],
 		passive_ability = {
 			stat_modifiers = func(stat, modifiers, _grid, _this):
-				if stat == "health" || stat == "max_health":
+				if stat == "shield":
 					modifiers["base"] += 100,
 			battle_start = func(grid, _this):
 				grid.progress_fatigue(5.0)},
@@ -729,12 +729,30 @@ func _init() -> void:
 			[true , true ],
 			[true , true ],
 		],
-		active_requirement = func(grid, _this):
-			var threshold = grid.get_stat("fatigue_threshold")["final"]
-			return threshold == 0,
-		active_ability = func(grid, _this):
+		stats = {
+			shield_gain = 5
+		},
+		active_ability = func(grid, this):
 			grid.add_status("dodge", 1)
-			grid.progress_fatigue(0.25),
+			var shield_gain = grid.get_item_stat(this, "shield_gain")
+			grid.add_stat("shield", shield_gain["final"])
+			grid.progress_fatigue(0.5),
+		tags = ["treasure_loot"]
+	})
+	
+	register_item("deal_with_the_devil", {
+		scene = preload("res://equipment/deal_with_the_devil/deal_with_the_devil.tscn"),
+		shape = [
+			[true , true ],
+			[true , true ],
+		],
+		passive_ability = {
+			item_stat_modifiers = func(stat, modifiers, _grid, _item, _this):
+				if stat == "damage":
+					modifiers["add_mult"] += 0.5,
+			stat_modifiers = func(stat, modifiers, _grid, _this):
+				if stat == "max_health" or stat == "health":
+					modifiers["mult_mult"] *= 0.5},
 		tags = ["treasure_loot"]
 	})
 	#endregion

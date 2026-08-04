@@ -69,12 +69,12 @@ var signals = [
 ]
 
 func calculate_modifiers(modifiers):
-	modifiers["final"] = modifiers["base"] * modifiers["add_mult"] * modifiers["mult_mult"]
-	if modifiers["base"] is int:
+	modifiers["final"] = modifiers.get("base", 0) * modifiers.get("add_mult", 1) * modifiers.get("mult_mult", 1) + modifiers.get("flat", 0)
+	if modifiers.get("base", 0) is int:
 		modifiers["final"] = (int)(modifiers["final"])
 
 func get_stat(stat):
-	var modifiers = {"base" = 0, "add_mult" = 1, "mult_mult" = 1}
+	var modifiers = {"base" = 0, "add_mult" = 1, "mult_mult" = 1, "flat" = 0}
 	if stat_changes.has(stat):
 		modifiers = stat_changes[stat].duplicate()
 	modifiers["base"] += stats.get(stat, 0)
@@ -84,12 +84,12 @@ func get_stat(stat):
 
 func add_stat(stat, value, operation = "base"):
 	if not stat_changes.has(stat):
-		stat_changes[stat] = {"base" = 0, "add_mult" = 1, "mult_mult" = 1}
+		stat_changes[stat] = {"base" = 0, "add_mult" = 1, "mult_mult" = 1, "flat" = 0}
 	stat_changes[stat][operation] += value
 
 func set_stat(stat, value):
 	if not stat_changes.has(stat):
-		stat_changes[stat] = {"base" = 0, "add_mult" = 1, "mult_mult" = 1}
+		stat_changes[stat] = {"base" = 0, "add_mult" = 1, "mult_mult" = 1, "flat" = 0}
 	var offset = get_stat(stat)["final"] - value
 	stat_changes[stat]["base"] -= offset
 
@@ -108,14 +108,14 @@ func add_item_stat(item, stat, value, operation = "base"):
 	if not item.has("stat_changes"):
 		item["stat_changes"] = {}
 	if not item["stat_changes"].has(stat):
-		item["stat_changes"][stat] = {"base" = 0, "add_mult" = 1, "mult_mult" = 1}
+		item["stat_changes"][stat] = {"base" = 0, "add_mult" = 1, "mult_mult" = 1, "flat" = 0}
 	item["stat_changes"][stat][operation] += value
 
 func set_item_stat(item, stat, value):
 	if not item.has("stat_changes"):
 		item["stat_changes"] = {}
 	if not item["stat_changes"].has(stat):
-		item["stat_changes"][stat] = {"base" = 0, "add_mult" = 1, "mult_mult" = 1}
+		item["stat_changes"][stat] = {"base" = 0, "add_mult" = 1, "mult_mult" = 1, "flat" = 0}
 	var offset = get_item_stat(item, stat)["final"] - value
 	item["stat_changes"][stat]["base"] -= offset
 
@@ -329,11 +329,11 @@ func get_enemy():
 func take_damage(damage):
 	var shield = get_stat("shield")
 	if shield["final"] >= damage["final"]:
-		add_stat("shield", -damage["final"])
+		add_stat("shield", -damage["final"], "flat")
 	else:
 		var health_damage = damage["final"] - shield["final"]
-		add_stat("shield", -shield["final"])
-		add_stat("health", -health_damage)
+		add_stat("shield", -shield["final"], "flat")
+		add_stat("health", -health_damage, "flat")
 	
 	text_effect("-" + str(damage["final"]), Color.RED)
 	damage_taken.emit([damage, self])
@@ -433,7 +433,7 @@ func progress_fatigue(time):
 		text_effect("message_fatigue", Color.PURPLE)
 	var fatigue_damage = 1 + int(floor(threshold))
 	add_stat("fatigue_threshold", 0.5)
-	take_damage({"base" = fatigue_damage, "add_mult" = 1, "mult_mult" = 1, "final" = fatigue_damage, "fatigue" = true})
+	take_damage({"base" = fatigue_damage, "add_mult" = 1, "mult_mult" = 1, "flat" = 0, "final" = fatigue_damage, "fatigue" = true})
 
 func _on_game_tick(tick) -> void:
 	var cooldown = get_stat("cooldown")["final"]
