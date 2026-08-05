@@ -8,6 +8,7 @@ var day = 0
 var lives = 3
 
 var battle: Dictionary
+var seen_encounters = []
 
 signal battle_initiated()
 signal battle_ended()
@@ -22,16 +23,32 @@ func init_battle(encounter):
 	player_equipment.team = 0
 	player_equipment.target_team = 1
 	player_equipment.target_enemy = 0
-	
 	var cooldown = player_equipment.get_stat("cooldown")["final"]
 	player_equipment.add_stat("charge", cooldown*0.5)
+	
+	player_equipment.character_sprite.get_node("LifeBar").visible = true
+	player_equipment.character_sprite.get_node("ChargeBar").visible = true
+	player_equipment.can_edit = false
+	
+	enemy_equipment.team = 1
+	enemy_equipment.target_team = 0
+	enemy_equipment.target_enemy = 0
 	
 	enemy_equipment.character_sprite.texture = encounter_data["enemies"][0]["character"]
 	enemy_equipment.layout = encounter_data["enemies"][0]["layout"].duplicate(true)
 	enemy_equipment.equipment = encounter_data["enemies"][0]["equipment"].duplicate(true)
-	enemy_equipment.team = 1
-	enemy_equipment.target_team = 0
-	enemy_equipment.target_enemy = 0
+	
+	enemy_equipment.visible = true
+	enemy_equipment.character_sprite.visible = true
+	
+	get_node("DayCounter").visible = true
+	#get_node("BattleTimer").visible = true
+	get_node("SpeedButton").visible = true
+	get_node("RewardBackground").visible = false
+	get_node("CharacterPicker").visible = false
+	get_node("ProceedToBattle").visible = false
+	
+	get_node("DayCounter").text = tr("ui_day_counter").format({day = day})
 	
 	for team in battle["teams"]:
 		for battler in team:
@@ -92,25 +109,24 @@ func lose_battle():
 	battle_ended.emit()
 
 func proceed_to_battle():
-	if Registry.encounter_schedule.has(day + 1):
-		day += 1
-	
-	var encounter = Registry.encounter_schedule[day].pick_random()
-	
-	player_equipment.character_sprite.get_node("LifeBar").visible = true
-	player_equipment.character_sprite.get_node("ChargeBar").visible = true
-	player_equipment.can_edit = false
-	enemy_equipment.visible = true
-	enemy_equipment.character_sprite.visible = true
-	get_node("DayCounter").visible = true
-	#get_node("BattleTimer").visible = true
-	get_node("SpeedButton").visible = true
-	get_node("RewardBackground").visible = false
-	get_node("CharacterPicker").visible = false
-	get_node("ProceedToBattle").visible = false
-	
-	get_node("DayCounter").text = tr("ui_day_counter").format({day = day})
-	init_battle(encounter)
+	if battle.get("won", true):
+		if Registry.encounter_schedule.has(day + 1):
+			day += 1
+		var encounter = Registry.encounter_schedule[day].pick_random()
+		seen_encounters = [encounter]
+		init_battle(encounter)
+	else:
+		var valid_encounters = Registry.encounter_schedule[day].duplicate()
+		for i in seen_encounters:
+			if valid_encounters.has(i):
+				valid_encounters.erase(i)
+		var encounter
+		if valid_encounters.size() > 0:
+			encounter = valid_encounters.pick_random()
+		else:
+			encounter = Registry.encounter_schedule[day].pick_random()
+		seen_encounters.append(encounter)
+		init_battle(encounter)
 
 func items_from_pool(list, pool, quantity):
 	if not Registry.item_tag_lists.has(pool):
@@ -197,7 +213,7 @@ func proceed_to_rewards():
 	#get_node("BattleTimer").visible = false
 	get_node("SpeedButton").visible = false
 	get_node("BattleEndLabel").visible = false
-	battle = {}
+	battle["active"] = false
 	player_equipment.can_edit = true
 	
 
