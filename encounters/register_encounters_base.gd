@@ -556,7 +556,7 @@ func _init() -> void:
 				],
 				equipment = [{
 						type = "attack_drone",
-						position = Vector2(1, 1),
+						position = Vector2(1, 2),
 						rotation = 0,
 					}, {
 						type = "defense_drone",
@@ -576,19 +576,31 @@ func _init() -> void:
 						rotation = 0,
 					}, {
 						type = "cheese",
+						position = Vector2(4, 4),
+						rotation = 0,
+					}, {
+						type = "spinach",
+						position = Vector2(1, 1),
+						rotation = 0,
+					}, {
+						type = "spinach",
+						position = Vector2(6, 4),
+						rotation = 0,
+					}, {
+						type = "sulphur",
+						position = Vector2(1, 4),
+						rotation = 0,
+					}, {
+						type = "sulphur",
+						position = Vector2(2, 4),
+						rotation = 0,
+					}, {
+						type = "sulphur",
 						position = Vector2(3, 4),
 						rotation = 0,
 					}, {
-						type = "sulphur",
-						position = Vector2(1, 3),
-						rotation = 0,
-					}, {
-						type = "sulphur",
-						position = Vector2(2, 3),
-						rotation = 0,
-					}, {
-						type = "sulphur",
-						position = Vector2(3, 3),
+						type = "sunglasses",
+						position = Vector2(2, 1),
 						rotation = 0,
 					}, {
 						type = "nuclear_launch_codes",

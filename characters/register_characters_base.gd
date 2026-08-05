@@ -282,9 +282,5 @@ func _init() -> void:
 			type = "fisticuffs",
 			position = Vector2(3, 4),
 			rotation = 0,
-		}, {
-			type = "nuclear_launch_codes",
-			position = Vector2(3, 5),
-			rotation = 0,
 		}]
 	})
