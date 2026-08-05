@@ -916,4 +916,33 @@ func _init() -> void:
 				this["item_scene"].pop()},
 		tags = ["treasure_loot"]
 	})
+	
+	register_item("skull", {
+		scene = preload("res://equipment/skull/skull.tscn"),
+		shape = [
+			[true , true ],
+			[true , true ],
+		],
+		passive_ability = {
+			stat_modifiers = func(stat, modifiers, grid, _this):
+				if stat == "multitasking":
+					var hp = grid.get_stat("health")["final"]
+					var max_hp = grid.get_stat("max_health")["final"]
+					if hp <= max_hp * 0.5:
+						modifiers["base"] += 1},
+		tags = ["treasure_loot"]
+	})
+	
+	register_item("bones", {
+		scene = preload("res://equipment/bones/bones.tscn"),
+		shape = [
+			[true , true ],
+			[true , true ],
+		],
+		passive_ability = {
+			stat_modifiers = func(stat, modifiers, _grid, _this):
+				if stat == "max_health":
+					modifiers["base"] += 50},
+		tags = ["treasure_loot"]
+	})
 	#endregion

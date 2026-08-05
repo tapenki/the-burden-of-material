@@ -282,5 +282,9 @@ func _init() -> void:
 			type = "fisticuffs",
 			position = Vector2(3, 4),
 			rotation = 0,
+		}, {
+			type = "bones",
+			position = Vector2(3, 4),
+			rotation = 0,
 		}]
 	})

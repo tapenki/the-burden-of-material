@@ -166,7 +166,7 @@ msgstr "•Use (after 8 seconds): Shoot the enemy, dealing *{damage}* attack dam
 msgid "item_berries_title"
 msgstr "Berries"
 msgid "item_berries_description"
-msgstr "•Has *{uses}* use(s).[br]•Use (health is below 50%): Eat the berries, recovering *{health_gain}* health."
+msgstr "•Has *{uses}* use(s).[br]•Use (under 50% health): Eat the berries, recovering *{health_gain}* health."
 
 msgid "item_fish_title"
 msgstr "Fish"
@@ -278,6 +278,16 @@ msgstr "Nuclear Launch Codes"
 msgid "item_nuclear_launch_codes_description"
 msgstr "•Fatigue start: Star nuclear war, dealing *{damage}* attack damage and applying *{status}* poison."
 
+msgid "item_skull_title"
+msgstr "Skull"
+msgid "item_skull_description"
+msgstr "•You have can use +1 item at a time while under 50% health."
+
+msgid "item_bones_title"
+msgstr "Bones"
+msgid "item_bones_description"
+msgstr "•You have +50 unfilled max health."
+
 # statuses
 
 msgid "status_poison_title"
@@ -320,7 +330,7 @@ msgstr "•Use: Bludgeon an enemy, dealing *{damage}* attack damage.[br]•Conne
 msgid "item_milk_title"
 msgstr "Milk"
 msgid "item_milk_description"
-msgstr "•Use (health is below 50%): Sip the milk, recovering *{health_gain}* health."
+msgstr "•Use (under 50% health): Sip the milk, recovering *{health_gain}* health."
 
 # bomber
 
