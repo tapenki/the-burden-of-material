@@ -895,4 +895,25 @@ func _init() -> void:
 				this["item_scene"].pop()},
 		tags = ["treasure_loot"]
 	})
+	
+	register_item("nuclear_launch_codes", {
+		scene = preload("res://equipment/nuclear_launch_codes/nuclear_launch_codes.tscn"),
+		shape = [
+			[true , true , true ],
+		],
+		stats = {
+			damage = 25,
+			status = 10
+		},
+		passive_ability = {
+			fatigue_start = func(grid, this):
+				var enemy = grid.get_enemy()
+				var damage = grid.get_item_stat(this, "damage")
+				damage["item_source"] = this
+				if grid.attack(enemy, damage):
+					var status_applied = grid.get_item_stat(this, "status")["final"]
+					enemy.add_status("poison", status_applied)
+				this["item_scene"].pop()},
+		tags = ["treasure_loot"]
+	})
 	#endregion

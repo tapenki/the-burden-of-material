@@ -3,7 +3,7 @@ extends Control
 @onready var player_equipment = get_node("PlayerEquipment")
 @onready var enemy_equipment = get_node("EnemyEquipment")
 
-var day = 8
+var day = 0
 
 var lives = 3
 
@@ -221,3 +221,9 @@ func _physics_process(_delta: float) -> void:
 		win_battle()
 	elif player_dead:
 		lose_battle()
+
+func play_sound(sound, pitch = 1.0):
+	var sound_node = get_node_or_null("Sounds/"+sound)
+	if sound_node:
+		sound_node.pitch_scale = pitch
+		sound_node.play()

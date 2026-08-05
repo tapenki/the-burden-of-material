@@ -174,6 +174,7 @@ func _on_gui_input(event: InputEvent) -> void:
 				position = grid.get_local_mouse_position() - (grid_size * 24 + drag_offset).rotated(rotation) 
 				highlight(position)
 				undescribe()
+				get_node("/root/Game").play_sound("Click", 0.7)
 			else:
 				grid.dragging = null
 				equip(grid.get_local_mouse_position() - (grid_size * 24 + drag_offset).rotated(rotation))
@@ -186,6 +187,7 @@ func _on_gui_input(event: InputEvent) -> void:
 				else:
 					unhighlight()
 					undescribe()
+				get_node("/root/Game").play_sound("Click")
 		elif grid.dragging == self and event.button_index == 2 and event.pressed:
 			equipment_reference["rotation"] = (equipment_reference["rotation"] + 1) % 4
 			rotation = equipment_reference["rotation"] * PI * 0.5
@@ -214,6 +216,7 @@ func pop():
 	sprite.scale = Vector2(1.2, 1.2)
 	var scale_tween = create_tween()
 	scale_tween.tween_property(sprite, "scale", Vector2(1, 1), 0.2)
+	get_node("/root/Game").play_sound("Pop")
 
 func describe():
 	var description_instance = preload("res://ui/description.tscn").instantiate()

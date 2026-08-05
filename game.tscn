@@ -8,6 +8,11 @@
 [ext_resource type="Script" uid="uid://bfi01ndy8eovu" path="res://speed_button.gd" id="4_j5wjh"]
 [ext_resource type="Script" uid="uid://dl2rdwhi7884n" path="res://character_picker.gd" id="6_eow3j"]
 [ext_resource type="Texture2D" uid="uid://cmoijxno6h350" path="res://ui/life.png" id="6_j5wjh"]
+[ext_resource type="AudioStream" uid="uid://obpgq38y8jc4" path="res://sounds/pop.ogg" id="9_vef74"]
+[ext_resource type="AudioStream" uid="uid://dwxqol47cepn3" path="res://sounds/oof.ogg" id="10_hve3p"]
+[ext_resource type="AudioStream" uid="uid://c7aee8h8uekjg" path="res://sounds/ouch.ogg" id="11_mfdv2"]
+[ext_resource type="AudioStream" uid="uid://d0oaw6v16m746" path="res://sounds/click.ogg" id="12_lc2xo"]
+[ext_resource type="AudioStream" uid="uid://dderfowffwkgv" path="res://sounds/sniff.ogg" id="13_215e1"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_7jktm"]
 
@@ -300,6 +305,7 @@ mouse_filter = 2
 
 [node name="BattleEndLabel" type="Label" parent="." unique_id=907304980]
 visible = false
+z_index = 2
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -780,6 +786,30 @@ character_sprite = NodePath("../PlayerCharacter")
 
 [node name="Camera2D" type="Camera2D" parent="." unique_id=1187277755]
 offset = Vector2(450, 300)
+
+[node name="Sounds" type="Node" parent="." unique_id=390416390]
+
+[node name="Pop" type="AudioStreamPlayer" parent="Sounds" unique_id=950690724]
+stream = ExtResource("9_vef74")
+bus = &"SFX"
+
+[node name="Oof" type="AudioStreamPlayer" parent="Sounds" unique_id=2025225609]
+stream = ExtResource("10_hve3p")
+bus = &"SFX"
+
+[node name="Ouch" type="AudioStreamPlayer" parent="Sounds" unique_id=256834493]
+stream = ExtResource("11_mfdv2")
+bus = &"SFX"
+
+[node name="Click" type="AudioStreamPlayer" parent="Sounds" unique_id=1405753332]
+stream = ExtResource("12_lc2xo")
+volume_db = -3.0
+bus = &"SFX"
+
+[node name="Sniff" type="AudioStreamPlayer" parent="Sounds" unique_id=201064455]
+stream = ExtResource("13_215e1")
+volume_db = -5.0
+bus = &"SFX"
 
 [connection signal="battle_ended" from="." to="ProceedToBattle" method="_on_game_battle_ended"]
 [connection signal="battle_initiated" from="." to="ProceedToBattle" method="_on_game_battle_initiated"]

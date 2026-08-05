@@ -273,6 +273,11 @@ msgstr "Defense Drone"
 msgid "item_defense_drone_description"
 msgstr "•Use or Rest: Call in a drone defense, gaining *{shield_gain}* shield."
 
+msgid "item_nuclear_launch_codes_title"
+msgstr "Nuclear Launch Codes"
+msgid "item_nuclear_launch_codes_description"
+msgstr "•Fatigue start: Star nuclear war, dealing *{damage}* attack damage and applying *{status}* poison."
+
 # statuses
 
 msgid "status_poison_title"

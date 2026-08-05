@@ -340,6 +340,7 @@ func take_damage(damage):
 	
 	text_effect("-" + str(damage["final"]), Color.RED)
 	damage_taken.emit([damage, self])
+	#get_node("/root/Game").play_sound("Ouch")
 
 func deal_damage(target, damage):
 	target.take_damage(damage)

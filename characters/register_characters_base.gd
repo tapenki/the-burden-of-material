@@ -283,7 +283,7 @@ func _init() -> void:
 			position = Vector2(3, 4),
 			rotation = 0,
 		}, {
-			type = "defense_drone",
+			type = "nuclear_launch_codes",
 			position = Vector2(3, 5),
 			rotation = 0,
 		}]
