@@ -488,3 +488,54 @@ func _init() -> void:
 			}
 		]
 	}, [9])
+	
+	Registry.register_encounter("grey_goo", {
+		enemies = [
+			{
+				character = preload("res://encounters/grey_goo/grey_goo.png"),
+				layout = [
+					[false, false, false, false, false, false, false, false],
+					[false, true , true , true , true , true , true , false],
+					[false, true , true , true , true , true , true , false],
+					[false, true , true , true , true , true , true , false],
+					[false, true , true , true , true , true , true , false],
+					[false, true , true , true , true , true , true , false],
+					[false, true , true , true , true , true , true , false],
+					[false, false, false, false, false, false, false, false]
+				],
+				equipment = [{
+						type = "attack_drone",
+						position = Vector2(1, 2),
+						rotation = 0,
+					}, {
+						type = "attack_drone",
+						position = Vector2(4, 5),
+						rotation = 0,
+					}, {
+						type = "defense_drone",
+						position = Vector2(4, 2),
+						rotation = 0,
+					}, {
+						type = "defense_drone",
+						position = Vector2(1, 5),
+						rotation = 0,
+					}, {
+						type = "slime",
+						position = Vector2(2, 1),
+						rotation = 0,
+					}, {
+						type = "slime",
+						position = Vector2(5, 1),
+						rotation = 0,
+					}, {
+						type = "slime",
+						position = Vector2(2, 4),
+						rotation = 0,
+					}, {
+						type = "slime",
+						position = Vector2(5, 4),
+						rotation = 0,
+					},]
+			}
+		]
+	}, [9])

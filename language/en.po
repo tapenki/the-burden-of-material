@@ -263,6 +263,16 @@ msgstr "Baton"
 msgid "item_baton_description"
 msgstr "•Use: Clobber the enemy dealing *{damage}* attack damage and stunning for 0.2 seconds."
 
+msgid "item_attack_drone_title"
+msgstr "Attack Drone"
+msgid "item_attack_drone_description"
+msgstr "•Use or Rest: Call in a drone strike, dealing *{damage}* attack damage."
+
+msgid "item_defense_drone_title"
+msgstr "Defense Drone"
+msgid "item_defense_drone_description"
+msgstr "•Use or Rest: Call in a drone defense, gaining *{shield_gain}* shield."
+
 # statuses
 
 msgid "status_poison_title"

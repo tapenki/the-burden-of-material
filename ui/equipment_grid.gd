@@ -42,6 +42,7 @@ signal item_stat_modifiers(arguments)
 
 signal item_used(arguments)
 signal can_use_item(arguments)
+signal rested(arguments)
 
 signal damage_dealt(arguments)
 signal damage_taken(arguments)
@@ -60,6 +61,7 @@ var signals = [
 	item_stat_modifiers,
 	item_used,
 	can_use_item,
+	rested,
 	damage_dealt,
 	damage_taken,
 	check_evasion,
@@ -396,6 +398,8 @@ func use_item():
 			var item_data = Registry.item_data[item["type"]]
 			if item_data.has("active_ability") and item.get("used"):
 				item["used"] = false
+				#item["item_scene"].pop()
+		rested.emit([self])
 
 func text_effect(text, color = Color.BLACK):
 	var label_instance = preload("res://ui/floating_text.tscn").instantiate()

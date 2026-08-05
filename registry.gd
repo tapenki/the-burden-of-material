@@ -264,7 +264,8 @@ func _init() -> void:
 					grid.add_item_stat(this, "charge", -2.0, "base")
 					var health_gain = grid.get_item_stat(this, "health_gain")
 					grid.add_stat("max_health", health_gain["final"])
-					grid.recover_health(health_gain)},
+					grid.recover_health(health_gain)
+					this["item_scene"].pop()},
 		tags = ["treasure_loot"]
 	})
 	
@@ -311,7 +312,8 @@ func _init() -> void:
 			damage_dealt = func(damage, _target, grid, this):
 				if damage.has("item_source") and grid.get_connected_items(this, 0).has(damage["item_source"]):
 					var health_gain = grid.get_item_stat(this, "health_gain")
-					grid.recover_health(health_gain)},
+					grid.recover_health(health_gain)
+					this["item_scene"].pop()},
 		tags = ["treasure_loot"]
 	})
 	
@@ -386,7 +388,8 @@ func _init() -> void:
 		passive_ability = {
 			fatigue_start = func(grid, this):
 				var health_gain = grid.get_item_stat(this, "health_gain")
-				grid.recover_health(health_gain)},
+				grid.recover_health(health_gain)
+				this["item_scene"].pop()},
 		tags = ["treasure_loot"]
 	})
 	
@@ -404,7 +407,8 @@ func _init() -> void:
 				if damage.get("attack"):
 					var enemy = grid.get_enemy()
 					var status_applied = grid.get_item_stat(this, "status")["final"]
-					enemy.add_status("poison", status_applied)},
+					enemy.add_status("poison", status_applied)
+					this["item_scene"].pop()},
 		tags = ["treasure_loot"],
 	})
 	
@@ -526,11 +530,12 @@ func _init() -> void:
 			[true , true ],
 		],
 		passive_ability = {
-			health_gained = func(gain, grid, _this):
+			health_gained = func(gain, grid, this):
 				var shield_gain = gain.duplicate()
 				shield_gain["mult_mult"] *= 0.5
 				grid.calculate_modifiers(shield_gain)
-				grid.recover_shield(shield_gain)},
+				grid.recover_shield(shield_gain)
+				this["item_scene"].pop()},
 		tags = ["treasure_loot"]
 	})
 	
@@ -612,6 +617,7 @@ func _init() -> void:
 				if grid.get_connected_items(this, 0).has(item):
 					grid.add_item_stat(this, "health_gain", 2)
 					grid.add_item_stat(this, "status", 1)
+					this["item_scene"].pop()
 					if not item.get("destroyed"):
 						grid.disconnect_item(item)
 						item["destroyed"] = true
@@ -633,7 +639,8 @@ func _init() -> void:
 		passive_ability = {
 			battle_start = func(grid, this):
 				var status_applied = grid.get_item_stat(this, "status")["final"]
-				grid.add_status("dodge", status_applied)},
+				grid.add_status("dodge", status_applied)
+				this["item_scene"].pop()},
 		tags = ["treasure_loot"]
 	})
 	
@@ -652,7 +659,8 @@ func _init() -> void:
 					var enemy = grid.get_enemy()
 					var dealt_damage = grid.get_item_stat(this, "damage")
 					dealt_damage["item_source"] = this
-					grid.deal_damage(enemy, dealt_damage)},
+					grid.deal_damage(enemy, dealt_damage)
+					this["item_scene"].pop()},
 		tags = ["treasure_loot"]
 	})
 	
@@ -667,8 +675,9 @@ func _init() -> void:
 			stat_modifiers = func(stat, modifiers, _grid, _this):
 				if stat == "shield":
 					modifiers["base"] += 100,
-			battle_start = func(grid, _this):
-				grid.progress_fatigue(5.0)},
+			battle_start = func(grid, this):
+				grid.progress_fatigue(5.0)
+				this["item_scene"].pop()},
 		tags = ["treasure_loot"]
 	})
 	
@@ -756,9 +765,10 @@ func _init() -> void:
 			stat_modifiers = func(stat, modifiers, _grid, _this):
 				if stat == "shield":
 					modifiers["base"] += 5,
-			battle_start = func(grid, _this):
+			battle_start = func(grid, this):
 				var enemy = grid.get_enemy()
-				enemy.add_stat("charge", -0.4)},
+				enemy.add_stat("charge", -0.4)
+				this["item_scene"].pop()},
 		tags = ["treasure_loot"]
 	})
 	
@@ -799,7 +809,7 @@ func _init() -> void:
 		},
 		active_ability = func(grid, this):
 			var shield_gain = grid.get_item_stat(this, "shield_gain")
-			grid.add_stat("shield", shield_gain["final"])
+			grid.recover_shield(shield_gain)
 			var enemy = grid.get_enemy()
 			enemy.add_stat("charge", -0.2),
 		tags = ["treasure_loot"]
@@ -812,10 +822,11 @@ func _init() -> void:
 			[true , true ],
 		],
 		passive_ability = {
-			damage_taken = func(damage, grid, _this):
+			damage_taken = func(damage, grid, this):
 				if damage.get("attack") and damage["final"] >= 10:
 					var enemy = grid.get_enemy()
-					enemy.add_stat("charge", -0.2),
+					enemy.add_stat("charge", -0.2)
+					this["item_scene"].pop(),
 			stat_modifiers = func(stat, modifiers, _grid, _this):
 				if stat == "shield":
 					modifiers["base"] += 25},
@@ -839,5 +850,49 @@ func _init() -> void:
 			if grid.attack(enemy, damage):
 				enemy.add_stat("charge", -0.2),
 		tags = ["treasure_loot"],
+	})
+	
+	register_item("attack_drone", {
+		scene = preload("res://equipment/attack_drone/attack_drone.tscn"),
+		shape = [
+			[true , true , true ],
+			[true , true , true ],
+		],
+		stats = {
+			damage = 8
+		},
+		active_ability = func(grid, this):
+			var enemy = grid.get_enemy()
+			var damage = grid.get_item_stat(this, "damage")
+			damage["item_source"] = this
+			grid.attack(enemy, damage),
+		passive_ability = {
+			rested = func(grid, this):
+				var enemy = grid.get_enemy()
+				var damage = grid.get_item_stat(this, "damage")
+				damage["item_source"] = this
+				grid.attack(enemy, damage)
+				this["item_scene"].pop()},
+		tags = ["treasure_loot"]
+	})
+	
+	register_item("defense_drone", {
+		scene = preload("res://equipment/defense_drone/defense_drone.tscn"),
+		shape = [
+			[true , true , true ],
+			[true , true , true ],
+		],
+		stats = {
+			shield_gain = 8
+		},
+		active_ability = func(grid, this):
+			var shield_gain = grid.get_item_stat(this, "shield_gain")
+			grid.recover_shield(shield_gain),
+		passive_ability = {
+			rested = func(grid, this):
+				var shield_gain = grid.get_item_stat(this, "shield_gain")
+				grid.recover_shield(shield_gain)
+				this["item_scene"].pop()},
+		tags = ["treasure_loot"]
 	})
 	#endregion
