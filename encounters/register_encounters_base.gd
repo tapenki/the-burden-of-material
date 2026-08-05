@@ -410,13 +410,13 @@ func _init() -> void:
 						position = Vector2(2, 1),
 						rotation = 0,
 					},{
-						type = "sulphur",
+						type = "spinach",
 						position = Vector2(5, 2),
-						rotation = 3,
+						rotation = 0,
 					},{
-						type = "sulphur",
+						type = "spinach",
 						position = Vector2(5, 3),
-						rotation = 3,
+						rotation = 0,
 					},{
 						type = "plasma_core",
 						position = Vector2(4, 4),
@@ -458,19 +458,19 @@ func _init() -> void:
 						rotation = 0,
 					}, {
 						type = "sulphur",
-						position = Vector2(5, 1),
+						position = Vector2(6, 1),
 						rotation = 3,
 					}, {
 						type = "sulphur",
-						position = Vector2(5, 2),
+						position = Vector2(6, 2),
 						rotation = 3,
 					}, {
 						type = "sulphur",
-						position = Vector2(5, 3),
+						position = Vector2(6, 3),
 						rotation = 3,
 					}, {
 						type = "badge",
-						position = Vector2(6, 2),
+						position = Vector2(5, 2),
 						rotation = 0,
 					}, {
 						type = "bulletproof_vest",
@@ -539,3 +539,62 @@ func _init() -> void:
 			}
 		]
 	}, [9])
+	
+	Registry.register_encounter("president", {
+		enemies = [
+			{
+				character = preload("res://encounters/president/president.png"),
+				layout = [
+					[false, false, false, false, false, false, false, false],
+					[false, true , true , true , true , true , true , false],
+					[false, true , true , true , true , true , true , false],
+					[false, true , true , true , true , true , true , false],
+					[false, true , true , true , true , true , true , false],
+					[false, true , true , true , true , true , true , false],
+					[false, true , true , true , true , true , true , false],
+					[false, false, false, false, false, false, false, false]
+				],
+				equipment = [{
+						type = "attack_drone",
+						position = Vector2(1, 1),
+						rotation = 0,
+					}, {
+						type = "defense_drone",
+						position = Vector2(4, 1),
+						rotation = 0,
+					}, {
+						type = "globe",
+						position = Vector2(1, 5),
+						rotation = 0,
+					}, {
+						type = "beef",
+						position = Vector2(3, 5),
+						rotation = 0,
+					}, {
+						type = "deal_with_the_devil",
+						position = Vector2(5, 5),
+						rotation = 0,
+					}, {
+						type = "cheese",
+						position = Vector2(3, 4),
+						rotation = 0,
+					}, {
+						type = "sulphur",
+						position = Vector2(1, 3),
+						rotation = 0,
+					}, {
+						type = "sulphur",
+						position = Vector2(2, 3),
+						rotation = 0,
+					}, {
+						type = "sulphur",
+						position = Vector2(3, 3),
+						rotation = 0,
+					}, {
+						type = "nuclear_launch_codes",
+						position = Vector2(4, 3),
+						rotation = 0,
+					},]
+			}
+		]
+	}, [10])

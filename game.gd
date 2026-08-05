@@ -141,7 +141,8 @@ func generate_reward(items):
 		player_equipment.equipment.append(prize_item)
 
 func proceed_to_rewards():
-	if not battle.has("won"):
+	if not Registry.encounter_schedule.has(day + 1):
+		get_tree().reload_current_scene()
 		return
 	var rewards = []
 	var pocket_reward = []
