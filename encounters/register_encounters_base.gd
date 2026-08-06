@@ -1,6 +1,8 @@
 extends Node
 
-func _init() -> void:
+signal registered()
+
+func register() -> void:
 	Registry.register_encounter("bandit", {
 		enemies = [
 			{
@@ -610,3 +612,5 @@ func _init() -> void:
 			}
 		]
 	}, [10])
+	
+	registered.emit()

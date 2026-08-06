@@ -8,4 +8,4 @@ func _ready() -> void:
 		add_child(button_instance)
 		if not first:
 			first = true
-			button_instance._on_pressed()
+			button_instance.change_character()

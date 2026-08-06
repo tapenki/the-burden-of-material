@@ -3,6 +3,10 @@ extends Button
 @export var character_name = "swordsman"
 
 func _on_pressed() -> void:
+	get_node("/root/Game").play_sound("Click", 1)
+	change_character()
+
+func change_character():
 	var player_equipment = get_node("/root/Game/PlayerEquipment")
 	var character_data = Registry.character_data[character_name]
 	player_equipment.character_sprite.texture = character_data["character"]

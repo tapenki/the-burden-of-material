@@ -11,7 +11,9 @@ var basic_layout = [
 	[false, false, false, false, false, false, false, false]
 ]
 
-func _init() -> void:
+signal registered()
+
+func register() -> void:
 	## knight
 	Registry.register_item("zweihander", {
 		scene = preload("res://characters/knight/zweihander/zweihander.tscn"),
@@ -283,8 +285,10 @@ func _init() -> void:
 			position = Vector2(3, 4),
 			rotation = 0,
 		}, {
-			type = "bones",
-			position = Vector2(3, 4),
+			type = "trumpet",
+			position = Vector2(3, 5),
 			rotation = 0,
 		}]
 	})
+	
+	registered.emit()

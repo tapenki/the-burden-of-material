@@ -9,6 +9,9 @@ msgstr ""
 
 # ui
 
+msgid "ui_loading_progress"
+msgstr "Registered Items: {registered_items}[br]Registered Statuses: {registered_statuses}[br]Registered Encounters: {registered_encounters}[br]Registered Characters: {registered_characters}"
+
 msgid "ui_character_select"
 msgstr "WANTED CRIMINALS"
 
@@ -146,7 +149,7 @@ msgstr "•Fatigue start: Sleep on pillow, recovering *{health_gain}* health."
 msgid "item_beehive_title"
 msgstr "Beehive"
 msgid "item_beehive_description"
-msgstr "•Attack damage taken: Bees retaliate, applying *{status}* poison."
+msgstr "•Damaged by attack: Bees retaliate, applying *{status}* poison."
 
 msgid "item_honeycomb_title"
 msgstr "Honeycomb"
@@ -181,7 +184,7 @@ msgstr "•Use: Spread the spores, recovering *{health_gain}* health and applyin
 msgid "item_snail_shell_title"
 msgstr "Snail's Shell"
 msgid "item_snail_shell_description"
-msgstr "•Health gained: Harden shell, gaining shield equal to half the health gained."
+msgstr "•Gained health: Harden shell, gaining shield equal to half the health gained."
 
 msgid "item_sippy_straw_title"
 msgstr "Sippy Straw"
@@ -196,7 +199,7 @@ msgstr "•Connected item can only be used after 8 seconds have passed."
 msgid "item_cauldron_title"
 msgstr "Cauldron"
 msgid "item_cauldron_description"
-msgstr "•Use: Brew a potion, recovering *{health_gain}* health and applying *{status}* poison to an enemy.[br]•Connected item used: Add it to the cauldron, increasing health gain by 2 and status applied by 1."
+msgstr "•Use: Brew a potion, recovering *{health_gain}* health and applying *{status}* poison to an enemy.[br]•Used connected item: Add it to the cauldron, increasing health gain by 2 and status applied by 1."
 
 msgid "item_magic_broom_title"
 msgstr "Magic Broom"
@@ -206,7 +209,7 @@ msgstr "•Battle start: Ride the broom, gaining *{status}* dodge."
 msgid "item_cactus_title"
 msgstr "Cactus"
 msgid "item_cactus_description"
-msgstr "•Attack damage taken: Cactus retaliates, dealing *{damage}* damage."
+msgstr "•Damaged by attack: Cactus retaliates, dealing *{damage}* damage."
 
 msgid "item_plasma_core_title"
 msgstr "Plasma Core"
@@ -266,12 +269,12 @@ msgstr "•Use: Clobber the enemy dealing *{damage}* attack damage and stunning 
 msgid "item_attack_drone_title"
 msgstr "Attack Drone"
 msgid "item_attack_drone_description"
-msgstr "•Use or Rest: Call in a drone strike, dealing *{damage}* attack damage."
+msgstr "•Use or Rested: Call in a drone strike, dealing *{damage}* attack damage."
 
 msgid "item_defense_drone_title"
 msgstr "Defense Drone"
 msgid "item_defense_drone_description"
-msgstr "•Use or Rest: Call in a drone defense, gaining *{shield_gain}* shield."
+msgstr "•Use or Rested: Call in a drone defense, gaining *{shield_gain}* shield."
 
 msgid "item_nuclear_launch_codes_title"
 msgstr "Nuclear Launch Codes"
@@ -287,6 +290,11 @@ msgid "item_bones_title"
 msgstr "Bones"
 msgid "item_bones_description"
 msgstr "•You have +50 unfilled max health."
+
+msgid "item_trumpet_title"
+msgstr "Trumpet"
+msgid "item_trumpet_description"
+msgstr "•Has *{uses}* use(s).[br]•Use: Sound the trumpet, increasing the damage of all your items by 11%.[br]•Your items have +7 damage while this is out of uses."
 
 # statuses
 

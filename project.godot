@@ -12,7 +12,7 @@ config_version=5
 
 config/name="The Burden Of Material"
 config/version="0.0.0"
-run/main_scene="uid://dvcabhmklyl8j"
+run/main_scene="uid://cukfs0payokhy"
 config/features=PackedStringArray("4.7", "GL Compatibility")
 boot_splash/bg_color=Color(0, 0, 0, 1)
 boot_splash/use_filter=false
@@ -22,8 +22,6 @@ config/icon="res://icon.svg"
 [autoload]
 
 Registry="*uid://ibdx3jlprm8c"
-RegisterCharactersBase="uid://eqgfotq46gii"
-RegisterEncountersBase="uid://hut7jfq77a7w"
 
 [display]
 

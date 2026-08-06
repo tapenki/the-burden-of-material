@@ -1,0 +1,33 @@
+[gd_scene format=3 uid="uid://cukfs0payokhy"]
+
+[ext_resource type="Script" uid="uid://r5rynnxigxpf" path="res://loading.gd" id="1_gov4d"]
+
+[node name="Loading" type="Control" unique_id=267419249]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_gov4d")
+
+[node name="Label" type="RichTextLabel" parent="." unique_id=2000774112]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = 300.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/default_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/normal_font_size = 24
+bbcode_enabled = true
+text = "Items registered: 0
+Statuses registered: 0
+Encounters registered: 0
+Characters registered: 0"
+fit_content = true
+scroll_active = false
+horizontal_alignment = 1
+vertical_alignment = 1

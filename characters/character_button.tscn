@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://gf31xls6mmex"]
 
-[ext_resource type="Script" uid="uid://2fqmgexpymok" path="res://ui/character_button.gd" id="1_mr4y4"]
+[ext_resource type="Script" uid="uid://2fqmgexpymok" path="res://characters/character_button.gd" id="1_mr4y4"]
 [ext_resource type="Texture2D" uid="uid://mlpsadm2hvvn" path="res://characters/knight/knight.png" id="2_oqj4s"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_fc0e3"]

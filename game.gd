@@ -109,6 +109,7 @@ func lose_battle():
 	battle_ended.emit()
 
 func proceed_to_battle():
+	play_sound("Click", 1)
 	if battle.get("won", true):
 		if Registry.encounter_schedule.has(day + 1):
 			day += 1
@@ -157,6 +158,7 @@ func generate_reward(items):
 		player_equipment.equipment.append(prize_item)
 
 func proceed_to_rewards():
+	play_sound("Click", 1)
 	if not Registry.encounter_schedule.has(day + 1):
 		get_tree().reload_current_scene()
 		return
