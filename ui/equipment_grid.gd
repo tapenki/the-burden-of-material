@@ -185,34 +185,44 @@ func remove_status(status):
 	statuses.erase(status)
 
 func add_status(status, stacks):
-	if statuses.has(status):
-		statuses[status]["stacks"] += stacks
-		if statuses[status]["stacks"] <= 0:
-			remove_status(status)
+	if stacks > 0:
+		var status_data = Registry.status_data[status]
+		var counter = status_data.get("counteracts")
+		if counter and statuses.has(counter):
+			var countered_status = statuses[counter]
+			var addcounter = -stacks
+			stacks -= countered_status["stacks"]
+			add_status(counter, addcounter)
+		if stacks <= 0:
 			return
-	else:
-		var status_instance = preload("res://ui/status_label.tscn").instantiate()
-		if character_sprite.flip_h:
-			status_instance.horizontal_alignment = HorizontalAlignment.HORIZONTAL_ALIGNMENT_RIGHT
-		character_sprite.get_node("Statuses").add_child(status_instance)
-		statuses[status] = {"stacks" = stacks, "status_scene" = status_instance}
-		if not statuses[status].get("connected_callables"):
-			var status_data = Registry.status_data[status]
-			if status_data.has("passive_ability"):
-				statuses[status]["passive_ability"] = status_data["passive_ability"].duplicate()
-				for key in statuses[status]["passive_ability"].keys():
-					var ability = statuses[status]["passive_ability"][key]
-					var wrapper = func(arguments): ## workaround to allow duplicate connections
-						ability.bind(statuses[status]).callv(arguments)
-					self[key].connect(wrapper)
-					if not statuses[status].get("connected_callables"):
-						statuses[status]["connected_callables"] = {}
-						statuses[status]["connected_callables"][key] = wrapper
-	statuses[status]["status_scene"].text = tr("status_"+status+"_title") + " ({stacks})".format({stacks = statuses[status]["stacks"]})
-	if stacks >= 0:
+		if statuses.has(status):
+			statuses[status]["stacks"] += stacks
+		else:
+			var status_instance = preload("res://ui/status_label.tscn").instantiate()
+			if character_sprite.flip_h:
+				status_instance.horizontal_alignment = HorizontalAlignment.HORIZONTAL_ALIGNMENT_RIGHT
+			character_sprite.get_node("Statuses").add_child(status_instance)
+			statuses[status] = {"stacks" = stacks, "status_scene" = status_instance}
+			if not statuses[status].get("connected_callables"):
+				if status_data.has("passive_ability"):
+					for key in status_data["passive_ability"].keys():
+						var ability = status_data["passive_ability"][key]
+						var wrapper = func(arguments):
+							ability.bind(statuses[status]).callv(arguments)
+						self[key].connect(wrapper)
+						if not statuses[status].get("connected_callables"):
+							statuses[status]["connected_callables"] = {}
+							statuses[status]["connected_callables"][key] = wrapper
 		text_effect("+" + str(stacks), Color.WHITE)
+		statuses[status]["status_scene"].text = tr("status_"+status+"_counter") + " ({stacks})".format({stacks = statuses[status]["stacks"]})
+	elif stacks < 0:
+		if statuses.has(status):
+			statuses[status]["stacks"] += stacks
+			if statuses[status]["stacks"] <= 0:
+				remove_status(status)
+			text_effect(str(stacks), Color.WHITE)
 	else:
-		text_effect(str(stacks), Color.WHITE)
+		text_effect("+" + str(stacks), Color.WHITE)
 
 func unload_grid():
 	for check_signal in signals:

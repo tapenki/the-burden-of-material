@@ -117,15 +117,14 @@ func register() -> void:
 			[true ],
 		],
 		stats = {
-			health_gain = 8
+			health_gain = 4,
+			status_applied = 1
 		},
-		active_requirement = func(grid, _this):
-			var hp = grid.get_stat("health")["final"]
-			var max_hp = grid.get_stat("max_health")["final"]
-			return hp <= max_hp * 0.5,
 		active_ability = func(grid, this):
 			var health_gain = grid.get_item_stat(this, "health_gain")
-			grid.recover_health(health_gain),
+			grid.recover_health(health_gain)
+			var status_applied = grid.get_item_stat(this, "status_applied")["final"]
+			grid.add_status("strength", status_applied),
 		tags = ["treasure_loot"]
 	})
 	
@@ -257,16 +256,15 @@ func register() -> void:
 			[true ]
 		],
 		stats = {
-			status = 3,
+			status_applied = 3,
 			uses = 1
 		},
 		active_requirement = func(grid, this):
 			return grid.get_item_stat(this, "uses")["final"] >= 1,
 		active_ability = func(grid, this):
-			var status_applied = grid.get_item_stat(this, "status")["final"]
+			var status_applied = grid.get_item_stat(this, "status_applied")["final"]
 			grid.add_status("poison", status_applied)
-			for item in grid.equipment:
-				grid.add_item_stat(item, "damage", 4)
+			grid.add_status("strength", status_applied)
 			grid.add_item_stat(this, "uses", -1, "base"),
 		tags = ["heirloom"]
 	})
@@ -284,7 +282,7 @@ func register() -> void:
 			position = Vector2(3, 4),
 			rotation = 0,
 		}, {
-			type = "trumpet",
+			type = "cheese",
 			position = Vector2(3, 5),
 			rotation = 0,
 		}]

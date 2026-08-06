@@ -89,7 +89,7 @@ msgstr "•Use (under 50% health): Sip the milk, recovering *{health_gain}* heal
 msgid "item_cheese_title"
 msgstr "Cheese"
 msgid "item_cheese_description"
-msgstr "•Use (have poison): Eat the cheese, recovering *{health_gain}* health and removing that much poison."
+msgstr "•Use (have poison): Eat the cheese, removing 3 poison and gaining *{status_applied}* regeneration."
 
 msgid "item_shiv_title"
 msgstr "Shiv"
@@ -154,7 +154,7 @@ msgstr "•Fatigue start: Sleep on pillow, recovering *{health_gain}* health."
 msgid "item_beehive_title"
 msgstr "Beehive"
 msgid "item_beehive_description"
-msgstr "•Damaged by attack: Bees retaliate, applying *{status}* poison."
+msgstr "•Damaged by attack: Bees retaliate, applying *{status_applied}* poison."
 
 msgid "item_honeycomb_title"
 msgstr "Honeycomb"
@@ -164,7 +164,7 @@ msgstr "•Use: Eat honey, gaining *{health_gain}* bonus health."
 msgid "item_stinger_title"
 msgstr "Stinger"
 msgid "item_stinger_description"
-msgstr "•Use: Sting an enemy, dealing *{damage}* attack damage and applying *{status}* poison."
+msgstr "•Use: Sting an enemy, dealing *{damage}* attack damage and applying *{status_applied}* poison."
 
 msgid "item_hunting_rifle_title"
 msgstr "Hunting Rifle"
@@ -184,7 +184,7 @@ msgstr "•Has *{uses}* use(s).[br]•Use: Eat the fish, gaining 1 dodge."
 msgid "item_mushroom_title"
 msgstr "Mushroom"
 msgid "item_mushroom_description"
-msgstr "•Use: Spread the spores, recovering *{health_gain}* health and applying *{status}* poison to an enemy."
+msgstr "•Use: Spread the spores, recovering *{health_gain}* health and applying *{status_applied}* poison to an enemy."
 
 msgid "item_snail_shell_title"
 msgstr "Snail's Shell"
@@ -204,12 +204,12 @@ msgstr "•Connected item can only be used after 8 seconds have passed."
 msgid "item_cauldron_title"
 msgstr "Cauldron"
 msgid "item_cauldron_description"
-msgstr "•Use: Brew a potion, recovering *{health_gain}* health and applying *{status}* poison to an enemy.[br]•Used connected item: Add it to the cauldron, increasing health gain by 2 and status applied by 1."
+msgstr "•Use: Brew a potion, recovering *{health_gain}* health and applying *{status_applied}* poison to an enemy.[br]•Used connected item: Add it to the cauldron, increasing health gain by 2 and status applied by 1."
 
 msgid "item_magic_broom_title"
 msgstr "Magic Broom"
 msgid "item_magic_broom_description"
-msgstr "•Battle start: Ride the broom, gaining *{status}* dodge."
+msgstr "•Battle start: Ride the broom, gaining *{status_applied}* dodge."
 
 msgid "item_cactus_title"
 msgstr "Cactus"
@@ -239,7 +239,7 @@ msgstr "•Use: Escape country, gaining *{shield_gain}* shield, 1 dodge, and pro
 msgid "item_spinach_title"
 msgstr "Spinach"
 msgid "item_spinach_description"
-msgstr "•You have +5 health and your items have +1 damage."
+msgstr "•You have +5 health.[br]•Battle start: Eat the spinach, gaining *{status_applied}* strength."
 
 msgid "item_deal_with_the_devil_title"
 msgstr "Deal With The Devil"
@@ -284,7 +284,7 @@ msgstr "•Use or Rested: Call in a drone defense, gaining *{shield_gain}* shiel
 msgid "item_nuclear_launch_codes_title"
 msgstr "Nuclear Launch Codes"
 msgid "item_nuclear_launch_codes_description"
-msgstr "•Fatigue start: Star nuclear war, dealing *{damage}* attack damage and applying *{status}* poison."
+msgstr "•Fatigue start: Star nuclear war, dealing *{damage}* attack damage and applying *{status_applied}* poison."
 
 msgid "item_skull_title"
 msgstr "Skull"
@@ -299,24 +299,37 @@ msgstr "•You have +50 unfilled max health."
 msgid "item_trumpet_title"
 msgstr "Trumpet"
 msgid "item_trumpet_description"
-msgstr "•Has *{uses}* use(s).[br]•Use: Sound the trumpet, increasing the damage of all your items by 11%.[br]•Your items have +7 damage while this is out of uses."
+msgstr "•Has *{uses}* use(s).[br]•Use: Sound the trumpet, gaining *{status_applied}* strength.[br]•Your items have +77% damage while this is out of uses."
 
 # statuses
 
+msgid "status_poison_counter"
+msgstr "[color=#00FF00]Poison[/color]"
 msgid "status_poison_title"
 msgstr "Poison"
 msgid "status_poison_description"
-msgstr "•Every 2 seconds: Take 1 damage for each stack of poison."
+msgstr "•Every 2 seconds: Take 1 damage for each stack of poison.[br]•Counteracts regeneration."
 
-msgid "status_burn_title"
-msgstr "Burn"
-msgid "status_burn_description"
-msgstr "•Every half a second: Take 1 damage for each stack of burn then lose 10% of your burn."
+msgid "status_regeneration_counter"
+msgstr "[color=#AAFF00]Regeneration[/color]"
+msgid "status_regeneration_title"
+msgstr "Regeneration"
+msgid "status_regeneration_description"
+msgstr "•Every 2 seconds: Recover 1 life for each stack of regeneration.[br]•Counteracts poison."
 
+msgid "status_dodge_counter"
+msgstr "[color=#00FFFF]Dodge[/color]"
 msgid "status_dodge_title"
 msgstr "Dodge"
 msgid "status_dodge_description"
-msgstr "•Attack incoming: Lose 1 stack of dodge and avoid the attack."
+msgstr "•Attack incoming: Lose 1 stack of dodge and avoid the attack.[br]•Counteracts exposure."
+
+msgid "status_strength_counter"
+msgstr "[color=#FFAA00]Strength[/color]"
+msgid "status_strength_title"
+msgstr "Strengt"
+msgid "status_strength_description"
+msgstr "•Your items have +1 damage for each stack of strength.[br]•Counteracts weakness."
 
 # knight
 
@@ -343,7 +356,7 @@ msgstr "•Use: Bludgeon an enemy, dealing *{damage}* attack damage.[br]•Conne
 msgid "item_egg_title"
 msgstr "Egg"
 msgid "item_egg_description"
-msgstr "•Use (under 50% health): Eat the egg, recovering *{health_gain}* health."
+msgstr "•Use: Eat the egg, recovering *{health_gain}* health and gaining *{status_applied}* strength."
 
 # bomber
 
@@ -367,4 +380,4 @@ msgstr "•Use: Punch an enemy, dealing *{damage}* attack damage. Hits twice whe
 msgid "item_beer_title"
 msgstr "Beer"
 msgid "item_beer_description"
-msgstr "•Has *{uses}* use(s).[br]•Use: Imbibe alcohol, applying *{status}* poison and increasing the damage of all your items by 4."
+msgstr "•Has *{uses}* use(s).[br]•Use: Imbibe alcohol, applying *{status_applied}* poison and strength."

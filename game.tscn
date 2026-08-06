@@ -623,7 +623,7 @@ offset_right = -144.0
 offset_bottom = 72.0
 grow_horizontal = 0
 grow_vertical = 2
-theme_override_constants/separation = 0
+theme_override_constants/separation = -2
 
 [node name="PlayerCharacter" type="TextureRect" parent="." unique_id=1062287325]
 layout_mode = 0
@@ -762,7 +762,7 @@ offset_top = -72.0
 offset_right = 288.0
 offset_bottom = 72.0
 grow_vertical = 2
-theme_override_constants/separation = 0
+theme_override_constants/separation = -2
 
 [node name="EnemyEquipment" type="Control" parent="." unique_id=1832386834 node_paths=PackedStringArray("character_sprite")]
 visible = false

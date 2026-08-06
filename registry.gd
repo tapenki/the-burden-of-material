@@ -32,7 +32,9 @@ func register_character(character_name, character_definition):
 	character_data[character_name] = character_definition
 
 func _ready() -> void:
+	## statuses
 	register_status("poison", {
+		counteracts = "regeneration",
 		passive_ability = {
 			game_tick = func(tick, grid, this):
 				if not this.has("charge"):
@@ -44,17 +46,17 @@ func _ready() -> void:
 					grid.deal_damage(grid, damage)}
 	})
 	
-	register_status("burn", {
+	register_status("regeneration", {
+		counteracts = "poison",
 		passive_ability = {
 			game_tick = func(tick, grid, this):
 				if not this.has("charge"):
 					this["charge"] = 0
 				this["charge"] += tick
-				if this["charge"] >= 0.5:
-					this["charge"] -= 0.5
-					var damage = {"final" = this["stacks"]}
-					grid.deal_damage(grid, damage)
-					grid.add_status("burn", -int(ceil(this["stacks"]*0.1)))}
+				if this["charge"] >= 2.0:
+					this["charge"] -= 2.0
+					var health_gain = {"final" = this["stacks"]}
+					grid.recover_health(health_gain)}
 	})
 	
 	register_status("dodge", {
@@ -64,6 +66,13 @@ func _ready() -> void:
 				grid.add_status("dodge", -1)}
 	})
 	
+	register_status("strength", {
+		passive_ability = {
+			item_stat_modifiers = func(stat, modifiers, _grid, _item, this):
+				if stat == "damage":
+					modifiers["base"] += this["stacks"]}
+	})
+	## pockets
 	register_item("magic_pockets_o", {
 		scene = preload("res://equipment/magic_pockets/pockets_o.tscn"),
 		shape = [

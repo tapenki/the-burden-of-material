@@ -39,10 +39,14 @@ func register() -> void:
 		shape = [
 			[true ],
 		],
+		stats = {
+			status_applied = 1
+		},
 		passive_ability = {
-			item_stat_modifiers = func(stat, modifiers, _grid, _item, _this):
-				if stat == "damage":
-					modifiers["base"] += 1,
+			battle_start = func(grid, this):
+				var status_applied = grid.get_item_stat(this, "status_applied")["final"]
+				grid.add_status("strength", status_applied)
+				this["item_scene"].pop(),
 			stat_modifiers = func(stat, modifiers, _grid, _this):
 				if stat == "health" || stat == "max_health":
 					modifiers["base"] += 5},
@@ -55,14 +59,14 @@ func register() -> void:
 			[true , true ],
 		],
 		stats = {
-			health_gain = 4
+			status_applied = 1
 		},
 		active_requirement = func(grid, _this):
 			return grid.statuses.has("poison"),
 		active_ability = func(grid, this):
-			var health_gain = grid.get_item_stat(this, "health_gain")
-			grid.add_status("poison", -health_gain["final"])
-			grid.recover_health(health_gain),
+			var status_applied = grid.get_item_stat(this, "status_applied")["final"]
+			grid.add_status("poison", -3)
+			grid.add_status("regeneration", status_applied),
 		tags = ["treasure_loot"]
 	}) 
 	
@@ -293,13 +297,13 @@ func register() -> void:
 			[true , true ],
 		],
 		stats = {
-			status = 1
+			status_applied = 1
 		},
 		passive_ability = {
 			damage_taken = func(damage, grid, this):
 				if damage.get("attack"):
 					var enemy = grid.get_enemy()
-					var status_applied = grid.get_item_stat(this, "status")["final"]
+					var status_applied = grid.get_item_stat(this, "status_applied")["final"]
 					enemy.add_status("poison", status_applied)
 					this["item_scene"].pop()},
 		tags = ["treasure_loot"],
@@ -313,14 +317,14 @@ func register() -> void:
 		],
 		stats = {
 			damage = 4,
-			status = 1
+			status_applied = 1
 		},
 		active_ability = func(grid, this):
 			var enemy = grid.get_enemy()
 			var damage = grid.get_item_stat(this, "damage")
 			damage["item_source"] = this
 			if grid.attack(enemy, damage):
-				var status_applied = grid.get_item_stat(this, "status")["final"]
+				var status_applied = grid.get_item_stat(this, "status_applied")["final"]
 				enemy.add_status("poison", status_applied),
 		tags = ["treasure_loot"],
 	}) 
@@ -406,13 +410,13 @@ func register() -> void:
 		],
 		stats = {
 			health_gain = 4,
-			status = 1
+			status_applied = 1
 		},
 		active_ability = func(grid, this):
 			var health_gain = grid.get_item_stat(this, "health_gain")
 			grid.recover_health(health_gain)
 			var enemy = grid.get_enemy()
-			var status_applied = grid.get_item_stat(this, "status")["final"]
+			var status_applied = grid.get_item_stat(this, "status_applied")["final"]
 			enemy.add_status("poison", status_applied),
 		tags = ["treasure_loot"]
 	}) 
@@ -498,13 +502,13 @@ func register() -> void:
 		],
 		stats = {
 			health_gain = 2,
-			status = 1,
+			status_applied = 1,
 		},
 		active_ability = func(grid, this):
 			var health_gain = grid.get_item_stat(this, "health_gain")
 			grid.recover_health(health_gain)
 			var enemy = grid.get_enemy()
-			var status_applied = grid.get_item_stat(this, "status")["final"]
+			var status_applied = grid.get_item_stat(this, "status_applied")["final"]
 			enemy.add_status("poison", status_applied),
 		passive_ability = {
 			item_used = func(item, grid, this):
@@ -528,11 +532,11 @@ func register() -> void:
 			[true ],
 		],
 		stats = {
-			status = 2
+			status_applied = 2
 		},
 		passive_ability = {
 			battle_start = func(grid, this):
-				var status_applied = grid.get_item_stat(this, "status")["final"]
+				var status_applied = grid.get_item_stat(this, "status_applied")["final"]
 				grid.add_status("dodge", status_applied)
 				this["item_scene"].pop()},
 		tags = ["treasure_loot"]
@@ -797,7 +801,7 @@ func register() -> void:
 		],
 		stats = {
 			damage = 25,
-			status = 10
+			status_applied = 10
 		},
 		passive_ability = {
 			fatigue_start = func(grid, this):
@@ -805,7 +809,7 @@ func register() -> void:
 				var damage = grid.get_item_stat(this, "damage")
 				damage["item_source"] = this
 				if grid.attack(enemy, damage):
-					var status_applied = grid.get_item_stat(this, "status")["final"]
+					var status_applied = grid.get_item_stat(this, "status_applied")["final"]
 					enemy.add_status("poison", status_applied)
 				this["item_scene"].pop()},
 		tags = ["treasure_loot"]
@@ -846,18 +850,19 @@ func register() -> void:
 			[true , true , true ],
 		],
 		stats = {
-			uses = 7
+			uses = 7,
+			status_applied = 1
 		},
 		active_requirement = func(grid, this):
 			return grid.get_item_stat(this, "uses")["final"] >= 1,
 		active_ability = func(grid, this):
-			for item in grid.equipment:
-				grid.add_item_stat(item, "damage", 0.11, "add_mult")
+			var status_applied = grid.get_item_stat(this, "status_applied")["final"]
+			grid.add_status("strength", status_applied)
 			grid.add_item_stat(this, "uses", -1, "base"),
 		passive_ability = {
 			item_stat_modifiers = func(stat, modifiers, grid, _item, this):
 				if stat == "damage" and grid.get_item_stat(this, "uses")["final"] == 0:
-					modifiers["base"] += 7},
+					modifiers["add_mult"] += 0.77},
 		tags = ["treasure_loot"]
 	})
 	
