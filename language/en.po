@@ -81,6 +81,11 @@ msgstr "Salt"
 msgid "item_salt_description"
 msgstr "•Your items have +1 health and shield gain."
 
+msgid "item_milk_title"
+msgstr "Milk"
+msgid "item_milk_description"
+msgstr "•Use (under 50% health): Sip the milk, recovering *{health_gain}* health."
+
 msgid "item_cheese_title"
 msgstr "Cheese"
 msgid "item_cheese_description"
@@ -335,10 +340,10 @@ msgstr "Frying Pan"
 msgid "item_frying_pan_description"
 msgstr "•Use: Bludgeon an enemy, dealing *{damage}* attack damage.[br]•Connected items have +100% health gain."
 
-msgid "item_milk_title"
-msgstr "Milk"
-msgid "item_milk_description"
-msgstr "•Use (under 50% health): Sip the milk, recovering *{health_gain}* health."
+msgid "item_egg_title"
+msgstr "Egg"
+msgid "item_egg_description"
+msgstr "•Use (under 50% health): Eat the egg, recovering *{health_gain}* health."
 
 # bomber
 

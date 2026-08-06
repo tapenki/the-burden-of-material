@@ -16,7 +16,7 @@ func register() -> void:
 	}) 
 	
 	Registry.register_item("milk", {
-		scene = preload("res://characters/chef/milk/milk.tscn"),
+		scene = preload("res://equipment/milk/milk.tscn"),
 		shape = [
 			[true ],
 			[true ]
