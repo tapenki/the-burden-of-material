@@ -136,6 +136,12 @@ func set_item_stat(item, stat, value):
 	var offset = get_item_stat(item, stat)["final"] - value
 	item["stat_changes"][stat]["base"] -= offset
 
+func roll_item_chance(odds_stat, item):
+	var odds_value = get_item_stat(item, odds_stat)["final"]
+	if randf_range(0, 100) < odds_value:
+		return true
+	return false
+
 func instantiate_item(item):
 	var item_data = Registry.item_data[item["type"]]
 	item["item_scene"] = item_data["scene"].instantiate()

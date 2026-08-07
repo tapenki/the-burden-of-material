@@ -2,7 +2,7 @@ extends Node
 
 func register() -> void:
 	Registry.register_item("salt", {
-		scene = preload("res://equipment/salt/salt.tscn"),
+		scene = preload("res://equipment/s/salt/salt.tscn"),
 		shape = [
 			[true ],
 		],
@@ -14,7 +14,7 @@ func register() -> void:
 	}) 
 	
 	Registry.register_item("milk", {
-		scene = preload("res://equipment/milk/milk.tscn"),
+		scene = preload("res://equipment/m/milk/milk.tscn"),
 		shape = [
 			[true ],
 			[true ]
@@ -33,7 +33,7 @@ func register() -> void:
 	})
 	
 	Registry.register_item("spinach", {
-		scene = preload("res://equipment/spinach/spinach.tscn"),
+		scene = preload("res://equipment/s/spinach/spinach.tscn"),
 		shape = [
 			[true ],
 		],
@@ -53,7 +53,7 @@ func register() -> void:
 	}) 
 	
 	Registry.register_item("cheese", {
-		scene = preload("res://equipment/cheese/cheese.tscn"),
+		scene = preload("res://equipment/c/cheese/cheese.tscn"),
 		shape = [
 			[true , true ],
 		],
@@ -70,7 +70,7 @@ func register() -> void:
 	}) 
 	
 	Registry.register_item("shiv", {
-		scene = preload("res://equipment/shiv/shiv.tscn"),
+		scene = preload("res://equipment/s/shiv/shiv.tscn"),
 		shape = [
 			[true ],
 			[true ]
@@ -87,7 +87,7 @@ func register() -> void:
 	}) 
 	
 	Registry.register_item("bandana", {
-		scene = preload("res://equipment/bandana/bandana.tscn"),
+		scene = preload("res://equipment/b/bandana/bandana.tscn"),
 		shape = [
 			[true , true ],
 			[true , false],
@@ -100,7 +100,7 @@ func register() -> void:
 	}) 
 	
 	Registry.register_item("axe", {
-		scene = preload("res://equipment/axe/axe.tscn"),
+		scene = preload("res://equipment/a/axe/axe.tscn"),
 		shape = [
 			[true , true ],
 			[true , false],
@@ -123,7 +123,7 @@ func register() -> void:
 	}) 
 	
 	Registry.register_item("flower", {
-		scene = preload("res://equipment/flower/flower.tscn"),
+		scene = preload("res://equipment/f/flower/flower.tscn"),
 		shape = [
 			[true , true ],
 			[true , true ],
@@ -146,7 +146,7 @@ func register() -> void:
 	}) 
 	
 	Registry.register_item("roots", {
-		scene = preload("res://equipment/roots/roots.tscn"),
+		scene = preload("res://equipment/r/roots/roots.tscn"),
 		shape = [
 			[true , true ],
 		],
@@ -166,7 +166,7 @@ func register() -> void:
 	}) 
 	 
 	Registry.register_item("pitchfork", {
-		scene = preload("res://equipment/pitchfork/pitchfork.tscn"),
+		scene = preload("res://equipment/p/pitchfork/pitchfork.tscn"),
 		shape = [
 			[true ],
 			[true ],
@@ -186,7 +186,7 @@ func register() -> void:
 	}) 
 	
 	Registry.register_item("straw_hat", {
-		scene = preload("res://equipment/straw_hat/straw_hat.tscn"),
+		scene = preload("res://equipment/s/straw_hat/straw_hat.tscn"),
 		shape = [
 			[true , true ],
 			[true , true ],
@@ -214,7 +214,7 @@ func register() -> void:
 	}) 
 	
 	Registry.register_item("beef", {
-		scene = preload("res://equipment/beef/beef.tscn"),
+		scene = preload("res://equipment/b/beef/beef.tscn"),
 		shape = [
 			[true , true ],
 			[true , true ],
@@ -232,7 +232,7 @@ func register() -> void:
 	}) 
 	
 	Registry.register_item("cow_slam", {
-		scene = preload("res://equipment/cow_slam/cow_slam.tscn"),
+		scene = preload("res://equipment/c/cow_slam/cow_slam.tscn"),
 		shape = [
 			[true , true ],
 			[true , true ],
@@ -254,7 +254,7 @@ func register() -> void:
 	}) 
 	
 	Registry.register_item("wood", {
-		scene = preload("res://equipment/wood/wood.tscn"),
+		scene = preload("res://equipment/w/wood/wood.tscn"),
 		shape = [
 			[true , true , true ],
 		],
@@ -270,7 +270,7 @@ func register() -> void:
 	}) 
 	
 	Registry.register_item("wise_words", {
-		scene = preload("res://equipment/wise_words/wise_words.tscn"),
+		scene = preload("res://equipment/w/wise_words/wise_words.tscn"),
 		shape = [
 			[true , true ],
 			[true , true ],
@@ -282,7 +282,7 @@ func register() -> void:
 	}) 
 	
 	Registry.register_item("pillow", {
-		scene = preload("res://equipment/pillow/pillow.tscn"),
+		scene = preload("res://equipment/p/pillow/pillow.tscn"),
 		shape = [
 			[true , true ],
 			[true , true ],
@@ -299,7 +299,7 @@ func register() -> void:
 	}) 
 	
 	Registry.register_item("beehive", {
-		scene = preload("res://equipment/beehive/beehive.tscn"),
+		scene = preload("res://equipment/b/beehive/beehive.tscn"),
 		shape = [
 			[true , true ],
 			[true , true ],
@@ -318,7 +318,7 @@ func register() -> void:
 	}) 
 	
 	Registry.register_item("stinger", {
-		scene = preload("res://equipment/stinger/stinger.tscn"),
+		scene = preload("res://equipment/s/stinger/stinger.tscn"),
 		shape = [
 			[true ],
 			[true ]
@@ -338,7 +338,7 @@ func register() -> void:
 	}) 
 	
 	Registry.register_item("honeycomb", {
-		scene = preload("res://equipment/honeycomb/honeycomb.tscn"),
+		scene = preload("res://equipment/h/honeycomb/honeycomb.tscn"),
 		shape = [
 			[true , true ],
 		],
@@ -354,7 +354,7 @@ func register() -> void:
 	
 	
 	Registry.register_item("hunting_rifle", {
-		scene = preload("res://equipment/hunting_rifle/hunting_rifle.tscn"),
+		scene = preload("res://equipment/h/hunting_rifle/hunting_rifle.tscn"),
 		shape = [
 			[true , true , true , true ],
 		],
@@ -375,7 +375,7 @@ func register() -> void:
 	}) 
 	
 	Registry.register_item("berries", {
-		scene = preload("res://equipment/berries/berries.tscn"),
+		scene = preload("res://equipment/b/berries/berries.tscn"),
 		shape = [
 			[true ],
 		],
@@ -395,7 +395,7 @@ func register() -> void:
 	}) 
 	
 	Registry.register_item("fish", {
-		scene = preload("res://equipment/fish/fish.tscn"),
+		scene = preload("res://equipment/f/fish/fish.tscn"),
 		shape = [
 			[true , true , true ],
 		],
@@ -411,7 +411,7 @@ func register() -> void:
 	}) 
 	
 	Registry.register_item("mushroom", {
-		scene = preload("res://equipment/mushroom/mushroom.tscn"),
+		scene = preload("res://equipment/m/mushroom/mushroom.tscn"),
 		shape = [
 			[true ],
 			[true ]
@@ -430,7 +430,7 @@ func register() -> void:
 	}) 
 	
 	Registry.register_item("snail_shell", {
-		scene = preload("res://equipment/snail_shell/snail_shell.tscn"),
+		scene = preload("res://equipment/s/snail_shell/snail_shell.tscn"),
 		shape = [
 			[true , true ],
 			[true , true ],
@@ -446,7 +446,7 @@ func register() -> void:
 	}) 
 	
 	Registry.register_item("sippy_straw", {
-		scene = preload("res://equipment/sippy_straw/sippy_straw.tscn"),
+		scene = preload("res://equipment/s/sippy_straw/sippy_straw.tscn"),
 		shape = [
 			[true ],
 			[true ],
@@ -468,7 +468,7 @@ func register() -> void:
 	}) 
 	
 	Registry.register_item("slime", {
-		scene = preload("res://equipment/slime/slime.tscn"),
+		scene = preload("res://equipment/s/slime/slime.tscn"),
 		shape = [
 			[true ],
 		],
@@ -492,7 +492,7 @@ func register() -> void:
 	}) 
 	
 	Registry.register_item("cauldron", {
-		scene = preload("res://equipment/cauldron/cauldron.tscn"),
+		scene = preload("res://equipment/c/cauldron/cauldron.tscn"),
 		shape = [
 			[true , true ],
 			[true , true ],
@@ -530,7 +530,7 @@ func register() -> void:
 	}) 
 	
 	Registry.register_item("magic_broom", {
-		scene = preload("res://equipment/magic_broom/magic_broom.tscn"),
+		scene = preload("res://equipment/m/magic_broom/magic_broom.tscn"),
 		shape = [
 			[true ],
 			[true ],
@@ -549,7 +549,7 @@ func register() -> void:
 	}) 
 	
 	Registry.register_item("cactus", {
-		scene = preload("res://equipment/cactus/cactus.tscn"),
+		scene = preload("res://equipment/c/cactus/cactus.tscn"),
 		shape = [
 			[true , true ],
 			[true , true ],
@@ -569,7 +569,7 @@ func register() -> void:
 	}) 
 	
 	Registry.register_item("plasma_core", {
-		scene = preload("res://equipment/plasma_core/plasma_core.tscn"),
+		scene = preload("res://equipment/p/plasma_core/plasma_core.tscn"),
 		shape = [
 			[true , true , true ],
 			[true , true , true ],
@@ -588,7 +588,7 @@ func register() -> void:
 	}) 
 	
 	Registry.register_item("sunglasses", {
-		scene = preload("res://equipment/sunglasses/sunglasses.tscn"),
+		scene = preload("res://equipment/s/sunglasses/sunglasses.tscn"),
 		shape = [
 			[true , true ],
 		],
@@ -612,7 +612,7 @@ func register() -> void:
 	}) 
 	
 	Registry.register_item("laser_eyes", {
-		scene = preload("res://equipment/laser_eyes/laser_eyes.tscn"),
+		scene = preload("res://equipment/l/laser_eyes/laser_eyes.tscn"),
 		shape = [
 			[true , true ],
 			[true , true ],
@@ -631,7 +631,7 @@ func register() -> void:
 	}) 
 	
 	Registry.register_item("globe", {
-		scene = preload("res://equipment/globe/globe.tscn"),
+		scene = preload("res://equipment/g/globe/globe.tscn"),
 		shape = [
 			[true , true ],
 			[true , true ],
@@ -648,7 +648,7 @@ func register() -> void:
 	}) 
 	
 	Registry.register_item("deal_with_the_devil", {
-		scene = preload("res://equipment/deal_with_the_devil/deal_with_the_devil.tscn"),
+		scene = preload("res://equipment/d/deal_with_the_devil/deal_with_the_devil.tscn"),
 		shape = [
 			[true , true ],
 			[true , true ],
@@ -665,7 +665,7 @@ func register() -> void:
 	}) 
 	
 	Registry.register_item("badge", {
-		scene = preload("res://equipment/badge/badge.tscn"),
+		scene = preload("res://equipment/b/badge/badge.tscn"),
 		shape = [
 			[true ],
 		],
@@ -683,7 +683,7 @@ func register() -> void:
 	})
 	
 	Registry.register_item("sulphur", {
-		scene = preload("res://equipment/sulphur/sulphur.tscn"),
+		scene = preload("res://equipment/s/sulphur/sulphur.tscn"),
 		shape = [
 			[true ],
 		],
@@ -708,7 +708,7 @@ func register() -> void:
 	}) 
 	
 	Registry.register_item("riot_shield", {
-		scene = preload("res://equipment/riot_shield/riot_shield.tscn"),
+		scene = preload("res://equipment/r/riot_shield/riot_shield.tscn"),
 		shape = [
 			[true , true ],
 			[true , true ],
@@ -726,7 +726,7 @@ func register() -> void:
 	}) 
 	
 	Registry.register_item("bulletproof_vest", {
-		scene = preload("res://equipment/bulletproof_vest/bulletproof_vest.tscn"),
+		scene = preload("res://equipment/b/bulletproof_vest/bulletproof_vest.tscn"),
 		shape = [
 			[true , true ],
 			[true , true ],
@@ -744,7 +744,7 @@ func register() -> void:
 	}) 
 	
 	Registry.register_item("baton", {
-		scene = preload("res://equipment/baton/baton.tscn"),
+		scene = preload("res://equipment/b/baton/baton.tscn"),
 		shape = [
 			[true ],
 			[true ],
@@ -763,7 +763,7 @@ func register() -> void:
 	}) 
 	
 	Registry.register_item("attack_drone", {
-		scene = preload("res://equipment/attack_drone/attack_drone.tscn"),
+		scene = preload("res://equipment/a/attack_drone/attack_drone.tscn"),
 		shape = [
 			[true , true , true ],
 			[true , true , true ],
@@ -787,7 +787,7 @@ func register() -> void:
 	}) 
 	
 	Registry.register_item("defense_drone", {
-		scene = preload("res://equipment/defense_drone/defense_drone.tscn"),
+		scene = preload("res://equipment/d/defense_drone/defense_drone.tscn"),
 		shape = [
 			[true , true , true ],
 			[true , true , true ],
@@ -807,7 +807,7 @@ func register() -> void:
 	}) 
 	
 	Registry.register_item("nuclear_launch_codes", {
-		scene = preload("res://equipment/nuclear_launch_codes/nuclear_launch_codes.tscn"),
+		scene = preload("res://equipment/n/nuclear_launch_codes/nuclear_launch_codes.tscn"),
 		shape = [
 			[true , true , true ],
 		],
@@ -828,7 +828,7 @@ func register() -> void:
 	}) 
 	
 	Registry.register_item("skull", {
-		scene = preload("res://equipment/skull/skull.tscn"),
+		scene = preload("res://equipment/s/skull/skull.tscn"),
 		shape = [
 			[true , true ],
 			[true , true ],
@@ -844,7 +844,7 @@ func register() -> void:
 	}) 
 	
 	Registry.register_item("bones", {
-		scene = preload("res://equipment/bones/bones.tscn"),
+		scene = preload("res://equipment/b/bones/bones.tscn"),
 		shape = [
 			[true , true ],
 			[true , true ],
@@ -857,7 +857,7 @@ func register() -> void:
 	}) 
 	
 	Registry.register_item("trumpet", {
-		scene = preload("res://equipment/trumpet/trumpet.tscn"),
+		scene = preload("res://equipment/t/trumpet/trumpet.tscn"),
 		shape = [
 			[true , true , true ],
 		],
@@ -879,7 +879,7 @@ func register() -> void:
 	})
 	
 	Registry.register_item("regenerative_tissue", {
-		scene = preload("res://equipment/regenerative_tissue/regenerative_tissue.tscn"),
+		scene = preload("res://equipment/r/regenerative_tissue/regenerative_tissue.tscn"),
 		shape = [
 			[true , false, false],
 			[true , true , true ],
@@ -898,7 +898,7 @@ func register() -> void:
 	})
 	
 	Registry.register_item("shovel", {
-		scene = preload("res://equipment/shovel/shovel.tscn"),
+		scene = preload("res://equipment/s/shovel/shovel.tscn"),
 		shape = [
 			[true ],
 			[true ],
@@ -916,5 +916,38 @@ func register() -> void:
 		passive_ability = {
 			generate_loot = func(loot, grid, _this):
 				grid.get_node("/root/Game").items_from_pool(loot, "treasure_loot", 1)},
+		tags = ["treasure_loot"]
+	}) 
+	
+	Registry.register_item("slots", {
+		scene = preload("res://equipment/s/slots/slots.tscn"),
+		shape = [
+			[true , true , true ],
+		],
+		stats = {
+			odds_0 = 33,
+			damage = 8,
+			shield_gain = 8,
+			status_applied = 1,
+		},
+		active_ability = func(grid, this):
+			var enemy = grid.get_enemy()
+			if grid.roll_item_chance("odds_0", this):
+				var damage = grid.get_item_stat(this, "damage")
+				damage["item_source"] = this
+				grid.attack(enemy, damage)
+			if grid.roll_item_chance("odds_0", this):
+				var shield_gain = grid.get_item_stat(this, "shield_gain")
+				grid.recover_shield(shield_gain)
+			if grid.roll_item_chance("odds_0", this):
+				if Registry.status_tag_lists.has("debuff"):
+					var status = Registry.status_tag_lists["debuff"].pick_random()
+					var status_applied = grid.get_item_stat(this, "status_applied")["final"]
+					enemy.add_status(status, status_applied)
+			if grid.roll_item_chance("odds_0", this):
+				if Registry.status_tag_lists.has("buff"):
+					var status = Registry.status_tag_lists["buff"].pick_random()
+					var status_applied = grid.get_item_stat(this, "status_applied")["final"]
+					grid.add_status(status, status_applied),
 		tags = ["treasure_loot"]
 	}) 

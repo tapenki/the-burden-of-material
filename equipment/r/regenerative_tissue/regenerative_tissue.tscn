@@ -1,0 +1,46 @@
+[gd_scene format=3 uid="uid://d34o8ng8223wi"]
+
+[ext_resource type="Script" uid="uid://hcvljlmyr8es" path="res://ui/equipment_item.gd" id="1_h0b5f"]
+[ext_resource type="Texture2D" uid="uid://ya75f22t1qlc" path="res://equipment/r/regenerative_tissue/regenerative_tissue.png" id="2_irvqf"]
+
+[node name="RegenerativeTissue" type="Control" unique_id=1620977827]
+layout_mode = 3
+anchors_preset = 0
+script = ExtResource("1_h0b5f")
+
+[node name="Sprite" type="TextureRect" parent="." unique_id=1247240217]
+layout_mode = 0
+pivot_offset_ratio = Vector2(0.5, 0.5)
+mouse_filter = 2
+texture = ExtResource("2_irvqf")
+
+[node name="SelectionArea" type="Control" parent="." unique_id=1948071879]
+anchors_preset = 0
+mouse_filter = 1
+
+[node name="Shape1" type="Control" parent="SelectionArea" unique_id=766256080]
+anchors_preset = 0
+offset_right = 48.0
+offset_bottom = 96.0
+mouse_filter = 1
+mouse_default_cursor_shape = 2
+
+[node name="Shape2" type="Control" parent="SelectionArea" unique_id=822670783]
+anchors_preset = 0
+offset_left = 96.0
+offset_top = 48.0
+offset_right = 144.0
+offset_bottom = 144.0
+mouse_filter = 1
+mouse_default_cursor_shape = 2
+
+[node name="Shape3" type="Control" parent="SelectionArea" unique_id=849986790]
+anchors_preset = 0
+offset_left = 48.0
+offset_top = 48.0
+offset_right = 96.0
+offset_bottom = 96.0
+mouse_filter = 1
+mouse_default_cursor_shape = 2
+
+[connection signal="gui_input" from="." to="." method="_on_gui_input"]

@@ -269,7 +269,7 @@ func register() -> void:
 			position = Vector2(3, 4),
 			rotation = 0,
 		}, {
-			type = "shovel",
+			type = "slots",
 			position = Vector2(2, 2),
 			rotation = 0,
 		}]

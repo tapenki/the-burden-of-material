@@ -1,0 +1,28 @@
+[gd_scene format=3 uid="uid://bemgwoys1x0xd"]
+
+[ext_resource type="Script" uid="uid://hcvljlmyr8es" path="res://ui/equipment_item.gd" id="1_j5ip5"]
+[ext_resource type="Texture2D" uid="uid://bgdmtd1hsoexo" path="res://equipment/s/spinach/spinach.png" id="2_385jd"]
+
+[node name="Spinach" type="Control" unique_id=1620977827]
+layout_mode = 3
+anchors_preset = 0
+script = ExtResource("1_j5ip5")
+
+[node name="Sprite" type="TextureRect" parent="." unique_id=1247240217]
+layout_mode = 0
+pivot_offset_ratio = Vector2(0.5, 0.5)
+mouse_filter = 2
+texture = ExtResource("2_385jd")
+
+[node name="SelectionArea" type="Control" parent="." unique_id=761036972]
+anchors_preset = 0
+mouse_filter = 1
+
+[node name="Shape1" type="Control" parent="SelectionArea" unique_id=1430213690]
+anchors_preset = 0
+offset_right = 48.0
+offset_bottom = 48.0
+mouse_filter = 1
+mouse_default_cursor_shape = 2
+
+[connection signal="gui_input" from="." to="." method="_on_gui_input"]

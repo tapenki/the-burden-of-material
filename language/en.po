@@ -306,6 +306,17 @@ msgstr "Regenerative Tissue"
 msgid "item_regenerative_tissue_description"
 msgstr "•Damaged by attack: Adapt, gaining *{status_applied}* regeneration."
 
+msgid "item_shovel_title"
+msgstr "Shovel"
+msgid "item_shovel_description"
+msgstr "•Use: Stab an enemy, dealing *{damage}* attack damage.[br]•Battle end: Dig for treasure."
+
+msgid "item_slots_title"
+msgstr "Slots"
+msgid "item_slots_description"
+msgstr "•Use: Spin the slots! *{odds_0}%* chance for each of the following:[br]Deal *{damage}* attack damage.[br]Gain *{shield_gain}* shield.[br]Apply *{status_applied}* Of a random debuff.[br]Gain *{status_applied}* of a random buff."
+
+
 # statuses
 
 msgid "status_poison_counter"

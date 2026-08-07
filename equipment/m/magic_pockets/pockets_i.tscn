@@ -1,0 +1,28 @@
+[gd_scene format=3 uid="uid://msrxxwalbwwg"]
+
+[ext_resource type="Script" uid="uid://c28tq32hc7prx" path="res://equipment/m/magic_pockets/magic_pockets.gd" id="1_spadf"]
+[ext_resource type="Texture2D" uid="uid://d1w0n0agqk8dd" path="res://equipment/m/magic_pockets/pockets_i.png" id="2_spadf"]
+
+[node name="PocketsI" type="Control" unique_id=1620977827]
+layout_mode = 3
+anchors_preset = 0
+script = ExtResource("1_spadf")
+
+[node name="Sprite" type="TextureRect" parent="." unique_id=1247240217]
+layout_mode = 0
+pivot_offset_ratio = Vector2(0.5, 0.5)
+mouse_filter = 2
+texture = ExtResource("2_spadf")
+
+[node name="SelectionArea" type="Control" parent="." unique_id=761036972]
+anchors_preset = 0
+mouse_filter = 1
+
+[node name="Shape1" type="Control" parent="SelectionArea" unique_id=1430213690]
+anchors_preset = 0
+offset_right = 192.0
+offset_bottom = 48.0
+mouse_filter = 1
+mouse_default_cursor_shape = 2
+
+[connection signal="gui_input" from="." to="." method="_on_gui_input"]
