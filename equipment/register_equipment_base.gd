@@ -517,9 +517,7 @@ func register() -> void:
 					grid.add_item_stat(this, "status", 1)
 					this["item_scene"].pop()
 					if not item.get("destroyed"):
-						grid.disconnect_item(item)
-						item["destroyed"] = true
-						item["item_scene"].kill()},
+						grid.destroy_item(item)},
 		tags = ["treasure_loot"]
 	}) 
 	

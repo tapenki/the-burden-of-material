@@ -151,6 +151,7 @@ func equip(from_position):
 	grid.connect_item(equipment_reference)
 	z_index = 0
 	grid.move_child(self, 0)
+	grid.update_equipment_layout()
 	return true
 
 func unequip():
@@ -158,6 +159,7 @@ func unequip():
 	grid.disconnect_item(equipment_reference)
 	z_index = 3
 	move_to_front()
+	grid.update_equipment_layout()
 
 func _on_gui_input(event: InputEvent) -> void:
 	if not grid.can_edit:

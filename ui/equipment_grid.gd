@@ -13,10 +13,21 @@ var layout = [
 	[true , true , true , true , true , true , true , true ],
 	[true , true , true , true , true , true , true , true ],
 	[true , true , true , true , true , true , true , true ],
-	[true , true , true , true , true , true , true , true ]
+	[true , true , true , true , true , true , true , true ],
 ]
 var offset_x = 4
 var offset_y = 4
+
+var equipment_layout = [
+	[false, false, false, false, false, false, false, false],
+	[false, false, false, false, false, false, false, false],
+	[false, false, false, false, false, false, false, false],
+	[false, false, false, false, false, false, false, false],
+	[false, false, false, false, false, false, false, false],
+	[false, false, false, false, false, false, false, false],
+	[false, false, false, false, false, false, false, false],
+	[false, false, false, false, false, false, false, false],
+]
 
 var equipment: Array
 var statuses: Dictionary
@@ -170,6 +181,12 @@ func disconnect_item(item):
 				self[key].disconnect(callable)
 	item.erase("connected_callables")
 
+func destroy_item(item):
+	disconnect_item(item)
+	item["destroyed"] = true
+	item["item_scene"].kill()
+	update_equipment_layout()
+
 func load_item(item):
 	if item.get("equipped", true):
 		connect_item(item)
@@ -245,6 +262,7 @@ func load_grid():
 				add_child(grid_slot)
 	for item in equipment:
 		load_item(item)
+	update_equipment_layout()
 
 func unlock_slot(x, y):
 	if not layout[y][x]:
@@ -290,7 +308,11 @@ func rotate_shape(grid_shape, grid_rotation):
 				rotated_grid_shape[row.size() - 1 - x].append(value)
 	return rotated_grid_shape
 
-func get_item_at_position(at_x, at_y):
+func update_equipment_layout():
+	for y in equipment_layout.size():
+		var row = equipment_layout[y]
+		for x in row.size():
+			row[x] = false
 	for item in equipment:
 		if not item.get("equipped", true):
 			continue
@@ -299,8 +321,24 @@ func get_item_at_position(at_x, at_y):
 		for y in shape.size():
 			var row = shape[y]
 			for x in row.size():
-				if row[x] and at_x == item["position"].x + x and at_y == item["position"].y + y:
-					return item
+				if row[x]:
+					equipment_layout[item["position"].y + y][item["position"].x + x] = item
+
+func get_item_at_position(at_x, at_y):
+	if at_x < 0 or at_x >= 8 or at_y < 0 or at_y >= 8:
+		return
+	var item = equipment_layout[at_y][at_x]
+	return item
+	#for item in equipment:
+		#if not item.get("equipped", true):
+			#continue
+		#var item_data = Registry.item_data[item["type"]]
+		#var shape = rotate_shape(item_data["shape"], item["rotation"])
+		#for y in shape.size():
+			#var row = shape[y]
+			#for x in row.size():
+				#if row[x] and at_x == item["position"].x + x and at_y == item["position"].y + y:
+					#return item
 
 func get_connected_items(item, connections_index):
 	var connected = []
