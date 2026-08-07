@@ -84,12 +84,12 @@ msgstr "•Your items have +1 health and shield gain."
 msgid "item_milk_title"
 msgstr "Milk"
 msgid "item_milk_description"
-msgstr "•Use (under 50% health): Sip the milk, recovering *{health_gain}* health."
+msgstr "•Use (under 50% health): Sip milk, recovering *{health_gain}* health."
 
 msgid "item_cheese_title"
 msgstr "Cheese"
 msgid "item_cheese_description"
-msgstr "•Use (have poison): Eat the cheese, removing 3 poison and gaining *{status_applied}* regeneration."
+msgstr "•Use (have poison): Eat cheese, removing 3 poison and gaining *{status_applied}* regeneration."
 
 msgid "item_shiv_title"
 msgstr "Shiv"
@@ -129,12 +129,12 @@ msgstr "•Use: Cow Slam! an enemy, dealing *{damage}* attack damage.[br]•Has 
 msgid "item_beef_title"
 msgstr "Beef"
 msgid "item_beef_description"
-msgstr "•You have +25 health."
+msgstr "•Battle start: Eat beef, gaining *{health_gain}* bonus health."
 
 msgid "item_wood_title"
 msgstr "Wood"
 msgid "item_wood_description"
-msgstr "•You have +25 shield."
+msgstr "•Battle start: Barricade, gaining *{shield_gain}* shield."
 
 msgid "item_wise_words_title"
 msgstr "Technique: Wise Words"
@@ -219,7 +219,7 @@ msgstr "•Damaged by attack: Cactus retaliates, dealing *{damage}* damage."
 msgid "item_plasma_core_title"
 msgstr "Plasma Core"
 msgid "item_plasma_core_description"
-msgstr "•Battle start: Burn bright, progressing fatigue by 5 seconds.[br]•You have +100 shield."
+msgstr "•Battle start: Burn bright, gaining *{shield_gain}* shield and progressing fatigue by 5 seconds."
 
 msgid "item_sunglasses_title"
 msgstr "Sunglasses"
@@ -239,17 +239,17 @@ msgstr "•Use: Escape country, gaining *{shield_gain}* shield, 1 dodge, and pro
 msgid "item_spinach_title"
 msgstr "Spinach"
 msgid "item_spinach_description"
-msgstr "•You have +5 health.[br]•Battle start: Eat the spinach, gaining *{status_applied}* strength."
+msgstr "•You have +5 health.[br]•Battle start: Eat spinach, gaining *{health_gain}* bonus health and *{status_applied}* strength."
 
 msgid "item_deal_with_the_devil_title"
 msgstr "Deal With The Devil"
 msgid "item_deal_with_the_devil_description"
-msgstr "•You have -25 health and can use +1 item at a time.[br]•Death: The Phobiarch takes your soul."
+msgstr "•Battle start: Bleed out, losing 25 max health.[br]•You can use +1 item at a time.[br]•Death: The Phobiarch takes your soul."
 
 msgid "item_badge_title"
 msgstr "Badge"
 msgid "item_badge_description"
-msgstr "•Battle start: Show the badge, stunning the enemy for 0.4 seconds.[br]•You have +5 shield."
+msgstr "•Battle start: Show the badge, gaining *{shield_gain}* shield and stunning the enemy for 0.4 seconds."
 
 msgid "item_sulphur_title"
 msgstr "Sulphur"
@@ -356,7 +356,7 @@ msgstr "•Use: Bludgeon an enemy, dealing *{damage}* attack damage.[br]•Conne
 msgid "item_egg_title"
 msgstr "Egg"
 msgid "item_egg_description"
-msgstr "•Use: Eat the egg, recovering *{health_gain}* health and gaining *{status_applied}* strength."
+msgstr "•Use: Eat egg, recovering *{health_gain}* health and gaining *{status_applied}* strength."
 
 # bomber
 

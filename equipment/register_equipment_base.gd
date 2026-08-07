@@ -40,16 +40,17 @@ func register() -> void:
 			[true ],
 		],
 		stats = {
+			health_gain = 5,
 			status_applied = 1
 		},
 		passive_ability = {
 			battle_start = func(grid, this):
+				var health_gain = grid.get_item_stat(this, "health_gain")
+				grid.add_stat("max_health", health_gain["final"])
+				grid.recover_health(health_gain)
 				var status_applied = grid.get_item_stat(this, "status_applied")["final"]
 				grid.add_status("strength", status_applied)
-				this["item_scene"].pop(),
-			stat_modifiers = func(stat, modifiers, _grid, _this):
-				if stat == "health" || stat == "max_health":
-					modifiers["base"] += 5},
+				this["item_scene"].pop()},
 		tags = ["treasure_loot"]
 	}) 
 	
@@ -220,10 +221,15 @@ func register() -> void:
 			[true , true ],
 			[true , true ],
 		],
+		stats = {
+			health_gain = 25
+		},
 		passive_ability = {
-			stat_modifiers = func(stat, modifiers, _grid, _this):
-				if stat == "health" || stat == "max_health":
-					modifiers["base"] += 25},
+			battle_start = func(grid, this):
+				var health_gain = grid.get_item_stat(this, "health_gain")
+				grid.add_stat("max_health", health_gain["final"])
+				grid.recover_health(health_gain)
+				this["item_scene"].pop()},
 		tags = ["treasure_loot"]
 	}) 
 	
@@ -254,10 +260,14 @@ func register() -> void:
 		shape = [
 			[true , true , true ],
 		],
+		stats = {
+			shield_gain = 25
+		},
 		passive_ability = {
-			stat_modifiers = func(stat, modifiers, _grid, _this):
-				if stat == "shield":
-					modifiers["base"] += 25},
+			battle_start = func(grid, this):
+				var shield_gain = grid.get_item_stat(this, "shield_gain")
+				grid.recover_shield(shield_gain)
+				this["item_scene"].pop()},
 		tags = ["treasure_loot"]
 	}) 
 	
@@ -567,11 +577,13 @@ func register() -> void:
 			[true , true , true ],
 			[true , true , true ],
 		],
+		stats = {
+			shield_gain = 100
+		},
 		passive_ability = {
-			stat_modifiers = func(stat, modifiers, _grid, _this):
-				if stat == "shield":
-					modifiers["base"] += 100,
 			battle_start = func(grid, this):
+				var shield_gain = grid.get_item_stat(this, "shield_gain")
+				grid.recover_shield(shield_gain)
 				grid.progress_fatigue(5.0)
 				this["item_scene"].pop()},
 		tags = ["treasure_loot"]
@@ -632,7 +644,7 @@ func register() -> void:
 		active_ability = func(grid, this):
 			grid.add_status("dodge", 1)
 			var shield_gain = grid.get_item_stat(this, "shield_gain")
-			grid.add_stat("shield", shield_gain["final"])
+			grid.recover_shield(shield_gain)
 			grid.progress_fatigue(0.5),
 		tags = ["treasure_loot"]
 	}) 
@@ -644,9 +656,11 @@ func register() -> void:
 			[true , true ],
 		],
 		passive_ability = {
+			battle_start = func(grid, this):
+				grid.add_stat("max_health", -25)
+				grid.add_stat("health", -25)
+				this["item_scene"].pop(),
 			stat_modifiers = func(stat, modifiers, _grid, _this):
-				if stat == "max_health" or stat == "health":
-					modifiers["base"] -= 25
 				if stat == "multitasking":
 					modifiers["base"] += 1},
 		tags = ["treasure_loot"]
@@ -657,11 +671,13 @@ func register() -> void:
 		shape = [
 			[true ],
 		],
+		stats = {
+			shield_gain = 5
+		},
 		passive_ability = {
-			stat_modifiers = func(stat, modifiers, _grid, _this):
-				if stat == "shield":
-					modifiers["base"] += 5,
 			battle_start = func(grid, this):
+				var shield_gain = grid.get_item_stat(this, "shield_gain")
+				grid.recover_shield(shield_gain)
 				var enemy = grid.get_enemy()
 				enemy.add_stat("charge", -0.4)
 				this["item_scene"].pop()},

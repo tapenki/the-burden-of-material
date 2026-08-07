@@ -271,7 +271,7 @@ func register() -> void:
 			position = Vector2(3, 4),
 			rotation = 0,
 		}, {
-			type = "cheese",
+			type = "deal_with_the_devil",
 			position = Vector2(3, 5),
 			rotation = 0,
 		}]
