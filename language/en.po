@@ -239,7 +239,7 @@ msgstr "•Use: Escape country, gaining *{shield_gain}* shield, 1 dodge, and pro
 msgid "item_spinach_title"
 msgstr "Spinach"
 msgid "item_spinach_description"
-msgstr "•You have +5 health.[br]•Battle start: Eat spinach, gaining *{health_gain}* bonus health and *{status_applied}* strength."
+msgstr "•Battle start: Eat spinach, gaining *{health_gain}* bonus health and *{status_applied}* strength."
 
 msgid "item_deal_with_the_devil_title"
 msgstr "Deal With The Devil"

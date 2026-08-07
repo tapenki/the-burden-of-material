@@ -334,7 +334,7 @@ func update_equipment_layout():
 		for y in shape.size():
 			var row = shape[y]
 			for x in row.size():
-				if row[x] and item["position"].x + x > 0 and item["position"].x + x < 8 and item["position"].y + y > 0 and item["position"].y + y < 8:
+				if row[x] and item["position"].x + x >= 0 and item["position"].x + x < 8 and item["position"].y + y >= 0 and item["position"].y + y < 8:
 					equipment_layout[item["position"].y + y][item["position"].x + x] = item
 
 func get_item_at_position(at_x, at_y):

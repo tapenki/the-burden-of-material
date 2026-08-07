@@ -159,13 +159,14 @@ func generate_reward(items):
 
 func proceed_to_rewards():
 	play_sound("Click", 1)
-	if not Registry.encounter_schedule.has(day + 1):
-		get_tree().reload_current_scene()
-		return
 	var rewards = []
 	var pocket_reward = []
 	
 	if battle["won"]:
+		if not Registry.encounter_schedule.has(day + 1):
+			get_tree().reload_current_scene()
+			return
+		
 		var valid_loot = []
 		
 		for item in enemy_equipment.equipment:
