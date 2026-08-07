@@ -67,6 +67,8 @@ signal fatigue_start(arguments)
 
 signal battle_start(arguments)
 
+signal generate_loot(arguments)
+
 var signals = [
 	stat_modifiers,
 	item_stat_modifiers,
@@ -80,6 +82,7 @@ var signals = [
 	game_tick,
 	fatigue_start,
 	battle_start,
+	generate_loot,
 ]
 
 func calculate_modifiers(modifiers):
@@ -207,9 +210,9 @@ func add_status(status, stacks):
 		var counter = status_data.get("counteracts")
 		if counter and statuses.has(counter):
 			var countered_status = statuses[counter]
-			var addcounter = -stacks
+			var oldstacks = stacks
 			stacks -= countered_status["stacks"]
-			add_status(counter, addcounter)
+			add_status(counter, -oldstacks)
 		if stacks <= 0:
 			return
 		if statuses.has(status):
@@ -234,10 +237,14 @@ func add_status(status, stacks):
 		statuses[status]["status_scene"].text = tr("status_"+status+"_counter") + " ({stacks})".format({stacks = statuses[status]["stacks"]})
 	elif stacks < 0:
 		if statuses.has(status):
+			var oldstacks = statuses[status]["stacks"]
 			statuses[status]["stacks"] += stacks
 			if statuses[status]["stacks"] <= 0:
 				remove_status(status)
-			text_effect(str(stacks), Color.WHITE)
+				text_effect(str(-oldstacks), Color.WHITE)
+			else:
+				statuses[status]["status_scene"].text = tr("status_"+status+"_counter") + " ({stacks})".format({stacks = statuses[status]["stacks"]})
+				text_effect(str(stacks), Color.WHITE)
 	else:
 		text_effect("+" + str(stacks), Color.WHITE)
 
@@ -321,7 +328,7 @@ func update_equipment_layout():
 		for y in shape.size():
 			var row = shape[y]
 			for x in row.size():
-				if row[x]:
+				if row[x] and item["position"].x + x > 0 and item["position"].x + x < 8 and item["position"].y + y > 0 and item["position"].y + y < 8:
 					equipment_layout[item["position"].y + y][item["position"].x + x] = item
 
 func get_item_at_position(at_x, at_y):

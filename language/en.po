@@ -301,6 +301,11 @@ msgstr "Trumpet"
 msgid "item_trumpet_description"
 msgstr "•Has *{uses}* use(s).[br]•Use: Sound the trumpet, gaining *{status_applied}* strength.[br]•Your items have +77% damage while this is out of uses."
 
+msgid "item_regenerative_tissue_title"
+msgstr "Regenerative Tissue"
+msgid "item_regenerative_tissue_description"
+msgstr "•Damaged by attack: Adapt, gaining *{status_applied}* regeneration."
+
 # statuses
 
 msgid "status_poison_counter"

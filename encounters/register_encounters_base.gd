@@ -1,7 +1,5 @@
 extends Node
 
-signal registered()
-
 func register() -> void:
 	Registry.register_encounter("bandit", {
 		enemies = [
@@ -291,6 +289,45 @@ func register() -> void:
 		]
 	}, [5])
 	
+	Registry.register_encounter("worm", {
+		enemies = [
+			{
+				character = preload("res://encounters/worm/worm.png"),
+				layout = [
+					[false, false, false, false, false, false, false, false],
+					[false, false, false, false, false, false, false, false],
+					[true , true , true , true , true , true , true , true ],
+					[true , true , true , true , true , true , true , true ],
+					[true , true , true , true , true , true , true , true ],
+					[true , true , true , true , true , true , true , true ],
+					[false, false, false, false, false, false, false, false],
+					[false, false, false, false, false, false, false, false]
+				],
+				equipment = [{
+						type = "shovel",
+						position = Vector2(0, 3),
+						rotation = 3,
+					}, {
+						type = "shovel",
+						position = Vector2(0, 4),
+						rotation = 1,
+					}, {
+						type = "roots",
+						position = Vector2(0, 5),
+						rotation = 0,
+					}, {
+						type = "roots",
+						position = Vector2(2, 5),
+						rotation = 0,
+					},{
+						type = "regenerative_tissue",
+						position = Vector2(5, 2),
+						rotation = 0,
+					},]
+			}
+		]
+	}, [5])
+	
 	Registry.register_encounter("witch", {
 		enemies = [
 			{
@@ -330,6 +367,49 @@ func register() -> void:
 						position = Vector2(2, 6),
 						rotation = 1,
 					},]
+			}
+		]
+	}, [6])
+	
+	Registry.register_encounter("skeleton", {
+		enemies = [
+			{
+				character = preload("res://encounters/skeleton/skeleton.png"),
+				layout = [
+					[false, false, false, false, false, false, false, false],
+					[false, true , true , true , true , true , true , false],
+					[false, true , true , true , true , true , true , false],
+					[false, true , false, true , true , false, true ,false],
+					[false, true , true , true , true , true , true , false],
+					[false, true , true , true , true , true , true , false],
+					[false, false, true , true , true , true , false, false],
+					[false, false, false, false, false, false, false, false]
+				],
+				equipment = [{
+						type = "skull",
+						position = Vector2(3, 1),
+						rotation = 0,
+					}, {
+						type = "bones",
+						position = Vector2(3, 3),
+						rotation = 0,
+					}, {
+						type = "trumpet",
+						position = Vector2(1, 1),
+						rotation = 1,
+					}, {
+						type = "milk",
+						position = Vector2(6, 1),
+						rotation = 0,
+					}, {
+						type = "shiv",
+						position = Vector2(2, 5),
+						rotation = 0,
+					}, {
+						type = "shiv",
+						position = Vector2(5, 5),
+						rotation = 0,
+					}]
 			}
 		]
 	}, [6])
@@ -381,49 +461,6 @@ func register() -> void:
 						position = Vector2(6, 5),
 						rotation = 0,
 					},]
-			}
-		]
-	}, [7])
-	
-	Registry.register_encounter("skeleton", {
-		enemies = [
-			{
-				character = preload("res://encounters/skeleton/skeleton.png"),
-				layout = [
-					[false, false, false, false, false, false, false, false],
-					[false, true , true , true , true , true , true , false],
-					[false, true , true , true , true , true , true , false],
-					[false, true , false, true , true , false, true ,false],
-					[false, true , true , true , true , true , true , false],
-					[false, true , true , true , true , true , true , false],
-					[false, false, true , true , true , true , false, false],
-					[false, false, false, false, false, false, false, false]
-				],
-				equipment = [{
-						type = "skull",
-						position = Vector2(3, 1),
-						rotation = 0,
-					}, {
-						type = "bones",
-						position = Vector2(3, 3),
-						rotation = 0,
-					}, {
-						type = "trumpet",
-						position = Vector2(1, 1),
-						rotation = 1,
-					}, {
-						type = "milk",
-						position = Vector2(6, 1),
-						rotation = 0,
-					}, {
-						type = "shiv",
-						position = Vector2(2, 5),
-						rotation = 0,
-					}, {
-						type = "shiv",
-						position = Vector2(5, 5),
-						rotation = 0,
-					}]
 			}
 		]
 	}, [7])
@@ -655,5 +692,3 @@ func register() -> void:
 			}
 		]
 	}, [10])
-	
-	registered.emit()

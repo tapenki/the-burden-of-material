@@ -1,7 +1,5 @@
 extends Node
 
-signal registered()
-
 func register() -> void:
 	Registry.register_item("salt", {
 		scene = preload("res://equipment/salt/salt.tscn"),
@@ -880,4 +878,43 @@ func register() -> void:
 		tags = ["treasure_loot"]
 	})
 	
-	registered.emit()
+	Registry.register_item("regenerative_tissue", {
+		scene = preload("res://equipment/regenerative_tissue/regenerative_tissue.tscn"),
+		shape = [
+			[true , false, false],
+			[true , true , true ],
+			[false, false, true ],
+		],
+		stats = {
+			status_applied = 1
+		},
+		passive_ability = {
+			damage_taken = func(damage, grid, this):
+				if damage.get("attack"):
+					var status_applied = grid.get_item_stat(this, "status_applied")["final"]
+					grid.add_status("regeneration", status_applied)
+					this["item_scene"].pop()},
+		tags = ["treasure_loot"],
+	})
+	
+	Registry.register_item("shovel", {
+		scene = preload("res://equipment/shovel/shovel.tscn"),
+		shape = [
+			[true ],
+			[true ],
+			[true ],
+			[true ],
+		],
+		stats = {
+			damage = 8
+		},
+		active_ability = func(grid, this):
+			var enemy = grid.get_enemy()
+			var damage = grid.get_item_stat(this, "damage")
+			damage["item_source"] = this
+			grid.attack(enemy, damage),
+		passive_ability = {
+			generate_loot = func(loot, grid, _this):
+				grid.get_node("/root/Game").items_from_pool(loot, "treasure_loot", 1)},
+		tags = ["treasure_loot"]
+	}) 

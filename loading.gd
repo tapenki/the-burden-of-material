@@ -14,6 +14,6 @@ func load_scripts():
 		var script = load(script_path)
 		var node = Node.new()
 		node.set_script(script)
-		node.register.call_deferred()
-		await node.registered
+		node.register()
+		await get_tree().process_frame
 	get_tree().change_scene_to_file("res://game.tscn")

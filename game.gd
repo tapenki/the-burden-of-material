@@ -187,6 +187,9 @@ func proceed_to_rewards():
 			get_node("RewardBackground/Title").text = "ui_gift_from_grandma"
 	
 	items_from_pool(rewards, "treasure_loot", 3)
+	
+	player_equipment.generate_loot.emit([rewards, player_equipment])
+	
 	generate_reward(rewards)
 	
 	items_from_pool(pocket_reward, "pockets", 1)

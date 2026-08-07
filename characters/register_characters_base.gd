@@ -11,8 +11,6 @@ var basic_layout = [
 	[false, false, false, false, false, false, false, false]
 ]
 
-signal registered()
-
 func register() -> void:
 	## knight
 	Registry.register_item("zweihander", {
@@ -271,10 +269,8 @@ func register() -> void:
 			position = Vector2(3, 4),
 			rotation = 0,
 		}, {
-			type = "deal_with_the_devil",
-			position = Vector2(3, 5),
+			type = "shovel",
+			position = Vector2(2, 2),
 			rotation = 0,
 		}]
 	})
-	
-	registered.emit()
