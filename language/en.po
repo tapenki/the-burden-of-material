@@ -264,7 +264,7 @@ msgstr "•Use: Raise shield, gaining *{shield_gain}* shield and stunning the en
 msgid "item_bulletproof_vest_title"
 msgstr "Bulletproof Vest"
 msgid "item_bulletproof_vest_description"
-msgstr "•You have +25 shield.[br]•10 or more attack damage taken: The vest retaliates, stunning the enemy for 0.2 seconds."
+msgstr "•Battle start: Wear the vest, gaining *{shield_gain}* shield.[br]•10 or more attack damage taken: The vest retaliates, stunning the enemy for 0.2 seconds."
 
 msgid "item_baton_title"
 msgstr "Baton"
@@ -316,6 +316,15 @@ msgstr "Slots"
 msgid "item_slots_description"
 msgstr "•Use: Spin the slots! *{odds_0}%* chance for each of the following:[br]Deal *{damage}* attack damage.[br]Gain *{shield_gain}* shield.[br]Apply *{status_applied}* Of a random debuff.[br]Gain *{status_applied}* of a random buff."
 
+msgid "item_sheet_metal_title"
+msgstr "Sheet Metal"
+msgid "item_sheet_metal_description"
+msgstr "•Battle start: Reinforce, gaining *{shield_gain}* shield. *{odds_0}%* chance to gain shield twice."
+
+msgid "item_poker_chip_title"
+msgstr "Poker Chip"
+msgid "item_poker_chip_description"
+msgstr "•Your items have +25% ability odds."
 
 # statuses
 

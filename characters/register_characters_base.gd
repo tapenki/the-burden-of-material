@@ -272,5 +272,13 @@ func register() -> void:
 			type = "slots",
 			position = Vector2(2, 2),
 			rotation = 0,
+		}, {
+			type = "sheet_metal",
+			position = Vector2(2, 2),
+			rotation = 0,
+		}, {
+			type = "poker_chip",
+			position = Vector2(2, 2),
+			rotation = 0,
 		}]
 	})

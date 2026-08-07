@@ -731,15 +731,19 @@ func register() -> void:
 			[true , true ],
 			[true , true ],
 		],
+		stats = {
+			shield_gain = 25,
+		},
 		passive_ability = {
 			damage_taken = func(damage, grid, this):
 				if damage.get("attack") and damage["final"] >= 10:
 					var enemy = grid.get_enemy()
 					enemy.add_stat("charge", -0.2)
 					this["item_scene"].pop(),
-			stat_modifiers = func(stat, modifiers, _grid, _this):
-				if stat == "shield":
-					modifiers["base"] += 25},
+			battle_start = func(grid, this):
+				var shield_gain = grid.get_item_stat(this, "shield_gain")
+				grid.recover_shield(shield_gain)
+				this["item_scene"].pop()},
 		tags = ["treasure_loot"]
 	}) 
 	
@@ -925,7 +929,7 @@ func register() -> void:
 			[true , true , true ],
 		],
 		stats = {
-			odds_0 = 33,
+			odds_0 = 40,
 			damage = 8,
 			shield_gain = 8,
 			status_applied = 1,
@@ -949,5 +953,37 @@ func register() -> void:
 					var status = Registry.status_tag_lists["buff"].pick_random()
 					var status_applied = grid.get_item_stat(this, "status_applied")["final"]
 					grid.add_status(status, status_applied),
+		tags = ["treasure_loot"]
+	}) 
+	
+	Registry.register_item("sheet_metal", {
+		scene = preload("res://equipment/s/sheet_metal/sheet_metal.tscn"),
+		shape = [
+			[false, true , true ],
+			[true , true , false],
+		],
+		stats = {
+			odds_0 = 40,
+			shield_gain = 20,
+		},
+		passive_ability = {
+			battle_start = func(grid, this):
+				var shield_gain = grid.get_item_stat(this, "shield_gain")
+				grid.recover_shield(shield_gain)
+				if grid.roll_item_chance("odds_0", this):
+					grid.recover_shield(shield_gain)
+				this["item_scene"].pop()},
+		tags = ["treasure_loot"]
+	})
+	
+	Registry.register_item("poker_chip", {
+		scene = preload("res://equipment/p/poker_chip/poker_chip.tscn"),
+		shape = [
+			[true ],
+		],
+		passive_ability = {
+			item_stat_modifiers = func(stat, modifiers, _grid, _item, _this):
+				if stat.substr(0, 5) == "odds_":
+					modifiers["add_mult"] += 0.25},
 		tags = ["treasure_loot"]
 	}) 
