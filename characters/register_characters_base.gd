@@ -273,7 +273,7 @@ func register() -> void:
 			position = Vector2(2, 2),
 			rotation = 0,
 		}, {
-			type = "sheet_metal",
+			type = "pillow",
 			position = Vector2(2, 2),
 			rotation = 0,
 		}, {

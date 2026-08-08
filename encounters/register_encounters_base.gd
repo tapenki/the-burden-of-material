@@ -201,7 +201,7 @@ func register() -> void:
 					}, {
 						type = "wood",
 						position = Vector2(5, 3),
-						rotation = 1,
+						rotation = 3,
 					}, {
 						type = "wise_words",
 						position = Vector2(3, 3),
@@ -239,7 +239,7 @@ func register() -> void:
 						rotation = 0,
 					}, {
 						type = "hunting_rifle",
-						position = Vector2(3, 2),
+						position = Vector2(3, 4),
 						rotation = 0,
 					}]
 			}
@@ -459,6 +459,49 @@ func register() -> void:
 					}, {
 						type = "roots",
 						position = Vector2(6, 5),
+						rotation = 0,
+					},]
+			}
+		]
+	}, [7])
+	
+	Registry.register_encounter("slot_machine", {
+		enemies = [
+			{
+				character = preload("res://encounters/slot_machine/slot_machine.png"),
+				layout = [
+					[false, false, true , true , true , true , false, false],
+					[false, false, true , true , true , true , false, false],
+					[false, false, true , true , true , true , false, false],
+					[false, false, true , true , true , true , false, false],
+					[false, false, true , true , true , true , false, false],
+					[false, false, true , true , true , true , false, false],
+					[false, false, true , true , true , true , false, false],
+					[false, false, true , true , true , true , false, false]
+				],
+				equipment = [{
+						type = "slots",
+						position = Vector2(2, 1),
+						rotation = 0,
+					},{
+						type = "slots",
+						position = Vector2(3, 2),
+						rotation = 0,
+					},{
+						type = "poker_chip",
+						position = Vector2(5, 1),
+						rotation = 0,
+					},{
+						type = "poker_chip",
+						position = Vector2(2, 2),
+						rotation = 0,
+					},{
+						type = "sheet_metal",
+						position = Vector2(2, 4),
+						rotation = 0,
+					},{
+						type = "sheet_metal",
+						position = Vector2(3, 6),
 						rotation = 0,
 					},]
 			}

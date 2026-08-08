@@ -258,14 +258,26 @@ func register() -> void:
 		shape = [
 			[true , true , true ],
 		],
+		connections = [
+			{
+				active = preload("res://ui/hearts_connection_active.tscn"),
+				inactive = preload("res://ui/hearts_connection_inactive.tscn"),
+				shape = [
+					[true , true, true],
+					[true , true, true],
+				],
+				offset = Vector2i(0, -2)
+			}
+		],
 		stats = {
-			shield_gain = 25
+			shield_gain = 3
 		},
 		passive_ability = {
-			battle_start = func(grid, this):
-				var shield_gain = grid.get_item_stat(this, "shield_gain")
-				grid.recover_shield(shield_gain)
-				this["item_scene"].pop()},
+			item_used = func(item, grid, this):
+				if grid.get_connected_items(this, 0).has(item):
+					var shield_gain = grid.get_item_stat(this, "shield_gain")
+					grid.recover_shield(shield_gain)
+					this["item_scene"].pop()},
 		tags = ["treasure_loot"]
 	}) 
 	
@@ -294,6 +306,8 @@ func register() -> void:
 			fatigue_start = func(grid, this):
 				var health_gain = grid.get_item_stat(this, "health_gain")
 				grid.recover_health(health_gain)
+				for item in grid.equipment:
+					grid.add_item_stat(item, "uses", 1, "base")
 				this["item_scene"].pop()},
 		tags = ["treasure_loot"]
 	}) 
@@ -576,7 +590,7 @@ func register() -> void:
 			[true , true , true ],
 		],
 		stats = {
-			shield_gain = 100
+			shield_gain = 75
 		},
 		passive_ability = {
 			battle_start = func(grid, this):

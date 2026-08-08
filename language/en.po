@@ -134,7 +134,7 @@ msgstr "•Battle start: Eat beef, gaining *{health_gain}* bonus health."
 msgid "item_wood_title"
 msgstr "Wood"
 msgid "item_wood_description"
-msgstr "•Battle start: Barricade, gaining *{shield_gain}* shield."
+msgstr "•Used connected item: Take cover, gaining *{shield_gain}* shield."
 
 msgid "item_wise_words_title"
 msgstr "Technique: Wise Words"
@@ -149,7 +149,7 @@ msgstr "•Use: Chop an enemy, dealing *{damage}* attack damage. Hits twice agai
 msgid "item_pillow_title"
 msgstr "Pillow"
 msgid "item_pillow_description"
-msgstr "•Fatigue start: Sleep on pillow, recovering *{health_gain}* health."
+msgstr "•Fatigue start: Sleep on pillow, recovering *{health_gain}* health and granting your items +1 use."
 
 msgid "item_beehive_title"
 msgstr "Beehive"
