@@ -229,16 +229,16 @@ func add_status(status, stacks):
 				status_instance.horizontal_alignment = HorizontalAlignment.HORIZONTAL_ALIGNMENT_RIGHT
 			character_sprite.get_node("Statuses").add_child(status_instance)
 			statuses[status] = {"stacks" = stacks, "status_scene" = status_instance}
-			if not statuses[status].get("connected_callables"):
-				if status_data.has("passive_ability"):
-					for key in status_data["passive_ability"].keys():
-						var ability = status_data["passive_ability"][key]
-						var wrapper = func(arguments):
+			if status_data.has("passive_ability"):
+				for key in status_data["passive_ability"].keys():
+					var ability = status_data["passive_ability"][key]
+					var wrapper = func(arguments):
+						if statuses.has(status): ## in case status gets removed by the same signal that activated it
 							ability.bind(statuses[status]).callv(arguments)
-						self[key].connect(wrapper)
-						if not statuses[status].get("connected_callables"):
-							statuses[status]["connected_callables"] = {}
-							statuses[status]["connected_callables"][key] = wrapper
+					self[key].connect(wrapper)
+					if not statuses[status].get("connected_callables"):
+						statuses[status]["connected_callables"] = {}
+					statuses[status]["connected_callables"][key] = wrapper
 		text_effect("+" + str(stacks), Color.WHITE)
 		statuses[status]["status_scene"].text = tr("status_"+status+"_counter") + " ({stacks})".format({stacks = statuses[status]["stacks"]})
 	elif stacks < 0:
@@ -253,6 +253,14 @@ func add_status(status, stacks):
 				text_effect(str(stacks), Color.WHITE)
 	else:
 		text_effect("+" + str(stacks), Color.WHITE)
+
+func get_statuses_of_tag(tag):
+	var got = []
+	for status in statuses.keys():
+		var status_data = Registry.status_data[status]
+		if status_data.has("tags") and status_data["tags"].has(tag):
+			got.append(status)
+	return got
 
 func unload_grid():
 	for check_signal in signals:

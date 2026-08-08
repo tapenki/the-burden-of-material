@@ -104,7 +104,7 @@ msgstr "•Steal +1 item when defeating an enemy."
 msgid "item_roots_title"
 msgstr "Roots"
 msgid "item_roots_description"
-msgstr "•Every 2 seconds: Absorb nutrients, gaining *{health_gain}* bonus health."
+msgstr "•Every 3 seconds: Absorb nutrients, gaining *{health_gain}* bonus health."
 
 msgid "item_flower_title"
 msgstr "Flower"
@@ -122,9 +122,9 @@ msgid "item_straw_hat_description"
 msgstr "•Connected item dealt damage: Draw power from the hat, recovering *{health_gain}* health."
 
 msgid "item_cow_slam_title"
-msgstr "Technique: Cow Slam!"
+msgstr "Technique: Cow Slam"
 msgid "item_cow_slam_description"
-msgstr "•Use: Cow Slam! an enemy, dealing *{damage}* attack damage.[br]•Has +1 damage for each 8 health you have."
+msgstr "•Use: Cow slam an enemy, dealing *{damage}* attack damage.[br]•Your items have +1 damage for each 15 health you have."
 
 msgid "item_beef_title"
 msgstr "Beef"
@@ -194,7 +194,7 @@ msgstr "•Gained health: Harden shell, gaining shield equal to half the health 
 msgid "item_sippy_straw_title"
 msgstr "Sippy Straw"
 msgid "item_sippy_straw_description"
-msgstr "•Use: Sip enemy poison, gaining *{health_gain}* bonus health.[br]•Has +1 health gain for each poison the enemy has."
+msgstr "•Use: Sip enemy poison, recovering *{health_gain}* health.[br]•Your items have +1 health gain for every 2 poison the enemy has."
 
 msgid "item_slime_title"
 msgstr "Slime"
@@ -204,12 +204,12 @@ msgstr "•Connected item can only be used after 8 seconds have passed."
 msgid "item_cauldron_title"
 msgstr "Cauldron"
 msgid "item_cauldron_description"
-msgstr "•Use: Brew a potion, recovering *{health_gain}* health and applying *{status_applied}* poison to an enemy.[br]•Used connected item: Add it to the cauldron, increasing health gain by 2 and status applied by 1."
+msgstr "•Use: Brew a potion, recovering *{health_gain}* health and applying *{status_applied}* poison to an enemy.[br]•Used connected item: Add it to the cauldron, increasing health gain and status applied by 1."
 
 msgid "item_magic_broom_title"
 msgstr "Magic Broom"
 msgid "item_magic_broom_description"
-msgstr "•Battle start: Ride the broom, gaining *{status_applied}* dodge."
+msgstr "•Battle start: Ride the broom, gaining *{status_applied}* dodge.[br]•Every 2 seconds: Broom sweeps, removing 1 of a random debuff on you."
 
 msgid "item_cactus_title"
 msgstr "Cactus"
@@ -324,7 +324,18 @@ msgstr "•Battle start: Reinforce, gaining *{shield_gain}* shield. *{odds_0}%* 
 msgid "item_poker_chip_title"
 msgstr "Poker Chip"
 msgid "item_poker_chip_description"
-msgstr "•Your items have +25% ability odds."
+msgstr "•Your items have +25% probability."
+
+msgid "item_alien_beacon_title"
+msgstr "Alien Beacon"
+msgid "item_alien_beacon_description"
+msgstr "•Battle start: Call in alien reinforcements, gaining *{status_applied}* of a random buff for each connected item."
+
+msgid "item_ray_gun_title"
+msgstr "Ray Gun"
+msgid "item_ray_gun_description"
+msgstr "•Use (after 16 seconds): Shoot the enemy, dealing *{damage}* attack damage and reducing enemy max health by the same amount."
+
 
 # statuses
 

@@ -150,7 +150,7 @@ func equip(from_position):
 	equipment_reference["equipped"] = true
 	grid.connect_item(equipment_reference)
 	z_index = 0
-	grid.move_child(self, 0)
+	#grid.move_child(self, 0)
 	grid.update_equipment_layout()
 	return true
 

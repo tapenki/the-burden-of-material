@@ -1,19 +1,19 @@
-[gd_scene format=3 uid="uid://b4m52pbac62mw"]
+[gd_scene format=3 uid="uid://djfkettsnv5us"]
 
-[ext_resource type="Script" uid="uid://hcvljlmyr8es" path="res://ui/equipment_item.gd" id="1_38i8w"]
-[ext_resource type="Texture2D" uid="uid://ds8dskruu35he" path="res://equipment/b/bandana/bandana.png" id="2_7kimw"]
+[ext_resource type="Script" uid="uid://hcvljlmyr8es" path="res://ui/equipment_item.gd" id="1_6ck1j"]
+[ext_resource type="Texture2D" uid="uid://13p1pft4y2ap" path="res://equipment/r/ray_gun/ray_gun.png" id="2_ldifh"]
 
-[node name="Bandana" type="Control" unique_id=1620977827]
+[node name="RayGun" type="Control" unique_id=1620977827]
 layout_mode = 3
 anchors_preset = 0
-script = ExtResource("1_38i8w")
+script = ExtResource("1_6ck1j")
 drag_offset = Vector2(-24, 0)
 
 [node name="Sprite" type="TextureRect" parent="." unique_id=1247240217]
 layout_mode = 0
 pivot_offset_ratio = Vector2(0.5, 0.5)
 mouse_filter = 2
-texture = ExtResource("2_7kimw")
+texture = ExtResource("2_ldifh")
 
 [node name="SelectionArea" type="Control" parent="." unique_id=761036972]
 anchors_preset = 0

@@ -151,13 +151,13 @@ func register() -> void:
 			[true , true ],
 		],
 		stats = {
-			health_gain = 2
+			health_gain = 3
 		},
 		passive_ability = {
 			game_tick = func(tick, grid, this):
 				grid.add_item_stat(this, "charge", tick, "base")
-				if grid.get_item_stat(this, "charge")["final"] >= 2.0:
-					grid.add_item_stat(this, "charge", -2.0, "base")
+				if grid.get_item_stat(this, "charge")["final"] >= 3.0:
+					grid.add_item_stat(this, "charge", -3.0, "base")
 					var health_gain = grid.get_item_stat(this, "health_gain")
 					grid.add_stat("max_health", health_gain["final"])
 					grid.recover_health(health_gain)
@@ -238,7 +238,7 @@ func register() -> void:
 			[true , true ],
 		],
 		stats = {
-			damage = 2
+			damage = 4
 		},
 		active_ability = func(grid, this):
 			var enemy = grid.get_enemy()
@@ -246,10 +246,10 @@ func register() -> void:
 			damage["item_source"] = this
 			grid.attack(enemy, damage),
 		passive_ability = {
-			item_stat_modifiers = func(stat, modifiers, grid, item, this):
-				if stat == "damage" and item == this:
+			item_stat_modifiers = func(stat, modifiers, grid, _item, _this):
+				if stat == "damage":
 					var hp = grid.get_stat("health")
-					modifiers["base"] += int(hp["final"] / 8)},
+					modifiers["base"] += int(hp["final"] / 15)},
 		tags = ["treasure_loot"]
 	}) 
 	
@@ -466,18 +466,17 @@ func register() -> void:
 			[true ],
 		],
 		stats = {
-			health_gain = 2
+			health_gain = 4
 		},
 		active_ability = func(grid, this):
 			var health_gain = grid.get_item_stat(this, "health_gain")
-			grid.add_stat("max_health", health_gain["final"])
 			grid.recover_health(health_gain),
 		passive_ability = {
-			item_stat_modifiers = func(stat, modifiers, grid, item, this):
-				if stat == "health_gain" and item == this:
+			item_stat_modifiers = func(stat, modifiers, grid, _item, _this):
+				if stat == "health_gain":
 					var enemy = grid.get_enemy()
 					if enemy and enemy.statuses.has("poison"):
-						modifiers["base"] += enemy.statuses["poison"]["stacks"]},
+						modifiers["base"] += int(enemy.statuses["poison"]["stacks"] / 2)},
 		tags = ["treasure_loot"]
 	}) 
 	
@@ -523,7 +522,7 @@ func register() -> void:
 			}
 		],
 		stats = {
-			health_gain = 2,
+			health_gain = 1,
 			status_applied = 1,
 		},
 		active_ability = func(grid, this):
@@ -535,7 +534,7 @@ func register() -> void:
 		passive_ability = {
 			item_used = func(item, grid, this):
 				if grid.get_connected_items(this, 0).has(item):
-					grid.add_item_stat(this, "health_gain", 2)
+					grid.add_item_stat(this, "health_gain", 1)
 					grid.add_item_stat(this, "status", 1)
 					this["item_scene"].pop()
 					if not item.get("destroyed"):
@@ -555,6 +554,15 @@ func register() -> void:
 			status_applied = 2
 		},
 		passive_ability = {
+			game_tick = func(tick, grid, this):
+				grid.add_item_stat(this, "charge", tick, "base")
+				if grid.get_item_stat(this, "charge")["final"] >= 2.0:
+					grid.add_item_stat(this, "charge", -2.0, "base")
+					var statuses = grid.get_statuses_of_tag("debuff")
+					if statuses.size() > 0:
+						var status = statuses.pick_random()
+						grid.add_status(status, -1)
+					this["item_scene"].pop(),
 			battle_start = func(grid, this):
 				var status_applied = grid.get_item_stat(this, "status_applied")["final"]
 				grid.add_status("dodge", status_applied)
@@ -999,5 +1007,60 @@ func register() -> void:
 			item_stat_modifiers = func(stat, modifiers, _grid, _item, _this):
 				if stat.substr(0, 5) == "odds_":
 					modifiers["add_mult"] += 0.25},
+		tags = ["treasure_loot"]
+	}) 
+	
+	Registry.register_item("alien_beacon", {
+		scene = preload("res://equipment/a/alien_beacon/alien_beacon.tscn"),
+		shape = [
+			[true , true ],
+			[true , true ],
+		],
+		connections = [
+			{
+				active = preload("res://ui/diamonds_connection_active.tscn"),
+				inactive = preload("res://ui/diamonds_connection_inactive.tscn"),
+				shape = [
+					[false , true, true, false],
+					[true , true, true, true],
+				],
+				offset = Vector2i(-1, 2)
+			}
+		],
+		stats = {
+			status_applied = 1,
+		},
+		passive_ability = {
+			battle_start = func(grid, this):
+				for i in grid.get_connected_items(this, 0):
+					if Registry.status_tag_lists.has("buff"):
+						var status = Registry.status_tag_lists["buff"].pick_random()
+						var status_applied = grid.get_item_stat(this, "status_applied")["final"]
+						grid.add_status(status, status_applied)
+				this["item_scene"].pop()},
+		tags = ["treasure_loot"]
+	})
+	
+	Registry.register_item("ray_gun", {
+		scene = preload("res://equipment/r/ray_gun/ray_gun.tscn"),
+		shape = [
+			[true , true ],
+			[true , false],
+		],
+		stats = {
+			damage = 15
+		},
+		active_requirement = func(grid, this):
+			return grid.get_item_stat(this, "charge")["final"] >= 16.0,
+		active_ability = func(grid, this):
+			var enemy = grid.get_enemy()
+			var damage = grid.get_item_stat(this, "damage")
+			damage["item_source"] = this
+			if grid.attack(enemy, damage):
+				enemy.add_stat("health", -damage["final"])
+				enemy.add_stat("max_health", -damage["final"]),
+		passive_ability = {
+			game_tick = func(tick, grid, this):
+				grid.add_item_stat(this, "charge", tick, "base")},
 		tags = ["treasure_loot"]
 	}) 
